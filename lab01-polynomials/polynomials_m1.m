@@ -4,16 +4,19 @@
 %
 % Finds the roots of various polynomials.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-01-18t20:18R
+% When      : 2022-01-18t20:37R
 % For       : ECE 3413
-% Version   : 1.1.1
+% Version   : 1.1.2
 %
 % CHANGELOG :
+%   v1.1.1 - 2022-01-18t20:37R
+%       revert finding `polesH`, no assert
+%
 %   v1.1.1 - 2022-01-18t20:18R
-%       using zero to find poles, zeros
+%       using `zero` to find poles, zeros
 %
 %   v1.1.0 - 2022-01-18t19:54R
-%       found poles, zeros of H (part 2)
+%       found poles, zeros of `H` (part 2)
 %
 %   v1.0.0 - 2022-01-18t12:13R
 %       part 1 completed
@@ -29,13 +32,13 @@ DEG_PER_RAD = 180/pi;
 disp('Part I')
 
 % Given the polynomial
-% P(s) := (s^3 + 7s^2 + 10s + 9)(s^4 - 3s^3 + 6s^2 + 2s + 1),
+%   P(s) := (s^3 + 7s^2 + 10s + 9)(s^4 - 3s^3 + 6s^2 + 2s + 1),
 
 % the factors are
 % x-order :   4  3  2  1  0
-B =        [     2  7 10  9 ]
+B =        [     1  7 10  9 ]
 A =        [  1 -3  6  2  1 ]
-% We convolve to find polynomial P(s).
+% We convolve to find polynomial `P(s)`.
 P = conv(B, A)
 
 % The roots are
@@ -52,17 +55,14 @@ table(s, ph_deg)
 disp('Part II')
 
 % Given the transfer function
-% H(s) := \frac{s^3 + 7s^2 + 10s + 9}{s^4 - 3s^3 + 6s^2 + 2s + 1},
+%   H(s) := \frac{s^3 + 7s^2 + 10s + 9}{s^4 - 3s^3 + 6s^2 + 2s + 1},
 % (Note that the numerator and denominator are the same as the factors
 %  of P.)
 H = tf(B, A)
 
-% Find the poles (the roots of the denominator) and inverse of gain.
-[polesH, Ginv] = zero(1/H)
-% Find the zeros (the roots of the numerator) and gain.
+% Find the poles (roots of the denominator) of `H`.
+polesH = roots(cell2mat(H.Denominator))
+% Find the zeros and gain using `zero`.
 [zerosH, G] = zero(H)
-
-% Assert the inverse.
-assert(Ginv*G == 1, join([Ginv "is must be the inverse of gain" G]))
 
 disp('Done.')
