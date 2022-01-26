@@ -1,5 +1,5 @@
-# MATLAB autosave
+# MATLAB autosaves
 *.asv
 
-# Simulink autosave
+# Simulink autosaves
 *.slx.autosave
