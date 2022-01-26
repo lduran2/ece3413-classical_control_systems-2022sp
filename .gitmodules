@@ -1,6 +1,3 @@
-[submodule "git-unzip-all"]
-	path = git-unzip-all
-	url = https://github.com/lduran2/git-unzip-all
 [submodule "hooks/unzip-all"]
 	path = hooks/unzip-all
 	url = https://github.com/lduran2/git-unzip-all
