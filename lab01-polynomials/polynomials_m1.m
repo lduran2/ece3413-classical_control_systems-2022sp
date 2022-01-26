@@ -9,7 +9,7 @@
 % Version   : 1.1.2
 %
 % CHANGELOG :
-%   v1.1.1 - 2022-01-18t20:37R
+%   v1.1.2 - 2022-01-18t20:37R
 %       revert finding `polesH`, no assert
 %
 %   v1.1.1 - 2022-01-18t20:18R
