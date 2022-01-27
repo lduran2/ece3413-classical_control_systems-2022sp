@@ -4,11 +4,14 @@
 %
 % Finds the roots of various polynomials.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-01-18t20:37R
+% When      : 2022-01-26t10:59R
 % For       : ECE 3413
-% Version   : 1.1.2
+% Version   : 1.1.3
 %
 % CHANGELOG :
+%   v1.1.3 - 2022-01-26t10:59R
+%       using `pole` to find the poles
+%
 %   v1.1.2 - 2022-01-18t20:37R
 %       revert finding `polesH`, no assert
 %
@@ -61,7 +64,7 @@ disp('Part II')
 H = tf(B, A)
 
 % Find the poles (roots of the denominator) of `H`.
-polesH = roots(cell2mat(H.Denominator))
+polesH = pole(H)
 % Find the zeros and gain using `zero`.
 [zerosH, G] = zero(H)
 
