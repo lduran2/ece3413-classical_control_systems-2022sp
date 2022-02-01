@@ -1,8 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?><embeddedOutputs><metaData><evaluationState>manual</evaluationState><layoutState>code</layoutState><outputStatus>ready</outputStatus><splitterState><proportion>0.4</proportion></splitterState></metaData><outputArray type="array"><element><type>matrix</type><outputData><header></header><name>P1</name><varSize>1×7</varSize><rows>1</rows><columns>7</columns><varType>double</varType><value>     1     1     2     8     7    15    12
-</value><type>double</type><subtype>double</subtype><prepopulatedData>[[{"value":"{\"value\":\"1\"}"},{"value":"{\"value\":\"1\"}"},{"value":"{\"value\":\"2\"}"},{"value":"{\"value\":\"8\"}"},{"value":"{\"value\":\"7\"}"},{"value":"{\"value\":\"15\"}"},{"value":"{\"value\":\"12\"}"}]]</prepopulatedData></outputData><lineNumbers type="array"><element>1</element></lineNumbers></element><element><type>matrix</type><outputData><header></header><name>ans</name><varSize>6×1</varSize><rows>6</rows><columns>1</columns><varType>complex</varType><value>   0.9979 + 1.6070i
+<?xml version="1.0" encoding="UTF-8"?><embeddedOutputs><metaData><evaluationState>manual</evaluationState><layoutState>code</layoutState><outputStatus>error</outputStatus><splitterState><proportion>0.4</proportion></splitterState></metaData><outputArray type="array"><element><type>matrix</type><outputData><header></header><name>G1B_factors</name><varSize>5×2</varSize><rows>5</rows><columns>2</columns><varType>double</varType><value>     0     9
+     1     2
+     1     3
+     1    -6
+     1     8
+</value><type>double</type><subtype>double</subtype><prepopulatedData>[[{"value":"{\"value\":\"0\"}"},{"value":"{\"value\":\"9\"}"}]]</prepopulatedData></outputData><lineNumbers type="array"><element>4</element></lineNumbers></element><element><type>matrix</type><outputData><header></header><name>G1A_factors</name><varSize>5×2</varSize><rows>5</rows><columns>2</columns><varType>double</varType><value>     1     0
+     1     7
+     1    -2
+     1    10
+     1    -3
+</value><type>double</type><subtype>double</subtype><prepopulatedData>[[{"value":"{\"value\":\"1\"}"},{"value":"{\"value\":\"0\"}"}]]</prepopulatedData></outputData><lineNumbers type="array"><element>5</element></lineNumbers></element><element><type>matrix</type><outputData><header></header><name>G1B</name><varSize>2×1</varSize><rows>2</rows><columns>1</columns><varType>double</varType><value>     0
+     9
+</value><type>double</type><subtype>double</subtype><prepopulatedData>[[{"value":"{\"value\":\"0\"}"},{"value":"{\"value\":\"9\"}"}]]</prepopulatedData></outputData><lineNumbers type="array"><element>13</element></lineNumbers></element><element><type>matrix</type><outputData><header></header><name>G1B</name><varSize>3×1</varSize><rows>3</rows><columns>1</columns><varType>double</varType><value>     0
+     9
+    18
+</value><type>double</type><subtype>double</subtype><prepopulatedData>[[{"value":"{\"value\":\"0\"}"},{"value":"{\"value\":\"9\"}"},{"value":"{\"value\":\"18\"}"}]]</prepopulatedData></outputData><lineNumbers type="array"><element>13</element></lineNumbers></element><element><type>matrix</type><outputData><header></header><name>G1B</name><varSize>4×1</varSize><rows>4</rows><columns>1</columns><varType>double</varType><value>     0
+     9
+    45
+    54
+</value><type>double</type><subtype>double</subtype><prepopulatedData>[[{"value":"{\"value\":\"0\"}"},{"value":"{\"value\":\"9\"}"},{"value":"{\"value\":\"45\"}"},{"value":"{\"value\":\"54\"}"}]]</prepopulatedData></outputData><lineNumbers type="array"><element>13</element></lineNumbers></element><element><type>matrix</type><outputData><header></header><name>G1B</name><varSize>5×1</varSize><rows>5</rows><columns>1</columns><varType>double</varType><value>     0
+     9
+    -9
+  -216
+  -324
+</value><type>double</type><subtype>double</subtype><prepopulatedData>[[{"value":"{\"value\":\"0\"}"},{"value":"{\"value\":\"9\"}"},{"value":"{\"value\":\"-9\"}"},{"value":"{\"value\":\"-216\"}"},{"value":"{\"value\":\"-324\"}"}]]</prepopulatedData></outputData><lineNumbers type="array"><element>13</element></lineNumbers></element><element><type>matrix</type><outputData><header></header><name>G1B</name><varSize>6×1</varSize><rows>6</rows><columns>1</columns><varType>double</varType><value>           0
+           9
+          63
+        -288
+       -2052
+       -2592
+</value><type>double</type><subtype>double</subtype><prepopulatedData>[[{"value":"{\"value\":\"0\"}"},{"value":"{\"value\":\"9\"}"},{"value":"{\"value\":\"63\"}"},{"value":"{\"value\":\"-288\"}"},{"value":"{\"value\":\"-2052\"}"},{"value":"{\"value\":\"-2592\"}"}]]</prepopulatedData></outputData><lineNumbers type="array"><element>13</element></lineNumbers></element><element><type>matrix</type><outputData><header></header><name>G1B</name><varSize>1×6</varSize><rows>1</rows><columns>6</columns><varType>double</varType><value>           0           9          63        -288       -2052       -2592
+</value><type>double</type><subtype>double</subtype><prepopulatedData>[[{"value":"{\"value\":\"0\"}"},{"value":"{\"value\":\"9\"}"},{"value":"{\"value\":\"63\"}"},{"value":"{\"value\":\"-288\"}"},{"value":"{\"value\":\"-2052\"}"},{"value":"{\"value\":\"-2592\"}"}]]</prepopulatedData></outputData><lineNumbers type="array"><element>16</element></lineNumbers></element><element><type>matrix</type><outputData><header></header><name>G1A</name><varSize>2×1</varSize><rows>2</rows><columns>1</columns><varType>double</varType><value>     1
+     0
+</value><type>double</type><subtype>double</subtype><prepopulatedData>[[{"value":"{\"value\":\"1\"}"},{"value":"{\"value\":\"0\"}"}]]</prepopulatedData></outputData><lineNumbers type="array"><element>24</element></lineNumbers></element><element><type>matrix</type><outputData><header></header><name>G1A</name><varSize>3×1</varSize><rows>3</rows><columns>1</columns><varType>double</varType><value>     1
+     7
+     0
+</value><type>double</type><subtype>double</subtype><prepopulatedData>[[{"value":"{\"value\":\"1\"}"},{"value":"{\"value\":\"7\"}"},{"value":"{\"value\":\"0\"}"}]]</prepopulatedData></outputData><lineNumbers type="array"><element>24</element></lineNumbers></element><element><type>matrix</type><outputData><header></header><name>G1A</name><varSize>4×1</varSize><rows>4</rows><columns>1</columns><varType>double</varType><value>     1
+     5
+   -14
+     0
+</value><type>double</type><subtype>double</subtype><prepopulatedData>[[{"value":"{\"value\":\"1\"}"},{"value":"{\"value\":\"5\"}"},{"value":"{\"value\":\"-14\"}"},{"value":"{\"value\":\"0\"}"}]]</prepopulatedData></outputData><lineNumbers type="array"><element>24</element></lineNumbers></element><element><type>matrix</type><outputData><header></header><name>G1A</name><varSize>5×1</varSize><rows>5</rows><columns>1</columns><varType>double</varType><value>     1
+    15
+    36
+  -140
+     0
+</value><type>double</type><subtype>double</subtype><prepopulatedData>[[{"value":"{\"value\":\"1\"}"},{"value":"{\"value\":\"15\"}"},{"value":"{\"value\":\"36\"}"},{"value":"{\"value\":\"-140\"}"},{"value":"{\"value\":\"0\"}"}]]</prepopulatedData></outputData><lineNumbers type="array"><element>24</element></lineNumbers></element><element><type>matrix</type><outputData><header></header><name>G1A</name><varSize>6×1</varSize><rows>6</rows><columns>1</columns><varType>double</varType><value>     1
+    12
+    -9
+  -248
+   420
+     0
+</value><type>double</type><subtype>double</subtype><prepopulatedData>[[{"value":"{\"value\":\"1\"}"},{"value":"{\"value\":\"12\"}"},{"value":"{\"value\":\"-9\"}"},{"value":"{\"value\":\"-248\"}"},{"value":"{\"value\":\"420\"}"},{"value":"{\"value\":\"0\"}"}]]</prepopulatedData></outputData><lineNumbers type="array"><element>24</element></lineNumbers></element><element><type>matrix</type><outputData><header></header><name>G1A</name><varSize>1×6</varSize><rows>1</rows><columns>6</columns><varType>double</varType><value>     1    12    -9  -248   420     0
+</value><type>double</type><subtype>double</subtype><prepopulatedData>[[{"value":"{\"value\":\"1\"}"},{"value":"{\"value\":\"12\"}"},{"value":"{\"value\":\"-9\"}"},{"value":"{\"value\":\"-248\"}"},{"value":"{\"value\":\"420\"}"},{"value":"{\"value\":\"0\"}"}]]</prepopulatedData></outputData><lineNumbers type="array"><element>27</element></lineNumbers></element><element><type>text</type><outputData><text>G1_s =
+ 
+  9 s^4 + 63 s^3 - 288 s^2 - 2052 s - 2592
+  ----------------------------------------
+   s^5 + 12 s^4 - 9 s^3 - 248 s^2 + 420 s
+ 
+Continuous-time transfer function.
+
+</text><truncationInfo><wasTruncatedMidLine>false</wasTruncatedMidLine></truncationInfo></outputData><lineNumbers type="array"><element>29</element></lineNumbers></element><element><type>matrix</type><outputData><header></header><name>P1</name><varSize>1×7</varSize><rows>1</rows><columns>7</columns><varType>double</varType><value>     1     1     2     8     7    15    12
+</value><type>double</type><subtype>double</subtype><prepopulatedData>[[{"value":"{\"value\":\"1\"}"},{"value":"{\"value\":\"1\"}"},{"value":"{\"value\":\"2\"}"},{"value":"{\"value\":\"8\"}"},{"value":"{\"value\":\"7\"}"},{"value":"{\"value\":\"15\"}"},{"value":"{\"value\":\"12\"}"}]]</prepopulatedData></outputData><lineNumbers type="array"><element>30</element></lineNumbers></element><element><type>matrix</type><outputData><header></header><name>ans</name><varSize>6×1</varSize><rows>6</rows><columns>1</columns><varType>complex</varType><value>   0.9979 + 1.6070i
    0.9979 - 1.6070i
   -1.8615 + 0.0000i
   -0.1302 + 1.4299i
   -0.1302 - 1.4299i
   -0.8739 + 0.0000i
-</value><type>complex</type><subtype>complex</subtype></outputData><lineNumbers type="array"><element>2</element></lineNumbers></element></outputArray><regionArray type="array"><element><code><sectionBreak>true</sectionBreak><endOfSection>false</endOfSection><regionNumber>0</regionNumber></code><startLine>1</startLine><endLine>1</endLine><outputIndexes type="array"><element>0</element></outputIndexes></element><element><code><sectionBreak>false</sectionBreak><endOfSection>true</endOfSection><regionNumber>1</regionNumber></code><startLine>2</startLine><endLine>2</endLine><outputIndexes type="array"><element>1</element></outputIndexes></element></regionArray></embeddedOutputs>
+</value><type>complex</type><subtype>complex</subtype></outputData><lineNumbers type="array"><element>31</element></lineNumbers></element></outputArray><regionArray type="array"><element><code><sectionBreak>true</sectionBreak><endOfSection>false</endOfSection><regionNumber>0</regionNumber></code><startLine>7</startLine><endLine>7</endLine><outputIndexes type="array"><element>0</element></outputIndexes></element><element><code><sectionBreak>false</sectionBreak><endOfSection>false</endOfSection><regionNumber>1</regionNumber></code><startLine>8</startLine><endLine>8</endLine><outputIndexes type="array"><element>1</element></outputIndexes></element><element><code><sectionBreak>false</sectionBreak><endOfSection>false</endOfSection><regionNumber>2</regionNumber></code><startLine>11</startLine><endLine>11</endLine><outputIndexes type="array"/></element><element><code><sectionBreak>false</sectionBreak><endOfSection>false</endOfSection><regionNumber>3</regionNumber></code><startLine>14</startLine><endLine>17</endLine><outputIndexes type="array"><element>2</element><element>3</element><element>4</element><element>5</element><element>6</element></outputIndexes></element><element><code><sectionBreak>false</sectionBreak><endOfSection>false</endOfSection><regionNumber>4</regionNumber></code><startLine>19</startLine><endLine>19</endLine><outputIndexes type="array"><element>7</element></outputIndexes></element><element><code><sectionBreak>false</sectionBreak><endOfSection>false</endOfSection><regionNumber>5</regionNumber></code><startLine>22</startLine><endLine>22</endLine><outputIndexes type="array"/></element><element><code><sectionBreak>false</sectionBreak><endOfSection>false</endOfSection><regionNumber>6</regionNumber></code><startLine>25</startLine><endLine>28</endLine><outputIndexes type="array"><element>8</element><element>9</element><element>10</element><element>11</element><element>12</element></outputIndexes></element><element><code><sectionBreak>false</sectionBreak><endOfSection>false</endOfSection><regionNumber>7</regionNumber></code><startLine>30</startLine><endLine>30</endLine><outputIndexes type="array"><element>13</element></outputIndexes></element><element><code><sectionBreak>false</sectionBreak><endOfSection>false</endOfSection><regionNumber>8</regionNumber></code><startLine>32</startLine><endLine>32</endLine><outputIndexes type="array"><element>14</element></outputIndexes></element><element><code><sectionBreak>false</sectionBreak><endOfSection>false</endOfSection><regionNumber>9</regionNumber></code><startLine>43</startLine><endLine>43</endLine><outputIndexes type="array"><element>15</element></outputIndexes></element><element><code><sectionBreak>false</sectionBreak><endOfSection>true</endOfSection><regionNumber>10</regionNumber></code><startLine>44</startLine><endLine>44</endLine><outputIndexes type="array"><element>16</element></outputIndexes></element></regionArray></embeddedOutputs>

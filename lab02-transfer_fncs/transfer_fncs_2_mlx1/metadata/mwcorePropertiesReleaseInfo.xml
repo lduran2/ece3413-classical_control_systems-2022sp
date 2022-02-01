@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Version information for MathWorks R2021a Release -->
+<!-- Version information for MathWorks R2020b Release -->
 <MathWorks_version_info>
-  <version>9.10.0.1710957</version>
-  <release>R2021a</release>
-  <description>Update 4</description>
-  <date>Jul 01 2021</date>
-  <checksum>1191127914</checksum>
+  <version>9.9.0.1718557</version>
+  <release>R2020b</release>
+  <description>Update 6</description>
+  <date>Jul 12 2021</date>
+  <checksum>4127359069</checksum>
 </MathWorks_version_info>
