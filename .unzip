@@ -1,4 +1,5 @@
-# This file will contain patterns of all files to be unzipped after
-# pushing to remote.
+# MATLAB live scripts
+*.mlx
 
-# populate me
+# Simulink models
+*.slx
