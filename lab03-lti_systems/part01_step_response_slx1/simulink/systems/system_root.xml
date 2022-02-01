@@ -6,5 +6,24 @@
   <P Name="SetExecutionDomain">off</P>
   <P Name="ExecutionDomainType">Deduce</P>
   <P Name="ReportName">simulink-default.rpt</P>
+  <P Name="SIDHighWatermark">2</P>
   <P Name="SimulinkSubDomain">Simulink</P>
+  <Block BlockType="Scope" Name="Scope" SID="2">
+    <P Name="Ports">[1]</P>
+    <P Name="Position">[375, 104, 405, 136]</P>
+    <P Name="ZOrder">2</P>
+    <P Name="ScopeSpecificationString">Simulink.scopes.TimeScopeBlockCfg(&apos;CurrentConfiguration&apos;, extmgr.ConfigurationSet(extmgr.Configuration(&apos;Core&apos;,&apos;General UI&apos;,true),extmgr.Configuration(&apos;Core&apos;,&apos;Source UI&apos;,true),extmgr.Configuration(&apos;Sources&apos;,&apos;WiredSimulink&apos;,true),extmgr.Configuration(&apos;Visuals&apos;,&apos;Time Domain&apos;,true),extmgr.Configuration(&apos;Tools&apos;,&apos;Plot Navigation&apos;,true),extmgr.Configuration(&apos;Tools&apos;,&apos;Measurements&apos;,true)),&apos;Version&apos;,&apos;2020b&apos;)</P>
+    <P Name="NumInputPorts">1</P>
+    <P Name="Floating">off</P>
+  </Block>
+  <Block BlockType="Step" Name="Step" SID="1">
+    <P Name="Position">[190, 105, 220, 135]</P>
+    <P Name="ZOrder">1</P>
+    <P Name="SampleTime">0</P>
+  </Block>
+  <Line>
+    <P Name="ZOrder">1</P>
+    <P Name="Src">1#out:1</P>
+    <P Name="Dst">2#in:1</P>
+  </Line>
 </System>

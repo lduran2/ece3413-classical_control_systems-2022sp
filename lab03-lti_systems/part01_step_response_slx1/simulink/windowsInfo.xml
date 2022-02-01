@@ -23,7 +23,7 @@
         <P Name="Extents" Class="double">[1339.0, 764.0]</P>
         <P Name="ZoomFactor" Class="double">1.0</P>
         <P Name="Offset" Class="double">[0.0, 0.0]</P>
-        <P Name="SceneRectInView" Class="double">[0.0, 0.0, 0.0, 0.0]</P>
+        <P Name="SceneRectInView" Class="double">[0.0, 0.0, 892.66666666666663, 509.33333333333331]</P>
       </Object>
       <Array PropName="DockComponentsInfo" Type="Simulink.DockComponentInfo" Dimension="1*2">
         <Object ObjectID="6">

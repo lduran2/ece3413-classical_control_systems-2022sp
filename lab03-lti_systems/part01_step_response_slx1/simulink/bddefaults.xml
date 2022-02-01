@@ -59,5 +59,18 @@
       <ControlOptions Visible="on" Enabled="on" Row="new" HorizontalStretch="on" PromptLocation="top" Orientation="horizontal" Scale="linear" TextType="Plain Text" Expand="off" ShowFilter="on" ShowParameterName="on" WordWrap="on" AlignPrompts="off"/>
     </DialogControl>
   </MaskDefaults>
-  <BlockParameterDefaults/>
+  <BlockParameterDefaults>
+    <Block BlockType="Scope">
+      <P Name="DefaultConfigurationName">Simulink.scopes.TimeScopeBlockCfg</P>
+    </Block>
+    <Block BlockType="Step">
+      <P Name="Time">1</P>
+      <P Name="Before">0</P>
+      <P Name="After">1</P>
+      <P Name="OutDataTypeStr">double</P>
+      <P Name="SampleTime">-1</P>
+      <P Name="VectorParams1D">on</P>
+      <P Name="ZeroCross">on</P>
+    </Block>
+  </BlockParameterDefaults>
 </BlockDiagramDefaults>
