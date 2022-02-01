@@ -6,8 +6,27 @@
   <P Name="SetExecutionDomain">off</P>
   <P Name="ExecutionDomainType">Deduce</P>
   <P Name="ReportName">simulink-default.rpt</P>
-  <P Name="SIDHighWatermark">2</P>
+  <P Name="SIDHighWatermark">3</P>
   <P Name="SimulinkSubDomain">Simulink</P>
+  <Block BlockType="Reference" Name="LTI System" SID="3">
+    <P Name="Ports">[1, 1]</P>
+    <P Name="Position">[250, 102, 345, 138]</P>
+    <P Name="ZOrder">3</P>
+    <P Name="LibraryVersion">2.3</P>
+    <P Name="SourceBlock">cstblocks/LTI System</P>
+    <P Name="SourceType">LTI Block</P>
+    <P Name="SourceProductBaseCode">CT</P>
+    <InstanceData>
+      <P Name="RTWMemSecFuncInitTerm">Inherit from model</P>
+      <P Name="RTWMemSecFuncExecute">Inherit from model</P>
+      <P Name="RTWMemSecDataConstants">Inherit from model</P>
+      <P Name="RTWMemSecDataInternal">Inherit from model</P>
+      <P Name="RTWMemSecDataParameters">Inherit from model</P>
+      <P Name="ContentPreviewEnabled">on</P>
+      <P Name="sys">tf([1 2], [1 5 9])</P>
+      <P Name="IC">[]</P>
+    </InstanceData>
+  </Block>
   <Block BlockType="Scope" Name="Scope" SID="2">
     <P Name="Ports">[1]</P>
     <P Name="Position">[375, 104, 405, 136]</P>
@@ -25,6 +44,11 @@
   <Line>
     <P Name="ZOrder">1</P>
     <P Name="Src">1#out:1</P>
+    <P Name="Dst">3#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">2</P>
+    <P Name="Src">3#out:1</P>
     <P Name="Dst">2#in:1</P>
   </Line>
 </System>

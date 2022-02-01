@@ -15,6 +15,12 @@
   <P Name="IsArchitectureModel">0</P>
   <P Name="IsAUTOSARArchitectureModel">0</P>
   <P Name="NumParameterArguments">0</P>
-  <P Name="NumExternalFileReferences">0</P>
+  <P Name="NumExternalFileReferences">1</P>
+  <ExternalFileReference>
+    <P Name="Reference">cstblocks/LTI System</P>
+    <P Name="Path">$bdroot/LTI System</P>
+    <P Name="SID">3</P>
+    <P Name="Type">LIBRARY_BLOCK</P>
+  </ExternalFileReference>
   <P Name="OrderedModelArguments">1</P>
 </GraphicalInterface>
