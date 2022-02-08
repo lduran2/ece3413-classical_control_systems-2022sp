@@ -14,7 +14,7 @@ syms s
 
 % for a in (1..4)
 as = 1:4
-textable = '';
+tex_table = '';
 for a=as
     % display a
     disp(join(['%%%% a =' string(a) '%%%%']))
@@ -29,27 +29,47 @@ for a=as
     RiseTime = G1_s_step.RiseTime
     PeakTime = G1_s_step.PeakTime
 
-    % generate LaTeX table
-    G1_s_sym = poly2sym(B,s)/poly2sym(A,s)
-    textable = sprintf('%s\t%d', textable, a);
-    textable = sprintf('%s & %s', textable, latex(G1_s_sym));
-    textable = sprintf('%s & %d', textable, SettlingTime);
-    textable = sprintf('%s & %d', textable, RiseTime);
-    textable = sprintf('%s & %d', textable, PeakTime);
-    textable = sprintf( ...
-        join(['%s & \\includegraphic[width=\\lineheight]' ...
-            '{figures/g1-s-%d.eps}\\\\*\n' ]), ...
-        textable, a);
-    
-    
     % find the step response
     [y, t] = step(G1_s);
     % plot the result
-    figure
+    fig = figure
     plot(y, t)
     title(join(['Step response of G_1 for a =' string(a)]))
     xlabel('time, t [s]')
     ylabel('amplitude, G_1(s; a)')
+
+    % create figure name
+    figname = sprintf('fig/g1-s-%d.', a);
+
+    % generate LaTeX table
+    G1_s_sym = poly2sym(B,s)/poly2sym(A,s)
+    tex_table = sprintf('%s\t%d', tex_table, a);
+    tex_table = sprintf('%s & %s', tex_table, latex(G1_s_sym));
+    tex_table = sprintf('%s & %d', tex_table, SettlingTime);
+    tex_table = sprintf('%s & %d', tex_table, RiseTime);
+    tex_table = sprintf('%s & %d', tex_table, PeakTime);
+    tex_table = sprintf( ...
+        join([ ...
+            '%s & \\includegraphic[width=\\lineheight]' ...
+            '{%seps}\\\\*\n' ...
+        ]), ...
+        tex_table, figname);
+    % end sprintf
+    
+    % save the figure data
+    saveas(fig, sprintf('%sfig', figname));
+    % save the figure image
+    saveas(fig, sprintf('../doc/lab0405/%seps', figname));
 end % for a
 
-disp(textable)
+% add the tabular environment and headers
+tex_table = sprintf(join([ ...
+    '\\begin{tabular}{@{}*2l*3Sl@{}}\n' ...
+    '\t\\toprule\n' ...
+    '\t \\(a\\) & transfer function \\(G_1(s; a)\\) & Setting Time \\(T_s \\brac{\\si\\second}\\) & Rising Time \\(T_r \\brac{\\si\\second}\\) & Peak Time \\(T_p \\brac{\\si\\second}\\) & \\\\*\n' ...
+    '\t\\midrule\n' ...
+    '%s' ...
+    '\t\\bottomrule\n' ...
+    '\\end{tabular}'
+]), tex_table)
+
