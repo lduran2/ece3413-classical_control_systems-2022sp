@@ -73,3 +73,7 @@ tex_table = sprintf(join([ ...
     '\\end{tabular}'
 ]), tex_table)
 
+% save the table
+table_out = fopen('../doc/lab0405/g1-table','w');
+fprintf(table_out, '%s', tex_table);
+fclose(table_out);
