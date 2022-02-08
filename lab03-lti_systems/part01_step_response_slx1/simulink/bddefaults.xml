@@ -72,5 +72,12 @@
       <P Name="VectorParams1D">on</P>
       <P Name="ZeroCross">on</P>
     </Block>
+    <Block BlockType="ToFile">
+      <P Name="Filename">untitled.mat</P>
+      <P Name="MatrixName">ans</P>
+      <P Name="SaveFormat">Array</P>
+      <P Name="Decimation">1</P>
+      <P Name="SampleTime">-1</P>
+    </Block>
   </BlockParameterDefaults>
 </BlockDiagramDefaults>

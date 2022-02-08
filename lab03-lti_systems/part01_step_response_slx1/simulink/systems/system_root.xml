@@ -5,8 +5,9 @@
   <P Name="Open">on</P>
   <P Name="SetExecutionDomain">off</P>
   <P Name="ExecutionDomainType">Deduce</P>
+  <P Name="ZoomFactor">353</P>
   <P Name="ReportName">simulink-default.rpt</P>
-  <P Name="SIDHighWatermark">3</P>
+  <P Name="SIDHighWatermark">4</P>
   <P Name="SimulinkSubDomain">Simulink</P>
   <Block BlockType="Reference" Name="LTI System" SID="3">
     <P Name="Ports">[1, 1]</P>
@@ -41,6 +42,13 @@
     <P Name="Time">0</P>
     <P Name="SampleTime">0</P>
   </Block>
+  <Block BlockType="ToFile" Name="To File" SID="4">
+    <P Name="Ports">[1]</P>
+    <P Name="Position">[375, 155, 435, 185]</P>
+    <P Name="ZOrder">4</P>
+    <P Name="Filename">out.mat</P>
+    <P Name="SaveFormat">Timeseries</P>
+  </Block>
   <Line>
     <P Name="ZOrder">1</P>
     <P Name="Src">1#out:1</P>
@@ -49,6 +57,15 @@
   <Line>
     <P Name="ZOrder">2</P>
     <P Name="Src">3#out:1</P>
-    <P Name="Dst">2#in:1</P>
+    <P Name="Points">[9, 0]</P>
+    <Branch>
+      <P Name="ZOrder">4</P>
+      <P Name="Points">[0, 50]</P>
+      <P Name="Dst">4#in:1</P>
+    </Branch>
+    <Branch>
+      <P Name="ZOrder">3</P>
+      <P Name="Dst">2#in:1</P>
+    </Branch>
   </Line>
 </System>

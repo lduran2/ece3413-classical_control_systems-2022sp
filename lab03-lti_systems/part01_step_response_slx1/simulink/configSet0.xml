@@ -12,7 +12,7 @@
         <P Name="StopTime">10.0</P>
         <P Name="AbsTol">auto</P>
         <P Name="AutoScaleAbsTol">on</P>
-        <P Name="FixedStep">auto</P>
+        <P Name="FixedStep">0.001</P>
         <P Name="InitialStep">auto</P>
         <P Name="MaxOrder">5</P>
         <P Name="ZcThreshold">auto</P>
@@ -26,13 +26,13 @@
         <P Name="RelTol">1e-3</P>
         <P Name="EnableMultiTasking">off</P>
         <P Name="ConcurrentTasks">off</P>
-        <P Name="SolverName">VariableStepAuto</P>
+        <P Name="SolverName">FixedStepAuto</P>
         <P Name="SolverJacobianMethodControl">auto</P>
         <P Name="ShapePreserveControl">DisableAll</P>
         <P Name="ZeroCrossControl">UseLocalSettings</P>
         <P Name="ZeroCrossAlgorithm">Nonadaptive</P>
         <P Name="AlgebraicLoopSolver">TrustRegion</P>
-        <P Name="SolverInfoToggleStatus">off</P>
+        <P Name="SolverInfoToggleStatus">on</P>
         <P Name="IsAutoAppliedInSIP">off</P>
         <P Name="SolverResetMethod">Fast</P>
         <P Name="PositivePriorityOrder">off</P>
