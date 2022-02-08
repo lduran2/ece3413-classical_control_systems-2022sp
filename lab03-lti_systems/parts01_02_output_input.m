@@ -1,4 +1,4 @@
-% Part II
+%% Part II
 % load time and data from 'out.mat'
 data = load('out.mat');
 t = data.ans.Time;
@@ -10,3 +10,5 @@ plot(t,y)
 title('step response, h')
 xlabel('time, t [s]')
 ylabel('conductance, h(t) [\Omega^{-1}]')
+
+%% Part III
