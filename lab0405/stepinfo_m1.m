@@ -10,8 +10,11 @@
 %   v1.0.0 - 2022-02-08t11:39R
 %       found stepinfo parameters for G1(s; a)
 
+syms s
+
 % for a in (1..4)
 as = 1:4
+textable = '';
 for a=as
     % display a
     disp(join(['%%%% a =' string(a) '%%%%']))
@@ -26,6 +29,19 @@ for a=as
     RiseTime = G1_s_step.RiseTime
     PeakTime = G1_s_step.PeakTime
 
+    % generate LaTeX table
+    G1_s_sym = poly2sym(B,s)/poly2sym(A,s)
+    textable = sprintf('%s\t%d', textable, a);
+    textable = sprintf('%s & %s', textable, latex(G1_s_sym));
+    textable = sprintf('%s & %d', textable, SettlingTime);
+    textable = sprintf('%s & %d', textable, RiseTime);
+    textable = sprintf('%s & %d', textable, PeakTime);
+    textable = sprintf( ...
+        join(['%s & \\includegraphic[width=\\lineheight]' ...
+            '{figures/g1-s-%d.eps}\\\\*\n' ]), ...
+        textable, a);
+    
+    
     % find the step response
     [y, t] = step(G1_s);
     % plot the result
@@ -35,3 +51,5 @@ for a=as
     xlabel('time, t [s]')
     ylabel('amplitude, G_1(s; a)')
 end % for a
+
+disp(textable)
