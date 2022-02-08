@@ -3,3 +3,6 @@
 
 # Simulink autosaves
 *.slx.autosave
+
+# MATLAB dataset
+*.mat
