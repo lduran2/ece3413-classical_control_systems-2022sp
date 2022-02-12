@@ -1,11 +1,14 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab03-lti_systems/part02_transfer_fnc_analysis_m1.m
 % Automates simultion of various transfer functions
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-02-12t17:39R
+% When      : 2022-02-12t17:58R
 % For       : ECE 3413
-% Version   : 1.2.1
+% Version   : 1.2.2
 %
 % CHANGELOG :
+%   v1.2.2 - 2022-02-12t17:58R
+%       found the rise time
+%
 %   v1.2.1 - 2022-02-12t17:39R
 %       found settling time
 %
@@ -92,15 +95,18 @@ close_system(nScopeSys)
 %% get the data and time
 y = out.simout.data;
 t = out.simout.time;
-n_samp = size(y, 1) % number of samples
+n_samp = size(y, 1)     % number of samples
+delta_t = t(2) - t(1)   % delta of time samples
 
 %% find peak time, Tk
+% this is the time that y reaches its max
 % get the max and its index
 [Y, K] = max(y)
 % the corresponding time is peak time
 Tk = t(K)   % [s]
 
 %% find settling time, Ts
+% this is the time that y is within 5% of the remaining mean
 % for each sample
 for ks=(K+1):n_samp
     % find the mean of y's from k
@@ -115,7 +121,25 @@ Ts = t(ks)
 % save Ey as the final value of y
 y_final = Ey
 
-% rise time,
+%% find rise time, Tr
+% for each sample
+for k10=1:n_samp
+    % stop if 10%ile
+    if (y(k10) >= 0.1*y_final)
+        break
+    end % if (y(k10) >= 0.1*y_final)
+end % for k10
+% continue for the remaining samples
+for k90=k10:n_samp
+    % stop if 90%ile
+    if (y(k90) >= 0.9*y_final)
+        break
+    end % if (y(k90) >= 0.9*y_final)
+end % for k90
+
+% the corresponding time difference is the rise time
+Tr = t(k90) - t(k10)
+
 % percent overshoot,
 % steady state error
 
