@@ -1,11 +1,14 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab03-lti_systems/part02_transfer_fnc_analysis_m1.m
 % Automates simultion of various transfer functions
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-02-12t15:08R
+% When      : 2022-02-12t16:45R
 % For       : ECE 3413
-% Version   : 1.1.2
+% Version   : 1.1.3
 %
 % CHANGELOG :
+%   v1.1.3 - 2022-02-12t16:45R
+%       copying the scope
+%
 %   v1.1.2 - 2022-02-12t15:08R
 %       plotting simulation data
 %
@@ -21,18 +24,24 @@
 %   v0.0.0 - 2022-02-12t14:07R
 %       hello world
 
-%% constants
-tsim = 10.0; % [s] simulation time
+%% parameters
+TSIM = 10.0; % [s] simulation time
+
+%% model constants
+WORD_DELIM = '_';           % part delimiter in filenames
+SIM_SUFFIX = 'slx1';        % common suffix for simulations
+FILE_SUFFIX = '.slx';       % suffix for the simulation files
+SYS_DELIM = '/';            % delimiter for block levels
+N_SCOPE = 'Scope';          % the name of the scope
 
 %% name of the simulation
-word_delim = '_';           % part delimiter in filenames
-sim_suffix = 'slx1.slx';    % common suffix for simulation files
 % split words by delimiter
-source_words = split(mfilename, word_delim)
+source_words = split(mfilename, WORD_DELIM)
 % remove the last word and rejoin by '_'
-source_base_cell = join({source_words{1:end-1}}, word_delim)
-% break out of cell and add simulation suffix
-sim_source = [ source_base_cell{:} word_delim sim_suffix ]
+source_base_cell = join({source_words{1:end-1}}, WORD_DELIM)
+% break out of cell and add suffixes
+sim_name = [ source_base_cell{:} WORD_DELIM SIM_SUFFIX ]
+sim_source = [ sim_name FILE_SUFFIX ]
 
 %% transfer function
 B = [2];        % the numerator
@@ -41,14 +50,28 @@ A = [1 5 9];    % the denominator
 % generate the transfer function
 Ga_s = tf(B,A)
 
-% run the simulation
+%% run the simulation
 out = sim(sim_source)
-% get the data and time
+
+%% save the scope image
+% open the scope
+open_system([ sim_name SYS_DELIM N_SCOPE ])
+% get the scope handle
+hScope = findall(0, 'Name', N_SCOPE)
+% get a handle for the source plot (opened by `open_system`)
+hSrc = findobj(hScope.UserData.Parent, 'Tag', 'VisualizationPanel')
+% create the target figure
+hTgt = figure;
+% do not invert the background in target
+set(hTgt, 'InvertHardCopy', 'off')
+% copy to target for saving
+copyobj(hSrc, hTgt)
+% save the result
+saveas(hTgt, 'figure/Ga_s.png')
+
+%% get the data and time
 y = out.simout.data;
 t = out.simout.time;
 
-% plot the data
-simplot(t, y);
-
-% display finished
+%% display finished
 disp('Done.')
