@@ -1,11 +1,14 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab03-lti_systems/part02_transfer_fnc_analysis_m1.m
 % Automates simultion of various transfer functions
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-02-12t17:58R
+% When      : 2022-02-12t18:29R
 % For       : ECE 3413
-% Version   : 1.2.2
+% Version   : 1.2.3
 %
 % CHANGELOG :
+%   v1.2.3 - 2022-02-12t18:29R
+%       corrected rise time by difference
+%
 %   v1.2.2 - 2022-02-12t17:58R
 %       found the rise time
 %
@@ -122,23 +125,41 @@ Ts = t(ks)
 y_final = Ey
 
 %% find rise time, Tr
+y10_exp = 0.1*y_final   % expected 10%ile
+y90_exp = 0.9*y_final   % expected 90%ile
+
 % for each sample
 for k10=1:n_samp
     % stop if 10%ile
-    if (y(k10) >= 0.1*y_final)
+    if (y(k10) >= y10_exp)
         break
-    end % if (y(k10) >= 0.1*y_final)
+    end % if (y(k10) >= y10_exp)
 end % for k10
 % continue for the remaining samples
 for k90=k10:n_samp
     % stop if 90%ile
-    if (y(k90) >= 0.9*y_final)
+    if (y(k90) >= y90_exp)
         break
-    end % if (y(k90) >= 0.9*y_final)
+    end % if (y(k90) >= y90_exp)
 end % for k90
 
+% display corresponding measured times
+t10_meas = t(k10)
+t90_meas = t(k90)
+
+% corresponding y(k)'s are a little high
+% estimate the proper values
+% for t10
+delta_y10 = (y(k10) - y(k10 - 1))
+y10_diff = (y10_exp - y(k10))
+t10 = (delta_t/delta_y10)*(y10_diff) + t10_meas
+% for t90
+delta_y90 = (y(k90) - y(k90 - 1))
+y90_diff = (y90_exp - y(k90))
+t90 = (delta_t/delta_y90)*(y90_diff) + t90_meas
+
 % the corresponding time difference is the rise time
-Tr = t(k90) - t(k10)
+Tr = t90 - t10
 
 % percent overshoot,
 % steady state error
