@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<System>
+  <P Name="Location">[23, 14, 1017, 751]</P>
+  <P Name="SystemRect">[0.000000, 0.000000, 0.000000, 0.000000]</P>
+  <P Name="Open">on</P>
+  <P Name="SetExecutionDomain">off</P>
+  <P Name="ExecutionDomainType">Deduce</P>
+  <P Name="ZoomFactor">353</P>
+  <P Name="ReportName">simulink-default.rpt</P>
+  <P Name="SIDHighWatermark">4</P>
+  <P Name="SimulinkSubDomain">Simulink</P>
+  <Block BlockType="Reference" Name="LTI System" SID="3">
+    <P Name="Ports">[1, 1]</P>
+    <P Name="Position">[250, 102, 345, 138]</P>
+    <P Name="ZOrder">3</P>
+    <P Name="LibraryVersion">2.3</P>
+    <P Name="SourceBlock">cstblocks/LTI System</P>
+    <P Name="SourceType">LTI Block</P>
+    <P Name="SourceProductBaseCode">CT</P>
+    <InstanceData>
+      <P Name="RTWMemSecFuncInitTerm">Inherit from model</P>
+      <P Name="RTWMemSecFuncExecute">Inherit from model</P>
+      <P Name="RTWMemSecDataConstants">Inherit from model</P>
+      <P Name="RTWMemSecDataInternal">Inherit from model</P>
+      <P Name="RTWMemSecDataParameters">Inherit from model</P>
+      <P Name="ContentPreviewEnabled">on</P>
+      <P Name="sys">tf([1 2], [1 5 9])</P>
+      <P Name="IC">[]</P>
+    </InstanceData>
+  </Block>
+  <Block BlockType="Scope" Name="Scope" SID="2">
+    <P Name="Ports">[1]</P>
+    <P Name="Position">[375, 104, 405, 136]</P>
+    <P Name="ZOrder">2</P>
+    <P Name="ScopeSpecificationString">Simulink.scopes.TimeScopeBlockCfg(&apos;CurrentConfiguration&apos;, extmgr.ConfigurationSet(extmgr.Configuration(&apos;Core&apos;,&apos;General UI&apos;,true),extmgr.Configuration(&apos;Core&apos;,&apos;Source UI&apos;,true),extmgr.Configuration(&apos;Sources&apos;,&apos;WiredSimulink&apos;,true),extmgr.Configuration(&apos;Visuals&apos;,&apos;Time Domain&apos;,true,&apos;SerializedDisplays&apos;,{struct(&apos;MinYLimReal&apos;,&apos;0.9&apos;,&apos;MaxYLimReal&apos;,&apos;1.1&apos;,&apos;YLabelReal&apos;,&apos;&apos;,&apos;MinYLimMag&apos;,&apos;0.9&apos;,&apos;MaxYLimMag&apos;,&apos;1.1&apos;,&apos;LegendVisibility&apos;,&apos;off&apos;,&apos;XGrid&apos;,true,&apos;YGrid&apos;,true,&apos;PlotMagPhase&apos;,false,&apos;AxesColor&apos;,[0 0 0],&apos;AxesTickColor&apos;,[0.686274509803922 0.686274509803922 0.686274509803922],&apos;ColorOrder&apos;,[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],&apos;Title&apos;,&apos;%&lt;SignalLabel&gt;&apos;,&apos;LinePropertiesCache&apos;,{{}},&apos;UserDefinedChannelNames&apos;,{{}},&apos;NumLines&apos;,1,&apos;LineNames&apos;,{{&apos;Step&apos;}},&apos;ShowContent&apos;,true,&apos;Placement&apos;,1)},&apos;DisplayPropertyDefaults&apos;,struct(&apos;MinYLimReal&apos;,&apos;0.9&apos;,&apos;MaxYLimReal&apos;,&apos;1.1&apos;,&apos;YLabelReal&apos;,&apos;&apos;,&apos;MinYLimMag&apos;,&apos;0.9&apos;,&apos;MaxYLimMag&apos;,&apos;1.1&apos;,&apos;LegendVisibility&apos;,&apos;off&apos;,&apos;XGrid&apos;,true,&apos;YGrid&apos;,true,&apos;PlotMagPhase&apos;,false,&apos;AxesColor&apos;,[0 0 0],&apos;AxesTickColor&apos;,[0.686274509803922 0.686274509803922 0.686274509803922],&apos;ColorOrder&apos;,[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration(&apos;Tools&apos;,&apos;Plot Navigation&apos;,true),extmgr.Configuration(&apos;Tools&apos;,&apos;Measurements&apos;,true,&apos;Version&apos;,&apos;2020b&apos;)),&apos;Version&apos;,&apos;2020b&apos;)</P>
+    <P Name="NumInputPorts">1</P>
+    <P Name="Floating">off</P>
+  </Block>
+  <Block BlockType="Step" Name="Step" SID="1">
+    <P Name="Position">[190, 105, 220, 135]</P>
+    <P Name="ZOrder">1</P>
+    <P Name="Time">0</P>
+    <P Name="SampleTime">0</P>
+  </Block>
+  <Block BlockType="ToFile" Name="To File" SID="4">
+    <P Name="Ports">[1]</P>
+    <P Name="Position">[375, 155, 435, 185]</P>
+    <P Name="ZOrder">4</P>
+    <P Name="Filename">out.mat</P>
+    <P Name="SaveFormat">Timeseries</P>
+  </Block>
+  <Line>
+    <P Name="ZOrder">1</P>
+    <P Name="Src">1#out:1</P>
+    <P Name="Dst">3#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">2</P>
+    <P Name="Src">3#out:1</P>
+    <P Name="Points">[9, 0]</P>
+    <Branch>
+      <P Name="ZOrder">4</P>
+      <P Name="Points">[0, 50]</P>
+      <P Name="Dst">4#in:1</P>
+    </Branch>
+    <Branch>
+      <P Name="ZOrder">3</P>
+      <P Name="Dst">2#in:1</P>
+    </Branch>
+  </Line>
+</System>

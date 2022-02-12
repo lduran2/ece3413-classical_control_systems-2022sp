@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sltp_graph version="1.1" packageUris="http://schema.mathworks.com/mf0/sltp_mm/R2020b_202003251737">
+  <sltp.mm.core.Context type="sltp.mm.core.Context" uuid="8234469d-06e2-4f17-9890-550a42a7aec9">
+    <priorityDirection>HighNumberLast</priorityDirection>
+    <unusedTaskIds>1</unusedTaskIds>
+    <editorState type="sltp.mm.core.EditorState" uuid="7c09ce62-97fa-4f90-81c8-381fea60607b">
+      <isSynchronized>true</isSynchronized>
+    </editorState>
+    <rootTask type="sltp.mm.core.Task" uuid="0822e29b-b084-4d6c-9b97-e95da76c3a2e">
+      <context type="sltp.mm.core.Context" uuid="8234469d-06e2-4f17-9890-550a42a7aec9"/>
+      <explicit>false</explicit>
+      <name>Default</name>
+      <priority>-2147483648</priority>
+      <subgraph type="sltp.mm.core.Graph" uuid="548378a6-9709-494e-8b2c-4b0c33775dd7">
+        <tasks type="sltp.mm.core.Task" uuid="419d043d-0491-464d-ab63-b0323c771e97">
+          <baseTask>true</baseTask>
+          <context type="sltp.mm.core.Context" uuid="8234469d-06e2-4f17-9890-550a42a7aec9"/>
+          <explicit>false</explicit>
+          <id>2</id>
+          <isTimed>true</isTimed>
+          <name>Cont</name>
+          <priority>40</priority>
+          <rates type="sltp.mm.core.Rate" uuid="6e6e506f-f244-47e9-9e45-07e601a263a0">
+            <annotation>Cont</annotation>
+            <color>255</color>
+            <hasBlocks>true</hasBlocks>
+            <rateSpec type="sltp.mm.core.RateSpec">
+              <period>0.0</period>
+            </rateSpec>
+            <sti>0</sti>
+          </rates>
+          <rates type="sltp.mm.core.Rate" uuid="2597b45a-45a1-4a1b-b7b5-e34361ca638b">
+            <annotation>D1</annotation>
+            <color>-436207361</color>
+            <hasBlocks>true</hasBlocks>
+            <rateSpec type="sltp.mm.core.RateSpec">
+              <period>.001</period>
+            </rateSpec>
+            <sti>1</sti>
+          </rates>
+        </tasks>
+      </subgraph>
+    </rootTask>
+  </sltp.mm.core.Context>
+</sltp_graph>

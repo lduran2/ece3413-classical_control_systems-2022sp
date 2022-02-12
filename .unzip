@@ -1,0 +1,5 @@
+# MATLAB live scripts
+*.mlx
+
+# Simulink models
+*.slx

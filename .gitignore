@@ -1,0 +1,8 @@
+# MATLAB autosaves
+*.asv
+
+# Simulink autosaves
+*.slx.autosave
+
+# MATLAB dataset
+*.mat
