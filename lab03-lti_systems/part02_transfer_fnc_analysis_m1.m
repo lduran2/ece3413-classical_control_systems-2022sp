@@ -1,11 +1,14 @@
-% Canonical https://github.com/lduran2/ece3413_classical_control_systems/lab03-lti_systems/part02_transfer_fnc_analysis_m1.m
+% Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab03-lti_systems/part02_transfer_fnc_analysis_m1.m
 % Automates simultion of various transfer functions
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-02-12t14:45R
+% When      : 2022-02-12t15:08R
 % For       : ECE 3413
-% Version   : 1.1.1
+% Version   : 1.1.2
 %
 % CHANGELOG :
+%   v1.1.2 - 2022-02-12t15:08R
+%       plotting simulation data
+%
 %   v1.1.1 - 2022-02-12t14:45R
 %       running simulation
 %
@@ -39,7 +42,13 @@ A = [1 5 9];    % the denominator
 Ga_s = tf(B,A)
 
 % run the simulation
-sim(sim_source)
+out = sim(sim_source)
+% get the data and time
+y = out.simout.data;
+t = out.simout.time;
+
+% plot the data
+simplot(t, y);
 
 % display finished
 disp('Done.')
