@@ -21,9 +21,9 @@
         <P Name="ViewObjType" Class="char">SimulinkTopLevel</P>
         <P Name="LoadSaveID" Class="char">0</P>
         <P Name="Extents" Class="double">[1339.0, 764.0]</P>
-        <P Name="ZoomFactor" Class="double">3.5251581618647063</P>
-        <P Name="Offset" Class="double">[186.02854698791884, 71.39962989141064]</P>
-        <P Name="SceneRectInView" Class="double">[186.02854698791884, 71.39962989141064, 253.22740872269739, 144.48524291571383]</P>
+        <P Name="ZoomFactor" Class="double">3.1410023351035408</P>
+        <P Name="Offset" Class="double">[185.54282407130444, 70.4218473923001]</P>
+        <P Name="SceneRectInView" Class="double">[185.54282407130444, 70.4218473923001, 284.19802707253973, 162.15630521539981]</P>
       </Object>
       <Array PropName="DockComponentsInfo" Type="Simulink.DockComponentInfo" Dimension="1*2">
         <Object ObjectID="6">
