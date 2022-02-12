@@ -1,11 +1,14 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab03-lti_systems/part02_transfer_fnc_analysis_m1.m
 % Automates simultion of various transfer functions
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-02-12t17:22R
+% When      : 2022-02-12t17:39R
 % For       : ECE 3413
-% Version   : 1.2.0
+% Version   : 1.2.1
 %
 % CHANGELOG :
+%   v1.2.1 - 2022-02-12t17:39R
+%       found settling time
+%
 %   v1.2.0 - 2022-02-12t17:22R
 %       found peak time
 %
@@ -29,6 +32,8 @@
 %
 %   v0.0.0 - 2022-02-12t14:07R
 %       hello world
+
+clear;
 
 %% parameters
 TSIM = 10.0; % [s] simulation time
@@ -77,7 +82,6 @@ set(hTgt, 'InvertHardCopy', 'off')
 % copy to target for saving
 copyobj(hSrc, hTgt)
 % save the result
-mkdir('fig')
 saveas(hTgt, [ FIG_DIR '/Ga_s.png' ])
 % close the target
 close(hTgt)
@@ -88,14 +92,29 @@ close_system(nScopeSys)
 %% get the data and time
 y = out.simout.data;
 t = out.simout.time;
+n_samp = size(y, 1) % number of samples
 
-%% finding peak time
+%% find peak time, Tk
 % get the max and its index
-[Y, k] = max(y)
+[Y, K] = max(y)
 % the corresponding time is peak time
-Tk = t(k)   % [s]
+Tk = t(K)   % [s]
 
-% settling time,
+%% find settling time, Ts
+% for each sample
+for ks=(K+1):n_samp
+    % find the mean of y's from k
+    Ey = mean(y(ks:n_samp));
+    % stop if y(k) is within 5% of E[y]
+    if (abs(y(ks) - Ey) < (0.05 * Ey))
+        break
+    end % if (abs(y(k) - Ey) < (0.05 * Ey))
+end % for ks=1:n_samp
+% the corresponding time is settling time
+Ts = t(ks)
+% save Ey as the final value of y
+y_final = Ey
+
 % rise time,
 % percent overshoot,
 % steady state error
