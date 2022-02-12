@@ -1,11 +1,14 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab03-lti_systems/part02_transfer_fnc_analysis_m1.m
 % Automates simultion of various transfer functions
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-02-12t17:01R
+% When      : 2022-02-12t17:22R
 % For       : ECE 3413
-% Version   : 1.1.4
+% Version   : 1.2.0
 %
 % CHANGELOG :
+%   v1.2.0 - 2022-02-12t17:22R
+%       found peak time
+%
 %   v1.1.4 - 2022-02-12t17:01R
 %       closing the target and scope
 %
@@ -85,6 +88,17 @@ close_system(nScopeSys)
 %% get the data and time
 y = out.simout.data;
 t = out.simout.time;
+
+%% finding peak time
+% get the max and its index
+[Y, k] = max(y)
+% the corresponding time is peak time
+Tk = t(k)   % [s]
+
+% settling time,
+% rise time,
+% percent overshoot,
+% steady state error
 
 %% display finished
 disp('Done.')
