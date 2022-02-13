@@ -1,11 +1,14 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab03-lti_systems/part02_transfer_fnc_analysis_m1.m
 % Automates simultion of various transfer functions
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-02-12t21:12R
+% When      : 2022-02-12t21:27R
 % For       : ECE 3413
-% Version   : 1.3.2
+% Version   : 1.4.0
 %
 % CHANGELOG :
+%   v1.4.0 - 2022-02-12t21:27R
+%       storing analysis outputs
+%
 %   v1.3.2 - 2022-02-12t21:12R
 %       label generated figures
 %
@@ -97,11 +100,18 @@ transfer_fncs = {
     [9], [ 1 0 9 ];
     [7], [ 1 6 9 ]
 }
+Ntfs = size(transfer_fncs, 1)   % number of transfer functions
+
+%% analysis outputs
+Tks = cell(Ntfs, 1);    % [s] peak times
+Tss = cell(Ntfs, 1);    % [s] settling times
+Trs = cell(Ntfs, 1);    % [s] rise times
+pcOSs = cell(Ntfs, 1);  % [%] overshoot rates
+Esss = cell(Ntfs, 1);   % <1> steady state errors
 
 %% analyze each transfer function
-NG = size(transfer_fncs, 1) % number of transfer functions
 % loop through the transfer functions
-for iG=1:NG
+for iG=1:Ntfs
     % get the coefficients at row iG
     % B := the numerator
     % A := the denominator
@@ -109,14 +119,18 @@ for iG=1:NG
     % calculate the subscript
     sbx = ('a' + iG - 1)
     % analyze the filter given by iG
-    analyze_filter(B, A, sbx, sim_name, sim_source);
+    [ Tks{iG}, Tss{iG}, Trs{iG}, pcOSs{iG}, Esss{iG} ] = ...
+        analyze_filter(sbx, sim_name, sim_source);
 end % for iG
+
+table(Tks, Tss, Trs, pcOSs, Esss)
 
 %% display finished
 disp('Done.')
 
 %% analyze_filter
-function analyze_filter(B, A, sbx, sim_name, sim_source)
+function [Tk, Ts, Tr, pcOS, Ess] = ...
+        analyze_filter(sbx, sim_name, sim_source)
     %% constants
     global SYS_DELIM  N_SCOPE  FIG_DIR
 
@@ -210,7 +224,7 @@ function analyze_filter(B, A, sbx, sim_name, sim_source)
     Tr = t90 - t10
 
     %% find percent overshoot, %OS
-    percentOS = (Y - y_final)/y_final * 100 % [%]
+    pcOS = (Y - y_final)/y_final * 100 % [%]
 
     %% find steady state error
     Ess = 1 - y_final
