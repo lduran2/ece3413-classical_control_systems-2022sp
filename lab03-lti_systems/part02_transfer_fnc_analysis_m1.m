@@ -1,11 +1,14 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab03-lti_systems/part02_transfer_fnc_analysis_m1.m
 % Automates simultion of various transfer functions
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-02-12t21:01R
+% When      : 2022-02-12t21:12R
 % For       : ECE 3413
-% Version   : 1.3.1
+% Version   : 1.3.2
 %
 % CHANGELOG :
+%   v1.3.2 - 2022-02-12t21:12R
+%       label generated figures
+%
 %   v1.3.1 - 2022-02-12t21:01R
 %       all tfs analyzed with has_overshoot
 %
@@ -135,7 +138,7 @@ function analyze_filter(B, A, sbx, sim_name, sim_source)
     % copy to target for saving
     copyobj(hSrc, hTgt)
     % save the result
-    fig_path = [ FIG_DIR '/G' sbx '_s.png' ]
+    fig_path = [ FIG_DIR '/gen_G' sbx '_s.png' ]
     saveas(hTgt, fig_path)
     % close the target
     close(hTgt)
