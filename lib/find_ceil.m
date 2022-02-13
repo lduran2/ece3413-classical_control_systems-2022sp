@@ -1,10 +1,13 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lib/find_ceil.m
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-02-12t19:55R
+% When      : 2022-02-12t20:01R
 % For       : ECE 3413
-% Version   : 1.2.6
+% Version   : 1.2.7
 %
 % CHANGELOG :
+%   v1.2.7 - 2022-02-12t20:01R
+%       fixed not returning `k`
+%
 %   v1.2.6 - 2022-02-12t19:55R
 %       separated to m-file
 %
@@ -35,4 +38,6 @@ function index = find_ceil(v, off, N, key)
             break
         end % if (v(k) >= key)
     end % for k
+    % return index k
+    index = k;
 end % function find_ceil(v, off, N, key)
