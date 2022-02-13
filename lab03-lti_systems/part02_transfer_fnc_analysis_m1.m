@@ -1,12 +1,15 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab03-lti_systems/part02_transfer_fnc_analysis_m1.m
 % Automates simultion of various transfer functions
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-02-12t20:47R
+% When      : 2022-02-12t20:53R
 % For       : ECE 3413
-% Version   : 1.2.8-alpha02
+% Version   : 1.2.8-alpha03
 %
 % CHANGELOG :
-%   v1.2.8-alpha00 - 2022-02-12t20:47R
+%   v1.2.8-alpha03 - 2022-02-12t20:53R
+%       fixed looping through tfs, subscripts
+%
+%   v1.2.8-alpha02 - 2022-02-12t20:47R
 %       analyze_filter function
 %
 %   v1.2.8-alpha00 - 2022-02-12t20:30R
@@ -89,14 +92,16 @@ transfer_fncs = {
     [7], [ 1 6 9 ]
 }
 
-%% loop through the transfer functions
-for iG=size(transfer_fncs, 1)
+%% analyze each transfer function
+NG = size(transfer_fncs, 1) % number of transfer functions
+% loop through the transfer functions
+for iG=1:NG
     % get the coefficients at row iG
     % B := the numerator
     % A := the denominator
     [B, A] = transfer_fncs{iG, :}
     % calculate the subscript
-    sbx = ('a' + iG - 1);
+    sbx = ('a' + iG - 1)
     % analyze the filter given by iG
     analyze_filter(B, A, sbx, sim_name, sim_source);
 end % for iG
@@ -127,7 +132,8 @@ function analyze_filter(B, A, sbx, sim_name, sim_source)
     % copy to target for saving
     copyobj(hSrc, hTgt)
     % save the result
-    saveas(hTgt, [ FIG_DIR '/G' sbx '_s.png' ])
+    fig_path = [ FIG_DIR '/G' sbx '_s.png' ]
+    saveas(hTgt, fig_path)
     % close the target
     close(hTgt)
 
