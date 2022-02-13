@@ -6,6 +6,10 @@
 % Version   : 1.2.3
 %
 % CHANGELOG :
+%   v1.2.4 - 2022-02-12t19:38R
+%       abstracted `find_ceil` and `estimate_by_diff` to
+%           `/lib/find_value.m`
+%
 %   v1.2.3 - 2022-02-12t18:29R
 %       corrected rise time by difference
 %
@@ -40,6 +44,7 @@
 %       hello world
 
 clear;
+addpath('../lib')   % for find_ceil, estimate_by_diff
 
 %% parameters
 TSIM = 10.0; % [s] simulation time
@@ -128,20 +133,9 @@ y_final = Ey
 y10_exp = 0.1*y_final   % expected 10%ile
 y90_exp = 0.9*y_final   % expected 90%ile
 
-% for each sample
-for k10=1:n_samp
-    % stop if 10%ile
-    if (y(k10) >= y10_exp)
-        break
-    end % if (y(k10) >= y10_exp)
-end % for k10
-% continue for the remaining samples
-for k90=k10:n_samp
-    % stop if 90%ile
-    if (y(k90) >= y90_exp)
-        break
-    end % if (y(k90) >= y90_exp)
-end % for k90
+% find the indices of each %ile
+k10 = find_ceil(y, 1,   n_samp, y10_exp)
+k90 = find_ceil(y, k10, n_samp, y90_exp)
 
 % display corresponding measured times
 t10_meas = t(k10)
@@ -149,14 +143,8 @@ t90_meas = t(k90)
 
 % corresponding y(k)'s are a little high
 % estimate the proper values
-% for t10
-delta_y10 = (y(k10) - y(k10 - 1))
-y10_diff = (y10_exp - y(k10))
-t10 = (delta_t/delta_y10)*(y10_diff) + t10_meas
-% for t90
-delta_y90 = (y(k90) - y(k90 - 1))
-y90_diff = (y90_exp - y(k90))
-t90 = (delta_t/delta_y90)*(y90_diff) + t90_meas
+t10 = estimate_by_diff(y10_exp, y, k10, t10_meas, delta_t)
+t90 = estimate_by_diff(y90_exp, y, k90, t90_meas, delta_t)
 
 % the corresponding time difference is the rise time
 Tr = t90 - t10
