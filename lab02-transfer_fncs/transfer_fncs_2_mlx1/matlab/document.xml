@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body><w:p><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr><w:r><w:t>Lab Demo</w:t></w:r></w:p><w:p><mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"><mc:Choice Requires="R2018b"><w:pPr><w:pStyle w:val="heading2"/><w:jc w:val="left"/></w:pPr></mc:Choice><mc:Fallback><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr></mc:Fallback></mc:AlternateContent><w:r><w:t>Part I, 3.a</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>Represent the following using polynomials in the numerator and the denominator</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="center"/></w:pPr><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="true"/></w:customXmlPr><w:r><w:t>G_1(s) := \frac{9(s + 2)(s + 3)(s - 6)(s + 8)}{s(s + 7)(s - 2)(s + 10)(s - 3)}.</w:t></w:r></w:customXml></w:p><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[clear;
+
+% matrix of factor coefficients
+% each row is one factor
+% these represent G1(s)
+G1B_factors = [ 0 9 ; 1 2; 1 3; 1 -6; 1 8 ]     % numerator
+G1A_factors = [ 1 0 ; 1 7; 1 -2; 1 10; 1 -3 ]   % denominator
+
+% convolve the numerator factors
+G1B = [1]; % initialize the numerator vector of coefficients
+% loop through the rows
+% transpose because for loops through columns
+for rowT=G1B_factors'
+    % convolve each factor to G1B
+    G1B = conv(G1B, rowT)
+end % rowT
+% transpose back to a row vector
+G1B = G1B'
+
+% now convolve the denominator factors
+G1A = [1]; % initialize the denominator vector of coefficients
+% loop through the rows
+% convolve each row of the matrix
+for rowT=G1A_factors'
+    G1A = conv(G1A, rowT)
+end % rowT
+% transpose back to a row vector
+G1A = G1A'
+
+G1_s = tf(G1B, G1A)]]></w:t></w:r></w:p><w:p><mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"><mc:Choice Requires="R2018b"><w:pPr><w:pStyle w:val="heading2"/><w:jc w:val="left"/></w:pPr></mc:Choice><mc:Fallback><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr></mc:Fallback></mc:AlternateContent><w:r><w:t>Part I, 4.b</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>Calculate by hand or with calculator the partial-fraction expansion of the following transfer functions:</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="center"/></w:pPr><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="true"/></w:customXmlPr><w:r><w:t>G_7(s) := \frac{5(s + 2)}{s(s^2 + 6s + 9)}.</w:t></w:r></w:customXml></w:p><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[clear;
+
+% matrix of factor coefficients
+% representing G7(s)
+G7B_factors = [ 0 5; 1 2 ]
+G7A_factors = [ 0 1 0; 1 6 9 ]
+
+% convolve the numerator factors
+G7B = [1]; % initialize the numerator vector of coefficients
+% convolve each row of the matrix
+for rowT=G7B_factors'
+    G7B = conv(G7B, rowT)
+end % rowT
+% transpose back to a row vector
+G7B = G7B'
+
+% now convolve the denominator factors
+G7A = [1]; % initialize the denominator vector of coefficients
+% convolve each row of the matrix
+for rowT=G7A_factors'
+    G7A = conv(G7A, rowT)
+end % rowT
+% transpose back to a row vector
+G7A = G7A'
+
+% use the residue function to find the residues, poles and direct term
+% of G7(s).
+[R7, P7, K7] = residue(G7B, G7A)
+
+% form the partial fraction expansion
+syms s;     % in terms of s
+G7PFX = 0;  % initialize the sum to 0
+
+% loop through each residue and pole with index k
+for k=1:size(R7, 1)
+    % R7(k) is the residue
+    baseAk = s - P7(k)   % base of the denominator for pole k
+    % for the degree, we track how many times we have seen P(k) so far
+    Psofar = P7(1:k, 1)
+    % and count the times
+    degreeAk = sum(P7(k) == Psofar)
+    % the denominator is base^degree
+    Ak = baseAk^degreeAk
+    % add the partial fraction formed
+    G7PFX = G7PFX + (R7(k)/Ak)
+end % for k=1:size(R, 1)
+
+% add the sum of the direct terms
+G7PFX = G7PFX + poly2sym(K7)]]></w:t></w:r></w:p><w:p><mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"><mc:Choice Requires="R2018b"><w:pPr><w:pStyle w:val="heading2"/><w:jc w:val="left"/></w:pPr></mc:Choice><mc:Fallback><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr></mc:Fallback></mc:AlternateContent><w:r><w:t>Part II, 2</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>Using a hand calculation, find the inverse Laplace transform of</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="center"/></w:pPr><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="true"/></w:customXmlPr><w:r><w:t>F(s) := \frac{2(s + 3)(s + 5)(s + 7)}{s(s + 8)(s^2 + 10s + 100)}.</w:t></w:r></w:customXml></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>MATLAB has a built in </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>ilaplace</w:t></w:r><w:r><w:t> function that performs this operation for us as follows.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[clear;
+syms s t    % F in terms of s, f in terms of t
+F_s = ((2*(s + 3)*(s + 5)*(s + 7))/(s*(s + 8)*(s^2 + 10 + 100)))
+f_t = ilaplace(F_s, s, t)]]></w:t></w:r></w:p><w:p><mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"><mc:Choice Requires="R2018b"><w:pPr><w:pStyle w:val="heading2"/><w:jc w:val="left"/></w:pPr></mc:Choice><mc:Fallback><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr></mc:Fallback></mc:AlternateContent><w:r><w:t>Part II, 3 (upto step iv)</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[% knowns
+kC1 = 1/5 %[F]
+kR2 = 5   %[ohm]
+kL3 = 1   %[H]
+kR4 = 2   %[ohm]
+kL5 = 1   %[H]
+kR6 = 2   %[ohm]
+kC7 = 1/3 %[F]
+kR8 = 1   %[ohm]
+kC9 = 1/4 %[F]
+k = [ kC1 kR2 kL3 kR4 kL5 kR6 kC7 kR8 kC9 ]
+
+% parameters
+syms pC1 pR2 pL3 pR4 pL5 pR6 pC7 pR8 pC9
+p = [ pC1 pR2 pL3 pR4 pL5 pR6 pC7 pR8 pC9 ]
+
+% unknowns
+syms V_s I1_s I2_s I3_s
+
+% from KCL:
+% i4 = i1 - i2
+% -------------
+% i1 = i3 + i5
+% i5 = i1 - i3
+% -------------
+% -i4 = i2 - i1
+% -------------
+% i3 + i6 = i2
+% i6 = i2 - i3
+% -------------
+% -i5 = i3 - i1
+% -i6 = i3 - i2
+
+% KVL: 0 = -v(t) + vC1(t) + vR2(t) + vL3(t) + vR4(t)
+%        = -v(t) + 1/C1 int[i1 dT] + i5(t)R2 + L3 di4/dt + i4(t)R4
+%        = -v(t) + 1/C1 int[i1 dT] + (i1 - i3)(t)R2 + L3 d/dt (i1 - i2)(t) + (i1 - i2)(t)R4
+% <->
+%      0 = -V(s) + I1(s)/(sC1) + (I1 - I3)(s)R2 + sL3 (I1 - I2)(s) + (I1 - I2)(s)R4
+%        = -V(s) + (1/(sC1) + R2 + sL3 + R4)I1(s) + (-sL3 - R4)I2(s) - R2 I3(s)
+
+% KVL: 0 = -vR4(t) - vL3(t) + vL5(t) + vR6(t) + vC7(t)
+%        = -i4(t)R4 - L3 di4/dt + L5 di6/dt + i6(t)R6 + 1/C7 int[i2 dT]
+%        = (i2 - i1)(t)R4 + L3 d/dt (i2 - i1)(t) + L5 d/dt (i2 - i3)(t) + (i2 - i3)R6 + 1/C7 int[i2 dT]
+% <->
+%      0 = (I2 - I1)(s)R4 + sL3 (I2 - I1)(s) + sL5 (I2 - I3)(s) + (I2 - I3)(s)R6 + 1/(sC7) I2(s)
+%        = (-R4 - sL3)I1(s) + (R4 + sL3 + sL5 + R6 + 1/(sC7))I2(s) + (-sL5 - R6)I3(s)
+
+% KVL: 0 = -vR2(t) + vR8(t) + vC9(t) - vR6(t) - vL5(t)
+%        = -i5(t)R2 + i3(t)R8 + 1/C9 int[i3 dt] - i6(t)R6 - L5 di6/dt
+%        = (i3 - i1)(t)R2 + i3(t)R8 + 1/C9 int[i3 dt] + (i3 - i2)(t)R6 + L5 d/dt (i3 - i2)(t)
+% <->
+%      0 = (I3 - I1)(s)R2 + I3(s)R8 + 1/(sC9) I3(s) + (I3 - I2)(s)R6 + sL5 (I3 - I2)(s)
+%        = -R2 I1(s) + (-R6 - sL5)I2(s) (R2 + R8 + 1/(sC9) + R6 + sL5)I3(s)
+
+% from KVL:
+% matrix of coefficients
+A = [     (1/(s*pC1) + pR2 + s*pL3 + pR4)                          (-s*pL3 - pR4)                                   -pR2  ;
+                           (-pR4 - s*pL3)  (pR4 + s*pL3 + s*pL5 + pR6 + 1/(s*pC7))                         (-s*pL5 - pR6) ;
+                                    -pR2                           (-pR6 - s*pL5)   (pR2 + pR8 + 1/(s*pC9) + pR6 + s*pL5)   ]
+% outputs
+b = [V_s; 0; 0]
+
+% solution
+% AI = b <=> I = (A^-1)b
+Ip = (A^-1)*b
+% substitute in the knowns
+% (inverse laplace on Ip will take freeze)
+Ik = subs(Ip, p, k)
+% time domain
+ik = ilaplace(Ik, s, t)]]></w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr><w:r><w:t>Lab Assignment</w:t></w:r></w:p><w:p><mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"><mc:Choice Requires="R2018b"><w:pPr><w:pStyle w:val="heading2"/><w:jc w:val="left"/></w:pPr></mc:Choice><mc:Fallback><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr></mc:Fallback></mc:AlternateContent><w:r><w:t>Part I</w:t></w:r></w:p><w:p><mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"><mc:Choice Requires="R2018b"><w:pPr><w:pStyle w:val="heading3"/><w:jc w:val="left"/></w:pPr></mc:Choice><mc:Fallback><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr></mc:Fallback></mc:AlternateContent><w:r><w:t>Use MATLAB to find </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>P_3</w:t></w:r></w:customXml><w:r><w:t>, </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>P_4</w:t></w:r></w:customXml><w:r><w:t> </w:t></w:r><w:r><w:t>and </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>P_5</w:t></w:r></w:customXml><w:r><w:t>.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="true"/></w:customXmlPr><w:r><w:t>P_1(s) = s^6 + s^5 + 2s^4 + 8s^3 + 7s^2 + 15s + 2,</w:t></w:r></w:customXml><w:r><w:t> </w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="true"/></w:customXmlPr><w:r><w:t>P_2(s) = s^6 + s^5 + 4s^4 + 3s^3 + 7s^2 + 15s + 18,</w:t></w:r></w:customXml><w:r><w:t> </w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="true"/></w:customXmlPr><w:r><w:t>P_3(s) = P_1(s) + P_2(s) , P_4(s) = P_1(s) - P_2(s) , P_5(s) = P_1(s)P_2(s).</w:t></w:r></w:customXml></w:p><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[clear
+
+% vectors of coefficients
+P1 = [ 1 1 2 8 7 15 2 ]
+P2 = [ 1 1 4 3 7 15 18 ]
+
+% convert to symbolic polynomials
+syms s % in terms of s
+P1_s = poly2sym(P1)
+P2_s = poly2sym(P2)
+
+% find P3, P4
+P3_s = P1_s + P2_s
+P4_s = P1_s - P2_s
+
+% for P5, first convolve P1 and P2 vectors
+P5 = conv(P1, P2)
+% then convert
+P5_s = poly2sym(P5)]]></w:t></w:r></w:p><w:p><mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"><mc:Choice Requires="R2018b"><w:pPr><w:pStyle w:val="heading3"/><w:jc w:val="left"/></w:pPr></mc:Choice><mc:Fallback><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr></mc:Fallback></mc:AlternateContent><w:r><w:t>Use MATLAB to find </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>P_6(s)</w:t></w:r></w:customXml><w:r><w:t>.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="center"/></w:pPr><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>P_6(s) := (s + 5)(s + 2)(s + 3)(s - 1)(s - 2)(s + 4)</w:t></w:r></w:customXml><w:r><w:t>.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[clear;
+
+% matrix of factor rows
+P6factors = [ 1 5; 1 2; 1 3; 1 -1; 1 -2; 1 -4 ]
+
+% now convolve the polynomials factors
+P6 = [1]; % initialize the vector of coefficients
+% loop through the rows
+% convolve each row of the matrix
+for rowT=P6factors'
+    P6 = conv(P6, rowT)
+end % rowT
+% transpose back to a row vector
+P6 = P6'
+]]></w:t></w:r></w:p><w:p><mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"><mc:Choice Requires="R2018b"><w:pPr><w:pStyle w:val="heading3"/><w:jc w:val="left"/></w:pPr></mc:Choice><mc:Fallback><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr></mc:Fallback></mc:AlternateContent><w:r><w:t>Use MATLAB to express </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>G2(s)</w:t></w:r><w:r><w:t> using factored forms of the polynomials in the numerator and the denominator.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="center"/></w:pPr><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="true"/></w:customXmlPr><w:r><w:t>G2(s) := \frac{s^4 + 17s^3 + 99s^2 + 223s + 140}{s^5 + 32s^4 + 363s^3 + 2092s^2 + 5052s + 4320}.</w:t></w:r></w:customXml></w:p><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[clear;
+
+% in terms of s
+syms s;
+
+% vectors of coefficients for numerator, denominator
+G2B = [ 1 17 99 223 140 ]
+G2A = [ 1 32 363 2092 5052 4320 ]
+% the transfer function
+G2_s = tf(G2B, G2A)
+
+% find the zeros, poles and gain of G2(s)
+[G2Z, G2G] = zero(G2_s)
+G2P = pole(G2_s)]]></w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>Symbolically these functions represent fractions. so let's additionally round each constant term to </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>4</w:t></w:r></w:customXml><w:r><w:t> places after the decimal, using </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>round</w:t></w:r><w:r><w:t> and </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>vpa</w:t></w:r><w:r><w:t>.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>We can use </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>\prod[s - r | r \in \mathbf{r}] \forall \mathbf{r} \in \{\mathbf{z}, \mathbf{p}\}</w:t></w:r></w:customXml><w:r><w:t> for either zeros </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>\mathbf{z}</w:t></w:r></w:customXml><w:r><w:t> or poles </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>\mathbf{p}</w:t></w:r></w:customXml><w:r><w:t> to find the numerator and denominator respectively.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>However, another issue we face is the complex roots because we want binomials with real roots.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>Well</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="ListParagraph"/><w:numPr><w:numId w:val="2"/></w:numPr><w:jc w:val="left"/></w:pPr><w:r><w:t>since coefficients of the polynomial are all real, imaginary roots occur when the radicand is negative.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="ListParagraph"/><w:numPr><w:numId w:val="2"/></w:numPr><w:jc w:val="left"/></w:pPr><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>[s - (a - b\sqrt{c})][s - (a + b\sqrt{c})] = [(s - a) + b\sqrt{c}][(s - a) - b\sqrt{c}] = (s - a)^2 - b^2 c</w:t></w:r></w:customXml><w:r><w:t> by the difference of squares.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="ListParagraph"/><w:numPr><w:numId w:val="2"/></w:numPr><w:jc w:val="left"/></w:pPr><w:r><w:t>Thus </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>[s - (a - b\mathcal{i})][s - (a + b\mathcal{i})] = [(s - a) + b\mathcal{i}][(s - a) - b\mathcal{i}] = (s - a)^2 + b^2 = s^2 - 2as + a^2 + b^2 = s^2 + s(-2a) + (a^2 + b^2)</w:t></w:r></w:customXml><w:r><w:t>.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="ListParagraph"/><w:numPr><w:numId w:val="2"/></w:numPr><w:jc w:val="left"/></w:pPr><w:r><w:t>according to the irration root theorem: if </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>(a - b\sqrt{c})</w:t></w:r></w:customXml><w:r><w:t> is a root, then so is </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>(a + b\sqrt{c})</w:t></w:r></w:customXml><w:r><w:t>. So if we track negative-imaginary roots, the conjugate will give the positive root. In this case, we will be multiplying these to </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>(s - a)^2 - b^2 c</w:t></w:r></w:customXml><w:r><w:t> for negative-imaginary roots and ignoring positive-imaginary roots.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[% numerator
+% initialize to G2G
+G2num = G2G
+% loop through the zeros
+% note the transpose
+for z=G2Z'
+    % check for imaginary part
+    z_imag = imag(z)
+    % specifically its sign
+    z_im_sgn = sign(round(vpa(z_imag), 4))
+    switch z_im_sgn
+        case 0
+            % if ZERO, then zero is real
+            % so take this root by itself
+            a = round(vpa(z), 4)
+            G2num = G2num * (s - a)
+        case -1
+            % if negative, then find the product with its conjugate
+            % which is also a root by the irrational root theorem for a
+            % quadratic factor
+            % first get the real part
+            z_real = real(z)
+            % the coefficients of the quadratic are
+            %   a1 = (-2a)
+            a1 = round(vpa(-2*z_real), 4)
+            %   a0 = (a^2 + b^2)
+            a0 = round(vpa(z_real^2 + z_imag^2), 4)
+            sqfactor = poly2syms([1 a1 a0], s)
+            % take the quadratic factor
+            G2num = G2num * poly2sym([1 a1 a0], s)
+        otherwise
+            % positive, so ignore it
+    end % switch z_im_sgn
+end % for z=G2Z'
+
+% denominator
+% initialize to 1
+G2den = 1
+% loop through the poles
+% note the transpose
+for p=G2P'
+    % check for imaginary part
+    p_imag = imag(p)
+    % specifically its sign
+    p_im_sgn = sign(round(vpa(p_imag), 4))
+    switch p_im_sgn
+        case 0
+            % if ZERO, then pole is real
+            % so take this root by itself
+            a = round(vpa(p), 4)
+            G2den = G2den * (s - a)
+        case -1
+            % if negative, then find the product with its conjugate
+            % which is also a root by the irrational root theorem for a
+            % quadratic factor
+            % first get the real part
+            p_real = real(p)
+            % the coefficients of the quadratic are
+            %   a1 = (-2a)
+            a1 = round(vpa(-2*p_real), 4)
+            %   a0 = (a^2 + b^2)
+            a0 = round(vpa(p_real^2 + p_imag^2), 4)
+            % take the quadratic factor
+            G2den = G2den * poly2sym([1 a1 a0], s)
+        otherwise
+            % positive, so ignore it
+    end % switch p_im_sgn
+end % for p=G2P'
+
+% divide for the fraction
+G2factorize_s = G2num/G2den]]></w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>This can also be performed from the outputs of </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>zero</w:t></w:r><w:r><w:t> and </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>pole</w:t></w:r><w:r><w:t> using MATLAB's built-in </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>zpk</w:t></w:r><w:r><w:t> function.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[G2factorize2_s = zpk(G2Z, G2P, G2G)]]></w:t></w:r></w:p><w:p><mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"><mc:Choice Requires="R2018b"><w:pPr><w:pStyle w:val="heading3"/><w:jc w:val="left"/></w:pPr></mc:Choice><mc:Fallback><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr></mc:Fallback></mc:AlternateContent><w:r><w:t>Use MATLAB to evaluate the partial fraction expansions in part 1, problem 4(a, b, c).</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>We found the partial fraction expansion of </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>G_7(s)</w:t></w:r></w:customXml><w:r><w:t> for problem 4b in the lab demo. For 4a, we can perform the same process to find </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>G_6(s)</w:t></w:r></w:customXml><w:r><w:t>. We are given</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="center"/></w:pPr><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="true"/></w:customXmlPr><w:r><w:t>G_6(s) := \frac{5(s + 2)}{s(s^2 + 8s + 15)}.</w:t></w:r></w:customXml></w:p><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[clear;
+
+% matrix of factor coefficients
+% representing G6(s)
+G6B_factors = [ 0 5; 1 2 ]
+G6A_factors = [ 0 1 0; 1 8 15 ]
+
+% convolve the numerator factors
+G6B = [1]; % initialize the numerator vector of coefficients
+% convolve each row of the matrix
+for rowT=G6B_factors'
+    G6B = conv(G6B, rowT)
+end % rowT
+% transpose back to a row vector
+G6B = G6B'
+
+% now convolve the denominator factors
+G6A = [1]; % initialize the denominator vector of coefficients
+% convolve each row of the matrix
+for rowT=G6A_factors'
+    G6A = conv(G6A, rowT)
+end % rowT
+% transpose back to a row vector
+G6A = G6A'
+
+% use the residue function to find the residues, poles and direct term
+% of G6(s).
+[R6, P6, K6] = residue(G6B, G6A)
+
+% form the partial fraction expansion
+syms s;     % in terms of s
+G6PFX = 0;  % initialize the sum to 0
+
+% loop through each residue and pole with index k
+for k=1:size(R6, 1)
+    % R6(k) is the residue
+    baseAk = s - P6(k)   % base of the denominator for pole k
+    % for the degree, we track how many times we have seen P(k) so far
+    Psofar = P6(1:k, 1)
+    % and count the times
+    degreeAk = sum(P6(k) == Psofar)
+    % the denominator is base^degree
+    Ak = baseAk^degreeAk
+    % add the partial fraction formed
+    G6PFX = G6PFX + (R6(k)/Ak)
+end % for k=1:size(R, 1)
+
+% add the sum of the direct terms
+G6PFX = G6PFX + poly2sym(K6)]]></w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>Likewise find </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>G_8
+(s)</w:t></w:r></w:customXml><w:r><w:t> for 4c. We are given</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="center"/></w:pPr><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="true"/></w:customXmlPr><w:r><w:t>G_8(s) := \frac{5(s + 2)}{s(s^2 + 6s + 34)}.</w:t></w:r></w:customXml></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>However, we will also simplify the complex fraction by multiplying by the least common denominator of the the numerator and denominator of each partial fraction.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[clear;
+
+% matrix of factor coefficients
+% representing G8(s)
+G8B_factors = [ 0 5; 1 2 ]
+G8A_factors = [ 0 1 0; 1 6 34 ]
+
+% convolve the numerator factors
+G8B = [1]; % initialize the numerator vector of coefficients
+% convolve each row of the matrix
+for rowT=G8B_factors'
+    G8B = conv(G8B, rowT)
+end % rowT
+% transpose back to a row vector
+G8B = G8B'
+
+% now convolve the denominator factors
+G8A = [1]; % initialize the denominator vector of coefficients
+% convolve each row of the matrix
+for rowT=G8A_factors'
+    G8A = conv(G8A, rowT)
+end % rowT
+% transpose back to a row vector
+G8A = G8A'
+
+% use the residue function to find the residues, poles and direct term
+% of G8(s).
+[R8, P8, K8] = residue(G8B, G8A)
+
+% form the partial fraction expansion
+syms s;     % in terms of s
+G8PFX = 0;  % initialize the sum to 0
+
+% loop through each residue and pole with index k
+for k=1:size(R8, 1)
+    % R8(k) is the residue
+    baseAk = s - P8(k)   % base of the denominator for pole k
+    % for the degree, we track how many times we have seen P(k) so far
+    Psofar = P8(1:k, 1)
+    % and count the times
+    degreeAk = sum(P8(k) == Psofar)
+    % the denominator is base^degree
+    Ak = baseAk^degreeAk
+
+    % because R(k), Ak are complex ratios, let's reduce by multiplying
+    % by LCM/LCM
+
+    % find the denominator for the residue, denominator
+    [~, RkD] = numden(sym(R8(k)))
+    [~, AkD] = numden(Ak)
+    % find the LCM of these
+    LCM = lcm(RkD, AkD)
+
+    % add the partial fraction formed
+    G8PFX = G8PFX + ((LCM*R8(k))/(LCM*Ak))
+end % for k=1:size(R, 1)
+
+% add the sum of the direct terms
+G8PFX = G8PFX + poly2sym(K8)]]></w:t></w:r></w:p><w:p><mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"><mc:Choice Requires="R2018b"><w:pPr><w:pStyle w:val="heading3"/><w:jc w:val="left"/></w:pPr></mc:Choice><mc:Fallback><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr></mc:Fallback></mc:AlternateContent><w:r><w:t>Discuss the use of MATLAB to manipulate transfer functions and polynomials. Discuss any shortcomings in using MATLAB to evaluate partial fraction expansions.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>Matlab has a specific datatype for transfer functions. This datatype accepts basic arithmetic operators </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>(+, -, *, /)</w:t></w:r></w:customXml><w:r><w:t>. For exponentiation, it only works if the exponent is a integer. Additionally, it does not support any algebriac functions that I thought to use. The datatype has two fields </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>Numerator</w:t></w:r><w:r><w:t> and </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>Denominator</w:t></w:r><w:r><w:t> which return table cells that contain each coefficient of the numerator and denominator respectively.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>Polynomials in MATLAB are represented as row vectors of coefficients. These can be added and subtracted together. They may also be multiplied or divided by complex scalars. They also support the unique operations of convolution together through the </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>conv</w:t></w:r><w:r><w:t> function and conversion to </w:t></w:r><w:r><w:rPr><w:i/></w:rPr><w:t>symbolic</w:t></w:r><w:r><w:t> expressions (in terms of variables) through the </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>poly2sym</w:t></w:r><w:r><w:t>.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>The shortcoming of partial fraction decomposition with </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>residue</w:t></w:r><w:r><w:t> can be seen in our exploration.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="ListParagraph"/><w:numPr><w:numId w:val="2"/></w:numPr><w:jc w:val="left"/></w:pPr><w:r><w:t>A common issue with many polynomial functions in MATLAB is that they only accept 1 polynomial rather than the factors of the polynomial. This means that they must be convolved before being used in the function. The same applies to </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>residue</w:t></w:r><w:r><w:t> for its numerator and denominator vectors.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="ListParagraph"/><w:numPr><w:numId w:val="2"/></w:numPr><w:jc w:val="left"/></w:pPr><w:r><w:t>Another is that the </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>residue</w:t></w:r><w:r><w:t> function returns 3 outputs representing vectors the residues, the poles and the direct terms, rather than the symbolic fractions themselves. This may be more useful because these values are easier to manipulate, but a second function that transforms them to partial fractions would be very useful.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="ListParagraph"/><w:numPr><w:numId w:val="2"/></w:numPr><w:jc w:val="left"/></w:pPr><w:r><w:t>The </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>residue</w:t></w:r><w:r><w:t> function does not keep track of the multiplicity of poles (or more importantly, the degree of a pole). This can be done by counting the number of times the same pole has appeared up to and including now.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="ListParagraph"/><w:numPr><w:numId w:val="2"/></w:numPr><w:jc w:val="left"/></w:pPr><w:r><w:t>A unique issue seems to show up for complex numbers in that the real and imaginary parts may have denominators, which makes for complex fractions, rather than a simple fraction that may be what's desired. This can be fixed by multiplying the numerator and denominator with the LCM of their own deniminators as I did for </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>G_8(s)</w:t></w:r></w:customXml><w:r><w:t>.</w:t></w:r></w:p><w:p><mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"><mc:Choice Requires="R2018b"><w:pPr><w:pStyle w:val="heading2"/><w:jc w:val="left"/></w:pPr></mc:Choice><mc:Fallback><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr></mc:Fallback></mc:AlternateContent><w:r><w:t>Part II</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[clear
+% part II uses variables from older questions, so I will not be
+% clearing through it as with part I]]></w:t></w:r></w:p><w:p><mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"><mc:Choice Requires="R2018b"><w:pPr><w:pStyle w:val="heading3"/><w:jc w:val="left"/></w:pPr></mc:Choice><mc:Fallback><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr></mc:Fallback></mc:AlternateContent><w:r><w:t>Generate symbolically the time function </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>f(t)</w:t></w:r></w:customXml><w:r><w:t> </w:t></w:r><w:r><w:t>shown in part 2, problem 1.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="center"/></w:pPr><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="true"/></w:customXmlPr><w:r><w:t>f(t) := 0.0075 - 0.0075 - 0.00034e^{-2.5t} \cos(22t) + 0.087e^{-2.5t}sin(22t) - 0.0072e^{-8t}.</w:t></w:r></w:customXml></w:p><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[syms t % f(t) is in terms of t
+f_frac_t = 0.0075 - 0.00034*exp(-2.5*t)*cos(22*t) + 0.087*exp(-2.5*t)*sin(22*t) - 0.0072*exp(-8*t)
+% since f_frac_t is symbol, fractions show up in fractional form
+% use `vpa` to show fractions as decimals
+f_t = vpa(f_frac_t)]]></w:t></w:r></w:p><w:p><mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"><mc:Choice Requires="R2018b"><w:pPr><w:pStyle w:val="heading2"/><w:jc w:val="left"/></w:pPr></mc:Choice><mc:Fallback><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr></mc:Fallback></mc:AlternateContent><w:r><w:t>Generate symbolically</w:t></w:r><w:r><w:t> </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>F(s)</w:t></w:r></w:customXml><w:r><w:t> shown in part 2, problem 2. Obtain your result symbolically in both factored and polynomial forms.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>The factored form of </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>F(s)</w:t></w:r></w:customXml><w:r><w:t> is</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[syms s % F(s) is in terms of s
+F_factored_s = 2*((s + 3)*(s + 5)*(s + 7))/(s*(s + 8)*(s^2 + 10*s + 100))]]></w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>As for the polynomial form, we can repeatedly convolve the numerator and denominator separate, giving us the row vectors of coefficients for each.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[FB = conv(conv(conv([2], [1 3]), [1 5]), [1 7])
+FA = conv(conv([1 0], [1 8]), [1 10 100])]]></w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>Thus in polynomial form </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>F(s)</w:t></w:r></w:customXml><w:r><w:t> is</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[F_poly_s = (2*s^3 + 30*s^2 + 142*s + 210)/(s^4 + 18*s^3 + 180*s^2 + 800*s)]]></w:t></w:r></w:p><w:p><mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"><mc:Choice Requires="R2018b"><w:pPr><w:pStyle w:val="heading3"/><w:jc w:val="left"/></w:pPr></mc:Choice><mc:Fallback><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr></mc:Fallback></mc:AlternateContent><w:r><w:t>Find the Laplace transform of</w:t></w:r><w:r><w:t> </w:t></w:r><w:r><w:t> </w:t></w:r><w:r><w:t> </w:t></w:r><w:r><w:t>shown in part 2, problem 1.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>This can be done readily with the built-in MATLAB </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>laplace</w:t></w:r><w:r><w:rPr/><w:t> function.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[Lf_t = laplace(f_t)]]></w:t></w:r></w:p><w:p><mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"><mc:Choice Requires="R2018b"><w:pPr><w:pStyle w:val="heading3"/><w:jc w:val="left"/></w:pPr></mc:Choice><mc:Fallback><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr></mc:Fallback></mc:AlternateContent><w:r><w:t>Find the inverse Laplace transform of</w:t></w:r><w:r><w:t> </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>F(s)</w:t></w:r></w:customXml><w:r><w:t> </w:t></w:r><w:r><w:t>shown in part 2, problem 2.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>Similarly, there is an </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>ilaplace</w:t></w:r><w:r><w:rPr/><w:t> function. Here we apply it to both forms of </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>F(s)</w:t></w:r></w:customXml><w:r><w:rPr/><w:t>.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[Linv_F_factored_s = ilaplace(F_factored_s)
+Linv_F_poly_s = ilaplace(F_poly_s)]]></w:t></w:r></w:p><w:p><mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"><mc:Choice Requires="R2018b"><w:pPr><w:pStyle w:val="heading3"/><w:jc w:val="left"/></w:pPr></mc:Choice><mc:Fallback><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr></mc:Fallback></mc:AlternateContent><w:r><w:t>Generate an LTI transfer function for your symbolic representation of</w:t></w:r><w:r><w:t> </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>F(s)</w:t></w:r></w:customXml><w:r><w:t> in part 2, problem 2 in both polynomial form and factored form. Start with the</w:t></w:r><w:r><w:t> </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>F(s)</w:t></w:r></w:customXml><w:r><w:t> </w:t></w:r><w:r><w:t>you generated symbolically.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>When it comes to an LTI transfer function from a polynomial form, we use the </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>tf</w:t></w:r><w:r><w:rPr/><w:t> transfer function function in MATLAB.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[F_poly_s % display for comparison
+B = [2 30 142 210]
+A = [1 18 180 800 0]
+LTI_F_poly_s = tf(B, A)]]></w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>As for an LTI transfer function from a factored form, we use the </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>zpk</w:t></w:r><w:r><w:rPr/><w:t> the zero-pole-gain function</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="code"/></w:pPr><w:r><w:t><![CDATA[F_factored_s % display for comparison
+% for linear factors (mx + b), the root is simple enough -b/m,
+% but for more complex roots, it's suggested to use a column vector and
+% the `roots` function
+Z = [-3 -5 -7]
+P = [0 ; -8 ; roots([1 10 100])]
+G = [2]
+LTI_F_factored_s = zpk(Z,P,G)]]></w:t></w:r></w:p><w:p><mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"><mc:Choice Requires="R2018b"><w:pPr><w:pStyle w:val="heading3"/><w:jc w:val="left"/></w:pPr></mc:Choice><mc:Fallback><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr></mc:Fallback></mc:AlternateContent><w:r><w:t>Solve for the loop currents in part 2. problem 3</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>See the demo.</w:t></w:r></w:p><w:p><mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"><mc:Choice Requires="R2018b"><w:pPr><w:pStyle w:val="heading3"/><w:jc w:val="left"/></w:pPr></mc:Choice><mc:Fallback><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr></mc:Fallback></mc:AlternateContent><w:r><w:t>Discuss the advantages and disadvantages between the Symbolic Math Toolbox and MATLAB alone to convert a transfer function from factored form to polynomial form and vice versa.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>I think that the key advantage of the Symbolic Math Toolbox is that it is a lot more flexible. You can use it for other things besides the LTI filters. Additionally, it is more straightforward.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>On the other hand, I think that the MATLAB LTI functions document your intent in the fulter more clearly. They provide more facilities like the </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>Numerator</w:t></w:r><w:r><w:t> and </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>Denominator</w:t></w:r><w:r><w:t> properties of the </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>tf</w:t></w:r><w:r><w:rPr/><w:t> databtype. The </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>zpk</w:t></w:r><w:r><w:rPr/><w:t> datatype also provide many other properties including, but not limited to, </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>Z</w:t></w:r><w:r><w:rPr/><w:t>, </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>P</w:t></w:r><w:r><w:rPr/><w:t>, </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>K</w:t></w:r><w:r><w:rPr/><w:t> and </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>Ts</w:t></w:r><w:r><w:rPr/><w:t> (for sample time) which help fetch the original arguments. Also, related functions like </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>roots</w:t></w:r><w:r><w:rPr/><w:t>, </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>zero</w:t></w:r><w:r><w:rPr/><w:t>, </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>pole</w:t></w:r><w:r><w:rPr/><w:t> and </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>residue</w:t></w:r><w:r><w:rPr/><w:t> help cut back on the possibilities of human error in doing the algebra and arithmetic yourself.</w:t></w:r></w:p><w:p><mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"><mc:Choice Requires="R2018b"><w:pPr><w:pStyle w:val="heading3"/><w:jc w:val="left"/></w:pPr></mc:Choice><mc:Fallback><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr></mc:Fallback></mc:AlternateContent><w:r><w:t>Discuss the advantages and disadvantages of using the Symbolic Math Toolbox to generate LTI transfer functions.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>The advantage of the symbol math toolbox is its flexibility. A symbolic math expression can represent any algebriac expression that you can think of, and it allows for multiple variables. This makes it useful for storing expressions. Additionally, it comes with compatible functions of its own, such as </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>subs</w:t></w:r><w:r><w:rPr/><w:t>, which can be used to substitute in values for its variables, and supports the operator </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>==</w:t></w:r><w:r><w:rPr/><w:t>, which means that you can use the </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>solve</w:t></w:r><w:r><w:rPr/><w:t> function with it. If you are familiar with the equations that you need to generate for the filters and have the parameters ready with no need for extra arithmetic, it is also much more straightforward.</w:t></w:r></w:p><w:p><mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"><mc:Choice Requires="R2018b"><w:pPr><w:pStyle w:val="heading3"/><w:jc w:val="left"/></w:pPr></mc:Choice><mc:Fallback><w:pPr><w:pStyle w:val="heading"/><w:jc w:val="left"/></w:pPr></mc:Fallback></mc:AlternateContent><w:r><w:t>Discuss the advantages of using the Symbolic Math Toolbox to solve simultaneous equations of the type generated by the electrical network in part 2, problem 3. Is it possible to solve the equations via MATLAB alone? Explain.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>In the case of the electrical network in part 2, problem 3, the symbolic math toolbox makes it more clear what you are accomplishing. This is because of the 3 expressions for each current involved in each of the 3 loops.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:t>Doing this with LTI functions would be rather messy, thus error-prone. You also have to be more specific about the order of terms. For the sake of ease, I would recommend separating the matrix out into one element per line, but this cannot be done because matrices of LTIs must be constructed in one statement. Fortunately you can split up statements to multiple lines using the </w:t></w:r><w:r><w:rPr><w:rFonts w:cs="monospace"/></w:rPr><w:t>...</w:t></w:r><w:r><w:rPr/><w:t> operator, but normally I would suggest using an intermediate variable.</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val="text"/><w:jc w:val="left"/></w:pPr><w:r><w:rPr/><w:t>Unfortunately, LTI systems cannot be combined with symbolic systems, and the unknown voltage </w:t></w:r><w:customXml w:element="equation"><w:customXmlPr><w:attr w:name="displayStyle" w:val="false"/></w:customXmlPr><w:r><w:t>V(s)</w:t></w:r></w:customXml><w:r><w:t> is symbolic, so the network cannot be performed with LTI functions.</w:t></w:r></w:p></w:body></w:document>
