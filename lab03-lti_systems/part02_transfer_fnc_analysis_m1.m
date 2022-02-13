@@ -1,11 +1,14 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab03-lti_systems/part02_transfer_fnc_analysis_m1.m
 % Automates simultion of various transfer functions
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-02-12t21:34R
+% When      : 2022-02-12t23:01R
 % For       : ECE 3413
-% Version   : 1.4.1
+% Version   : 1.4.2
 %
 % CHANGELOG :
+%   v1.4.2 - 2022-02-12t23:01R
+%       added function names to the table
+%
 %   v1.4.1 - 2022-02-12t21:34R
 %       using vectors for analysis outputs, instead of cells
 %
@@ -106,11 +109,12 @@ transfer_fncs = {
 Ntfs = size(transfer_fncs, 1)   % number of transfer functions
 
 %% analysis outputs
-Tks = zeros(Ntfs, 1);   % [s] peak times
-Tss = zeros(Ntfs, 1);   % [s] settling times
-Trs = zeros(Ntfs, 1);   % [s] rise times
-pcOSs = zeros(Ntfs, 1); % [%] overshoot rates
-Esss = zeros(Ntfs, 1);  % <1> steady state errors
+fnc_cells = cell(Ntfs, 1);  % names of the functions in cells
+Tks = zeros(Ntfs, 1);       % [s] peak times
+Tss = zeros(Ntfs, 1);       % [s] settling times
+Trs = zeros(Ntfs, 1);       % [s] rise times
+pcOSs = zeros(Ntfs, 1);     % [%] overshoot rates
+Esss = zeros(Ntfs, 1);      % <1> steady state errors
 
 %% analyze each transfer function
 % loop through the transfer functions
@@ -121,12 +125,17 @@ for iG=1:Ntfs
     [B, A] = transfer_fncs{iG, :}
     % calculate the subscript
     sbx = ('a' + iG - 1)
+    % name the function
+    fnc_cells{iG} = [ 'G' sbx '(s)' ];
     % analyze the filter given by iG
     [ Tks(iG), Tss(iG), Trs(iG), pcOSs(iG), Esss(iG) ] = ...
         analyze_filter(sbx, sim_name, sim_source);
 end % for iG
 
-table(Tks, Tss, Trs, pcOSs, Esss)
+% break function names out of cells
+fncs = cell2mat(fnc_cells);
+% create a table
+table(fncs, Tks, Tss, Trs, pcOSs, Esss)
 
 %% display finished
 disp('Done.')
