@@ -5,6 +5,9 @@
 *.mat
 *.fig
 
+# generated figures
+gen_*.png
+
 # Simulink autosaves
 *.slx.autosave
 
