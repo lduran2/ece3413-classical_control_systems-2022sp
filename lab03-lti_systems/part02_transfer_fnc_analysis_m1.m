@@ -1,11 +1,14 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab03-lti_systems/part02_transfer_fnc_analysis_m1.m
 % Automates simultion of various transfer functions
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-02-12t20:16R
+% When      : 2022-02-12t20:18R
 % For       : ECE 3413
-% Version   : 1.2.6
+% Version   : 1.2.7
 %
 % CHANGELOG :
+%   v1.2.7 - 2022-02-12t20:18R
+%       found the steady state error
+%
 %   v1.2.6 - 2022-02-12t20:16R
 %       found the percent overshoot
 %
@@ -152,10 +155,11 @@ t90 = estimate_by_diff(y90_exp, y, k90, t90_meas, delta_t)
 % the corresponding time difference is the rise time
 Tr = t90 - t10
 
-%% find percent overshoot
+%% find percent overshoot, %OS
 percentOS = (Y - y_final)/y_final * 100 % [%]
 
-% steady state error
+%% find steady state error
+Ess = 1 - y_final
 
 %% display finished
 disp('Done.')
