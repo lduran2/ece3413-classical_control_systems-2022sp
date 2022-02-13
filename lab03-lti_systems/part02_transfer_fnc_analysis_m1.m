@@ -1,13 +1,13 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab03-lti_systems/part02_transfer_fnc_analysis_m1.m
 % Automates simultion of various transfer functions
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-02-12t20:40R
+% When      : 2022-02-12t20:47R
 % For       : ECE 3413
-% Version   : 1.2.8-alpha01
+% Version   : 1.2.8-alpha02
 %
 % CHANGELOG :
-%   v1.2.8-alpha01 - 2022-02-12t20:40R
-%       different subscript for each figure
+%   v1.2.8-alpha00 - 2022-02-12t20:47R
+%       analyze_filter function
 %
 %   v1.2.8-alpha00 - 2022-02-12t20:30R
 %       multiple transport functions
@@ -62,6 +62,7 @@ addpath('../lib')   % for find_ceil, estimate_by_diff
 TSIM = 10.0; % [s] simulation time
 
 %% model constants
+global SYS_DELIM  N_SCOPE  FIG_DIR
 WORD_DELIM = '_';           % part delimiter in filenames
 SIM_SUFFIX = 'slx1';        % common suffix for simulations
 FILE_SUFFIX = '.slx';       % suffix for the simulation files
@@ -96,8 +97,17 @@ for iG=size(transfer_fncs, 1)
     [B, A] = transfer_fncs{iG, :}
     % calculate the subscript
     sbx = ('a' + iG - 1);
+    % analyze the filter given by iG
+    analyze_filter(B, A, sbx, sim_name, sim_source);
+end % for iG
 
-    %% analyze the filter given by iG
+%% display finished
+disp('Done.')
+
+%% analyze_filter
+function analyze_filter(B, A, sbx, sim_name, sim_source)
+    %% constants
+    global SYS_DELIM  N_SCOPE  FIG_DIR
 
     %% run the simulation
     out = sim(sim_source)
@@ -178,7 +188,4 @@ for iG=size(transfer_fncs, 1)
 
     %% find steady state error
     Ess = 1 - y_final
-end % for iG
-
-%% display finished
-disp('Done.')
+end % function analyze_filter(B, A, sbx)
