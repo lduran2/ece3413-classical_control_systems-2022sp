@@ -72,15 +72,5 @@
       <P Name="VectorParams1D">on</P>
       <P Name="ZeroCross">on</P>
     </Block>
-    <Block BlockType="ToWorkspace">
-      <P Name="VariableName">simulink_output</P>
-      <P Name="MaxDataPoints">1000</P>
-      <P Name="Decimation">1</P>
-      <P Name="SaveFormat">Array</P>
-      <P Name="Save2DSignal">3-D array (concatenate along third dimension)</P>
-      <P Name="FixptAsFi">off</P>
-      <P Name="NumInputs">1</P>
-      <P Name="SampleTime">0</P>
-    </Block>
   </BlockParameterDefaults>
 </BlockDiagramDefaults>
