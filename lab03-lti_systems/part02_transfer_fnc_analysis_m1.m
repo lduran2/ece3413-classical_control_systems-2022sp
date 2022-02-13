@@ -1,18 +1,21 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab03-lti_systems/part02_transfer_fnc_analysis_m1.m
 % Automates simultion of various transfer functions
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-02-12t20:53R
+% When      : 2022-02-12t21:01R
 % For       : ECE 3413
-% Version   : 1.2.8-alpha03
+% Version   : 1.3.1
 %
 % CHANGELOG :
-%   v1.2.8-alpha03 - 2022-02-12t20:53R
+%   v1.3.1 - 2022-02-12t21:01R
+%       all tfs analyzed with has_overshoot
+%
+%   v1.3.0-alpha03 - 2022-02-12t20:53R
 %       fixed looping through tfs, subscripts
 %
-%   v1.2.8-alpha02 - 2022-02-12t20:47R
+%   v1.3.0-alpha02 - 2022-02-12t20:47R
 %       analyze_filter function
 %
-%   v1.2.8-alpha00 - 2022-02-12t20:30R
+%   v1.3.0-alpha00 - 2022-02-12t20:30R
 %       multiple transport functions
 %
 %   v1.2.7 - 2022-02-12t20:18R
@@ -154,20 +157,34 @@ function analyze_filter(B, A, sbx, sim_name, sim_source)
     Tk = t(K)   % [s]
 
     %% find settling time, Ts
-    % this is the time that y is within 5% of the remaining mean
-    % for each sample
-    for ks=(K+1):n_samp
-        % find the mean of y's from k
-        Ey = mean(y(ks:n_samp));
-        % stop if y(k) is within 5% of E[y]
-        if (abs(y(ks) - Ey) < (0.05 * Ey))
-            break
-        end % if (abs(y(k) - Ey) < (0.05 * Ey))
-    end % for ks=1:n_samp
-    % the corresponding time is settling time
-    Ts = t(ks)
-    % save Ey as the final value of y
-    y_final = Ey
+    % some filters do not have overshoot, for example Gb(s)
+
+    % if K is not the last index, we have an overshoot
+    has_overshoot = (K ~= n_samp)
+
+    % if overshoot
+    if (has_overshoot)
+        % this is the time that y is within 5% of the remaining mean
+        % for each sample
+        for ks=(K+1):n_samp
+            % find the mean of y's from k
+            Ey = mean(y(ks:n_samp));
+            % stop if y(k) is within 5% of E[y]
+            if (abs(y(ks) - Ey) < (0.05 * Ey))
+                break
+            end % if (abs(y(k) - Ey) < (0.05 * Ey))
+        end % for ks=1:n_samp
+        % the corresponding time is settling time
+        Ts = t(ks)
+        % save Ey as the final value of y
+        y_final = Ey
+    else    % if (has_overshoot)
+        % otherwise
+        % settling time IS peak time
+        Ts = Tk
+        % max{y} is the final value
+        y_final = Y
+    end     % if (has_overshoot)
 
     %% find rise time, Tr
     y10_exp = 0.1*y_final   % expected 10%ile
