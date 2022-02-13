@@ -1,11 +1,14 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab03-lti_systems/part02_transfer_fnc_analysis_m1.m
 % Automates simultion of various transfer functions
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-02-12t21:27R
+% When      : 2022-02-12t21:34R
 % For       : ECE 3413
-% Version   : 1.4.0
+% Version   : 1.4.1
 %
 % CHANGELOG :
+%   v1.4.1 - 2022-02-12t21:34R
+%       using vectors for analysis outputs, instead of cells
+%
 %   v1.4.0 - 2022-02-12t21:27R
 %       storing analysis outputs
 %
@@ -103,11 +106,11 @@ transfer_fncs = {
 Ntfs = size(transfer_fncs, 1)   % number of transfer functions
 
 %% analysis outputs
-Tks = cell(Ntfs, 1);    % [s] peak times
-Tss = cell(Ntfs, 1);    % [s] settling times
-Trs = cell(Ntfs, 1);    % [s] rise times
-pcOSs = cell(Ntfs, 1);  % [%] overshoot rates
-Esss = cell(Ntfs, 1);   % <1> steady state errors
+Tks = zeros(Ntfs, 1);   % [s] peak times
+Tss = zeros(Ntfs, 1);   % [s] settling times
+Trs = zeros(Ntfs, 1);   % [s] rise times
+pcOSs = zeros(Ntfs, 1); % [%] overshoot rates
+Esss = zeros(Ntfs, 1);  % <1> steady state errors
 
 %% analyze each transfer function
 % loop through the transfer functions
@@ -119,7 +122,7 @@ for iG=1:Ntfs
     % calculate the subscript
     sbx = ('a' + iG - 1)
     % analyze the filter given by iG
-    [ Tks{iG}, Tss{iG}, Trs{iG}, pcOSs{iG}, Esss{iG} ] = ...
+    [ Tks(iG), Tss(iG), Trs(iG), pcOSs(iG), Esss(iG) ] = ...
         analyze_filter(sbx, sim_name, sim_source);
 end % for iG
 
