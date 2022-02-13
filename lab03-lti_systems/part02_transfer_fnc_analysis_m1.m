@@ -1,11 +1,14 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab03-lti_systems/part02_transfer_fnc_analysis_m1.m
 % Automates simultion of various transfer functions
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-02-12t18:29R
+% When      : 2022-02-12t20:11R
 % For       : ECE 3413
-% Version   : 1.2.3
+% Version   : 1.2.5
 %
 % CHANGELOG :
+%   v1.2.5 - 2022-02-12t20:11R
+%       finding Ts back from end of signal
+%
 %   v1.2.4 - 2022-02-12t19:38R
 %       abstracted `find_ceil` and `estimate_by_diff` to
 %           `/lib/find_value.m`
@@ -115,14 +118,14 @@ Tk = t(K)   % [s]
 
 %% find settling time, Ts
 % this is the time that y is within 5% of the remaining mean
-% for each sample
-for ks=(K+1):n_samp
+% for each sample backwards
+for ks=n_samp:-1:(K+1)
     % find the mean of y's from k
     Ey = mean(y(ks:n_samp));
-    % stop if y(k) is within 5% of E[y]
-    if (abs(y(ks) - Ey) < (0.05 * Ey))
+    % stop if y(k) is outside 5% of E[y]
+    if (abs(y(ks) - Ey) >= (0.05 * Ey))
         break
-    end % if (abs(y(k) - Ey) < (0.05 * Ey))
+    end % if (abs(y(k) - Ey) >= (0.05 * Ey))
 end % for ks=1:n_samp
 % the corresponding time is settling time
 Ts = t(ks)
