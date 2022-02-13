@@ -1,11 +1,17 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab03-lti_systems/part02_transfer_fnc_analysis_m1.m
 % Automates simultion of various transfer functions
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-02-12t20:18R
+% When      : 2022-02-12t20:40R
 % For       : ECE 3413
-% Version   : 1.2.7
+% Version   : 1.2.8-alpha01
 %
 % CHANGELOG :
+%   v1.2.8-alpha01 - 2022-02-12t20:40R
+%       different subscript for each figure
+%
+%   v1.2.8-alpha00 - 2022-02-12t20:30R
+%       multiple transport functions
+%
 %   v1.2.7 - 2022-02-12t20:18R
 %       found the steady state error
 %
@@ -74,92 +80,105 @@ source_base_cell = join({source_words{1:end-1}}, WORD_DELIM)
 sim_name = [ source_base_cell{:} WORD_DELIM SIM_SUFFIX ]
 sim_source = [ sim_name FILE_SUFFIX ]
 
-%% transfer function
-B = [2];        % the numerator
-A = [1 5 9];    % the denominator
+%% transfer functions
+transfer_fncs = {
+    [2], [ 1 5 9 ];
+    [5], [ 1 9 9 ];
+    [9], [ 1 0 9 ];
+    [7], [ 1 6 9 ]
+}
 
-% generate the transfer function
-Ga_s = tf(B,A)
+%% loop through the transfer functions
+for iG=size(transfer_fncs, 1)
+    % get the coefficients at row iG
+    % B := the numerator
+    % A := the denominator
+    [B, A] = transfer_fncs{iG, :}
+    % calculate the subscript
+    sbx = ('a' + iG - 1);
 
-%% run the simulation
-out = sim(sim_source)
+    %% analyze the filter given by iG
 
-%% save the scope image
-% open the scope
-nScopeSys = [ sim_name SYS_DELIM N_SCOPE ]
-open_system(nScopeSys)
-% get the scope handle
-hScope = findall(0, 'Name', N_SCOPE)
-% get a handle for the source plot (opened by `open_system`)
-hSrc = findobj(hScope.UserData.Parent, 'Tag', 'VisualizationPanel')
-% create the target figure
-hTgt = figure;
-% do not invert the background in target
-set(hTgt, 'InvertHardCopy', 'off')
-% copy to target for saving
-copyobj(hSrc, hTgt)
-% save the result
-saveas(hTgt, [ FIG_DIR '/Ga_s.png' ])
-% close the target
-close(hTgt)
+    %% run the simulation
+    out = sim(sim_source)
 
-% close the scope
-close_system(nScopeSys)
+    %% save the scope image
+    % open the scope
+    nScopeSys = [ sim_name SYS_DELIM N_SCOPE ]
+    open_system(nScopeSys)
+    % get the scope handle
+    hScope = findall(0, 'Name', N_SCOPE)
+    % get a handle for the source plot (opened by `open_system`)
+    hSrc = findobj(hScope.UserData.Parent, 'Tag', 'VisualizationPanel')
+    % create the target figure
+    hTgt = figure;
+    % do not invert the background in target
+    set(hTgt, 'InvertHardCopy', 'off')
+    % copy to target for saving
+    copyobj(hSrc, hTgt)
+    % save the result
+    saveas(hTgt, [ FIG_DIR '/G' sbx '_s.png' ])
+    % close the target
+    close(hTgt)
 
-%% get the data and time
-y = out.simout.data;
-t = out.simout.time;
-n_samp = size(y, 1)     % number of samples
-delta_t = t(2) - t(1)   % delta of time samples
+    % close the scope
+    close_system(nScopeSys)
 
-%% find peak time, Tk
-% this is the time that y reaches its max
-% get the max and its index
-[Y, K] = max(y)
-% the corresponding time is peak time
-Tk = t(K)   % [s]
+    %% get the data and time
+    y = out.simout.data;
+    t = out.simout.time;
+    n_samp = size(y, 1)     % number of samples
+    delta_t = t(2) - t(1)   % delta of time samples
 
-%% find settling time, Ts
-% this is the time that y is within 5% of the remaining mean
-% for each sample
-for ks=(K+1):n_samp
-    % find the mean of y's from k
-    Ey = mean(y(ks:n_samp));
-    % stop if y(k) is within 5% of E[y]
-    if (abs(y(ks) - Ey) < (0.05 * Ey))
-        break
-    end % if (abs(y(k) - Ey) < (0.05 * Ey))
-end % for ks=1:n_samp
-% the corresponding time is settling time
-Ts = t(ks)
-% save Ey as the final value of y
-y_final = Ey
+    %% find peak time, Tk
+    % this is the time that y reaches its max
+    % get the max and its index
+    [Y, K] = max(y)
+    % the corresponding time is peak time
+    Tk = t(K)   % [s]
 
-%% find rise time, Tr
-y10_exp = 0.1*y_final   % expected 10%ile
-y90_exp = 0.9*y_final   % expected 90%ile
+    %% find settling time, Ts
+    % this is the time that y is within 5% of the remaining mean
+    % for each sample
+    for ks=(K+1):n_samp
+        % find the mean of y's from k
+        Ey = mean(y(ks:n_samp));
+        % stop if y(k) is within 5% of E[y]
+        if (abs(y(ks) - Ey) < (0.05 * Ey))
+            break
+        end % if (abs(y(k) - Ey) < (0.05 * Ey))
+    end % for ks=1:n_samp
+    % the corresponding time is settling time
+    Ts = t(ks)
+    % save Ey as the final value of y
+    y_final = Ey
 
-% find the indices of each %ile
-k10 = find_ceil(y, 1,   n_samp, y10_exp)
-k90 = find_ceil(y, k10, n_samp, y90_exp)
+    %% find rise time, Tr
+    y10_exp = 0.1*y_final   % expected 10%ile
+    y90_exp = 0.9*y_final   % expected 90%ile
 
-% display corresponding measured times
-t10_meas = t(k10)
-t90_meas = t(k90)
+    % find the indices of each %ile
+    k10 = find_ceil(y, 1,   n_samp, y10_exp)
+    k90 = find_ceil(y, k10, n_samp, y90_exp)
 
-% corresponding y(k)'s are a little high
-% estimate the proper values
-t10 = estimate_by_diff(y10_exp, y, k10, t10_meas, delta_t)
-t90 = estimate_by_diff(y90_exp, y, k90, t90_meas, delta_t)
+    % display corresponding measured times
+    t10_meas = t(k10)
+    t90_meas = t(k90)
 
-% the corresponding time difference is the rise time
-Tr = t90 - t10
+    % corresponding y(k)'s are a little high
+    % estimate the proper values
+    t10 = estimate_by_diff(y10_exp, y, k10, t10_meas, delta_t)
+    t90 = estimate_by_diff(y90_exp, y, k90, t90_meas, delta_t)
 
-%% find percent overshoot, %OS
-percentOS = (Y - y_final)/y_final * 100 % [%]
+    % the corresponding time difference is the rise time
+    Tr = t90 - t10
 
-%% find steady state error
-Ess = 1 - y_final
+    %% find percent overshoot, %OS
+    percentOS = (Y - y_final)/y_final * 100 % [%]
+
+    %% find steady state error
+    Ess = 1 - y_final
+end % for iG
 
 %% display finished
 disp('Done.')
