@@ -1,8 +1,18 @@
 # MATLAB autosaves
 *.asv
 
+# MATLAB datasets
+*.mat
+*.fig
+
+# generated figures
+gen_*.png
+
 # Simulink autosaves
 *.slx.autosave
 
-# MATLAB dataset
-*.mat
+# Simulink cache files
+*.slxc
+
+# MATLAB & Simulink compilation files
+slprj/
