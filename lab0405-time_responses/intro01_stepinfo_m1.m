@@ -1,4 +1,4 @@
-% https://github.com/lduran2/ece3413_classical_control_systems/lab0405/stepinfo_m1.m
+% https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/intro01_stepinfo_m1.m
 %
 % Finds the roots of various polynomials.
 % By        : Leomar Duran <https://github.com/lduran2>
