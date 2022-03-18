@@ -2,11 +2,14 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/part02_reals.m
 % Calculates the parameters of a transfer function
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-18t02:03R
+% When      : 2022-03-18t02:06R
 % For       : ECE 3413
-% Version   : 1.1.1
+% Version   : 1.1.2
 %
 % CHANGELOG :
+%   v1.1.2 - 2022-03-18t02:06R
+%       part 2b, found a, b for (1/2)Re{s0}
+%
 %   v1.1.1 - 2022-03-18t02:03R
 %       part 2b, found a, b for 2Re{s0}
 %
@@ -47,3 +50,14 @@ tfG2b = tf(zpkG2b)                  % convert to standard transfer function
 G2b_den_poly = tfG2b.Denominator{:}
 G2b_P_a = G2b_den_poly(2)
 G2b_P_b = G2b_den_poly(3)
+
+%% 2c.)  real part is decreased 1/2 time over that of task 2a
+G2c_P_Re = G2_P_Re/2                % double real part
+G2c_P = (G2c_P_Re) + (G2_P_Im)*j    % combine real, imaginary parts
+zpkG2c = zpk(G2_Z, G2c_P, G2_K)     % make zpk filter
+tfG2c = tf(zpkG2c)                  % convert to standard transfer function
+
+%% extract a and b for 2c
+G2c_den_poly = tfG2c.Denominator{:}
+G2c_P_a = G2c_den_poly(2)
+G2c_P_b = G2c_den_poly(3)
