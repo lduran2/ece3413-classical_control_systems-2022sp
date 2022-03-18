@@ -1,13 +1,16 @@
 %%
-% Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/part0102_reals.m
+% Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/part0102_reals_m1.m
 % Calculates the parameters of a transfer function, modifying the
 % real part.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-18t02:06R
+% When      : 2022-03-18t04:00R
 % For       : ECE 3413
-% Version   : 1.1.2
+% Version   : 1.1.3
 %
 % CHANGELOG :
+%   v1.1.3 - 2022-03-18t04:00R
+%       added _m1 suffix
+%
 %   v1.1.2 - 2022-03-18t02:06R
 %       part 2b, found a, b for (1/2)Re{s0}
 %

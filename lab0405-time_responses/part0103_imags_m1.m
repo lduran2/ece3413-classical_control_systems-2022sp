@@ -1,13 +1,16 @@
 %%
-% Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/part0103_imags.m
+% Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/part0103_imags_m1.m
 % Calculates the parameters of a transfer function, modifying the
 % imaginary part.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-18t02:30R
+% When      : 2022-03-18t04:00R
 % For       : ECE 3413
-% Version   : 1.0.0
+% Version   : 1.0.1
 %
 % CHANGELOG :
+%   v1.0.1 - 2022-03-18t04:00R
+%       added _m1 suffix
+%
 %   v1.0.0 - 2022-03-18t02:30R
 %       completed part part 01.03
 
