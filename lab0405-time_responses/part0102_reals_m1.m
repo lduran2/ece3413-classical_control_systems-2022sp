@@ -51,21 +51,21 @@ G2_P_Im = imag(G2_P)                % imaginary parts of poles
 %% 2b.) real part is increased two times over that of task 2a
 G2b_P_Re = 2*G2_P_Re                % double real part
 G2b_P = (G2b_P_Re) + (G2_P_Im)*j    % combine real, imaginary parts
-zpkG2b = zpk(G2_Z, G2b_P, G2_K)     % make zpk filter
-tfG2b = tf(zpkG2b)                  % convert to standard transfer function
+den_zpkG2b = zpk(G2_Z, G2b_P, G2_K) % make zpk filter for denominator
+den_tfG2b = tf(den_zpkG2b)          % convert to standard transfer function
 
 %% extract a and b for 2b
-G2b_den_poly = tfG2b.Denominator{:}
+G2b_den_poly = den_tfG2b.Denominator{:}
 G2b_a = G2b_den_poly(2)
 G2b_b = G2b_den_poly(3)
 
 %% 2c.)  real part is decreased 1/2 time over that of task 2a
 G2c_P_Re = G2_P_Re/2                % double real part
 G2c_P = (G2c_P_Re) + (G2_P_Im)*j    % combine real, imaginary parts
-zpkG2c = zpk(G2_Z, G2c_P, G2_K)     % make zpk filter
-tfG2c = tf(zpkG2c)                  % convert to standard transfer function
+den_zpkG2c = zpk(G2_Z, G2c_P, G2_K) % make zpk filter for denominator
+den_tfG2c = tf(den_zpkG2c)          % convert to standard transfer function
 
 %% extract a and b for 2c
-G2c_den_poly = tfG2c.Denominator{:}
+G2c_den_poly = den_tfG2c.Denominator{:}
 G2c_a = G2c_den_poly(2)
 G2c_b = G2c_den_poly(3)
