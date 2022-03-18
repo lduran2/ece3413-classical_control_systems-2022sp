@@ -3,11 +3,14 @@
 % Calculates the parameters of a transfer function, modifying the
 % imaginary part.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-18t04:12R
+% When      : 2022-03-18t13:31R
 % For       : ECE 3413
-% Version   : 1.0.2
+% Version   : 1.0.3
 %
 % CHANGELOG :
+%   v1.0.3 - 2022-03-18t13:31R
+%       removed clear so parts can be called together
+%
 %   v1.0.2 - 2022-03-18t04:12R
 %       a, b output shorter names
 %
@@ -16,8 +19,6 @@
 %
 %   v1.0.0 - 2022-03-18t02:30R
 %       completed part part 01.03
-
-clear
 
 %% part 3a.
 

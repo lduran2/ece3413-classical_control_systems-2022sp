@@ -3,11 +3,14 @@
 % Calculates the parameters of a transfer function, modifying the
 % real part.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-18t04:08R
+% When      : 2022-03-18t13:31R
 % For       : ECE 3413
-% Version   : 1.1.4
+% Version   : 1.1.5
 %
 % CHANGELOG :
+%   v1.1.5 - 2022-03-18t13:31R
+%       removed clear so parts can be called together
+%
 %   v1.1.4 - 2022-03-18t04:08R
 %       a, b output shorter names
 %
@@ -25,8 +28,6 @@
 %
 %   v1.0.0 - 2022-03-17t11:59R
 %       found the roots of G2(s; a, b)
-
-clear
 
 %% part 2a.
 
