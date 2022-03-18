@@ -1,0 +1,49 @@
+%%
+% Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/part02_reals.m
+% Calculates the parameters of a transfer function
+% By        : Leomar Duran <https://github.com/lduran2>
+% When      : 2022-03-18t02:03R
+% For       : ECE 3413
+% Version   : 1.1.1
+%
+% CHANGELOG :
+%   v1.1.1 - 2022-03-18t02:03R
+%       part 2b, found a, b for 2Re{s0}
+%
+%   v1.1.0 - 2022-03-18t01:43R
+%       used zpk to find poles
+%
+%   v1.0.0 - 2022-03-17t11:59R
+%       found the roots of G2(s; a, b)
+
+clear
+
+%% part 2a.
+
+%% parameters of G2(s; a, b) = b/(s^2 + as + b)
+a = 4
+b = 25
+
+%% transfer function G2(s; a, b)
+tfG2 = tf([b], [1 a b])
+
+%% find as ZPK function
+zpkG2 = zpk(tfG2)                   % convert to ZPK form
+G2_Z = [ zpkG2.Z{:} ]               % original zeros
+G2_P = [ zpkG2.P{:} ]               % original poles
+G2_K = zpkG2.K                      % original gain
+
+%% find pole parts
+G2_P_Re = real(G2_P)                % real parts of poles
+G2_P_Im = imag(G2_P)                % imaginary parts of poles
+
+%% 2b.) real part is increased two times over that of task 2a
+G2b_P_Re = 2*G2_P_Re                % double real part
+G2b_P = (G2b_P_Re) + (G2_P_Im)*j    % combine real, imaginary parts
+zpkG2b = zpk(G2_Z, G2b_P, G2_K)     % make zpk filter
+tfG2b = tf(zpkG2b)                  % convert to standard transfer function
+
+%% extract a and b for 2b
+G2b_den_poly = tfG2b.Denominator{:}
+G2b_P_a = G2b_den_poly(2)
+G2b_P_b = G2b_den_poly(3)
