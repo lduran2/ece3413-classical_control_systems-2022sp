@@ -3,11 +3,14 @@
 % Calculates the parameters of a transfer function, modifying the
 % imaginary part.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-18t04:00R
+% When      : 2022-03-18t04:12R
 % For       : ECE 3413
-% Version   : 1.0.1
+% Version   : 1.0.2
 %
 % CHANGELOG :
+%   v1.0.2 - 2022-03-18t04:12R
+%       a, b output shorter names
+%
 %   v1.0.1 - 2022-03-18t04:00R
 %       added _m1 suffix
 %
@@ -43,8 +46,8 @@ tfG3d = tf(zpkG3d)                  % convert to standard transfer function
 
 %% extract a and b for 3d
 G3d_den_poly = tfG3d.Denominator{:}
-G3d_P_a = G3d_den_poly(2)
-G3d_P_b = G3d_den_poly(3)
+G3d_a = G3d_den_poly(2)
+G3d_b = G3d_den_poly(3)
 
 %% 3e.) imaginary part is increased four times over that of task 2a
 G3e_P_Im = 4*G3_P_Im                % double real part
@@ -54,5 +57,5 @@ tfG3e = tf(zpkG3e)                  % convert to standard transfer function
 
 %% extract a and b for 3e
 G3e_den_poly = tfG3e.Denominator{:}
-G3e_P_a = G3e_den_poly(2)
-G3e_P_b = G3e_den_poly(3)
+G3e_a = G3e_den_poly(2)
+G3e_b = G3e_den_poly(3)

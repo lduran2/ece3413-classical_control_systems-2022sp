@@ -3,11 +3,14 @@
 % Calculates the parameters of a transfer function, modifying the
 % real part.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-18t04:00R
+% When      : 2022-03-18t04:08R
 % For       : ECE 3413
-% Version   : 1.1.3
+% Version   : 1.1.4
 %
 % CHANGELOG :
+%   v1.1.4 - 2022-03-18t04:08R
+%       a, b output shorter names
+%
 %   v1.1.3 - 2022-03-18t04:00R
 %       added _m1 suffix
 %
@@ -52,8 +55,8 @@ tfG2b = tf(zpkG2b)                  % convert to standard transfer function
 
 %% extract a and b for 2b
 G2b_den_poly = tfG2b.Denominator{:}
-G2b_P_a = G2b_den_poly(2)
-G2b_P_b = G2b_den_poly(3)
+G2b_a = G2b_den_poly(2)
+G2b_b = G2b_den_poly(3)
 
 %% 2c.)  real part is decreased 1/2 time over that of task 2a
 G2c_P_Re = G2_P_Re/2                % double real part
@@ -63,5 +66,5 @@ tfG2c = tf(zpkG2c)                  % convert to standard transfer function
 
 %% extract a and b for 2c
 G2c_den_poly = tfG2c.Denominator{:}
-G2c_P_a = G2c_den_poly(2)
-G2c_P_b = G2c_den_poly(3)
+G2c_a = G2c_den_poly(2)
+G2c_b = G2c_den_poly(3)
