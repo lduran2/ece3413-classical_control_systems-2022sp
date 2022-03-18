@@ -1,6 +1,7 @@
 %%
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/part0102_reals.m
-% Calculates the parameters of a transfer function
+% Calculates the parameters of a transfer function, modifying the
+% real part.
 % By        : Leomar Duran <https://github.com/lduran2>
 % When      : 2022-03-18t02:06R
 % For       : ECE 3413
