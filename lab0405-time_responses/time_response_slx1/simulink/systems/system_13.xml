@@ -9,7 +9,7 @@
     <P Name="Ports">[3]</P>
     <P Name="Position">[370, 37, 410, 93]</P>
     <P Name="ZOrder">17</P>
-    <P Name="ScopeSpecificationString">Simulink.scopes.TimeScopeBlockCfg(&apos;CurrentConfiguration&apos;, extmgr.ConfigurationSet(extmgr.Configuration(&apos;Core&apos;,&apos;General UI&apos;,true),extmgr.Configuration(&apos;Core&apos;,&apos;Source UI&apos;,true),extmgr.Configuration(&apos;Sources&apos;,&apos;WiredSimulink&apos;,true),extmgr.Configuration(&apos;Visuals&apos;,&apos;Time Domain&apos;,true,&apos;SerializedDisplays&apos;,{struct(&apos;MinYLimReal&apos;,&apos;-0.18775&apos;,&apos;MaxYLimReal&apos;,&apos;1.68974&apos;,&apos;YLabelReal&apos;,&apos;&apos;,&apos;MinYLimMag&apos;,&apos;0.00000&apos;,&apos;MaxYLimMag&apos;,&apos;1.68974&apos;,&apos;LegendVisibility&apos;,&apos;On&apos;,&apos;XGrid&apos;,true,&apos;YGrid&apos;,true,&apos;PlotMagPhase&apos;,false,&apos;AxesColor&apos;,[0 0 0],&apos;AxesTickColor&apos;,[0.686274509803922 0.686274509803922 0.686274509803922],&apos;ColorOrder&apos;,[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],&apos;Title&apos;,&apos;%&lt;SignalLabel&gt;&apos;,&apos;LinePropertiesCache&apos;,{{}},&apos;UserDefinedChannelNames&apos;,{{}},&apos;NumLines&apos;,3,&apos;LineNames&apos;,{{&apos;1Re&apos;,&apos;2Re&apos;,&apos;(1/2)Re&apos;}},&apos;ShowContent&apos;,true,&apos;Placement&apos;,1)},&apos;DisplayPropertyDefaults&apos;,struct(&apos;MinYLimReal&apos;,&apos;-0.18775&apos;,&apos;MaxYLimReal&apos;,&apos;1.68974&apos;,&apos;YLabelReal&apos;,&apos;&apos;,&apos;MinYLimMag&apos;,&apos;0.00000&apos;,&apos;MaxYLimMag&apos;,&apos;1.68974&apos;,&apos;LegendVisibility&apos;,&apos;On&apos;,&apos;XGrid&apos;,true,&apos;YGrid&apos;,true,&apos;PlotMagPhase&apos;,false,&apos;AxesColor&apos;,[0 0 0],&apos;AxesTickColor&apos;,[0.686274509803922 0.686274509803922 0.686274509803922],&apos;ColorOrder&apos;,[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration(&apos;Tools&apos;,&apos;Plot Navigation&apos;,true),extmgr.Configuration(&apos;Tools&apos;,&apos;Measurements&apos;,true,&apos;Version&apos;,&apos;2020b&apos;)),&apos;Version&apos;,&apos;2020b&apos;)</P>
+    <P Name="ScopeSpecificationString">Simulink.scopes.TimeScopeBlockCfg(&apos;CurrentConfiguration&apos;, extmgr.ConfigurationSet(extmgr.Configuration(&apos;Core&apos;,&apos;General UI&apos;,true),extmgr.Configuration(&apos;Core&apos;,&apos;Source UI&apos;,true),extmgr.Configuration(&apos;Sources&apos;,&apos;WiredSimulink&apos;,true),extmgr.Configuration(&apos;Visuals&apos;,&apos;Time Domain&apos;,true,&apos;SerializedDisplays&apos;,{struct(&apos;MinYLimReal&apos;,&apos;-0.18775&apos;,&apos;MaxYLimReal&apos;,&apos;1.68974&apos;,&apos;YLabelReal&apos;,&apos;&apos;,&apos;MinYLimMag&apos;,&apos;0.00000&apos;,&apos;MaxYLimMag&apos;,&apos;1.68974&apos;,&apos;LegendVisibility&apos;,&apos;On&apos;,&apos;XGrid&apos;,true,&apos;YGrid&apos;,true,&apos;PlotMagPhase&apos;,false,&apos;AxesColor&apos;,[0 0 0],&apos;AxesTickColor&apos;,[0.686274509803922 0.686274509803922 0.686274509803922],&apos;ColorOrder&apos;,[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],&apos;Title&apos;,&apos;%&lt;SignalLabel&gt;&apos;,&apos;LinePropertiesCache&apos;,{{}},&apos;UserDefinedChannelNames&apos;,{{}},&apos;NumLines&apos;,0,&apos;LineNames&apos;,{{[]}},&apos;ShowContent&apos;,true,&apos;Placement&apos;,1)},&apos;DisplayPropertyDefaults&apos;,struct(&apos;MinYLimReal&apos;,&apos;-0.18775&apos;,&apos;MaxYLimReal&apos;,&apos;1.68974&apos;,&apos;YLabelReal&apos;,&apos;&apos;,&apos;MinYLimMag&apos;,&apos;0.00000&apos;,&apos;MaxYLimMag&apos;,&apos;1.68974&apos;,&apos;LegendVisibility&apos;,&apos;On&apos;,&apos;XGrid&apos;,true,&apos;YGrid&apos;,true,&apos;PlotMagPhase&apos;,false,&apos;AxesColor&apos;,[0 0 0],&apos;AxesTickColor&apos;,[0.686274509803922 0.686274509803922 0.686274509803922],&apos;ColorOrder&apos;,[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration(&apos;Tools&apos;,&apos;Plot Navigation&apos;,true),extmgr.Configuration(&apos;Tools&apos;,&apos;Measurements&apos;,true,&apos;Version&apos;,&apos;2020b&apos;)),&apos;Version&apos;,&apos;2020b&apos;)</P>
     <P Name="NumInputPorts">3</P>
     <P Name="Floating">off</P>
   </Block>
@@ -20,7 +20,7 @@
     <P Name="SampleTime">0</P>
   </Block>
   <Block BlockType="TransferFcn" Name="Transfer Fcn" SID="10">
-    <P Name="Position">[105, 22, 275, 68]</P>
+    <P Name="Position">[95, 22, 265, 68]</P>
     <P Name="ZOrder">16</P>
     <P Name="Numerator">[b]</P>
     <P Name="Denominator">[1 a b]</P>
@@ -30,20 +30,20 @@
     </Port>
   </Block>
   <Block BlockType="TransferFcn" Name="Transfer Fcn1" SID="11">
-    <P Name="Position">[105, 112, 275, 158]</P>
+    <P Name="Position">[80, 112, 280, 158]</P>
     <P Name="ZOrder">18</P>
-    <P Name="Numerator">[G2b_b]</P>
-    <P Name="Denominator">[1 G2b_a G2b_b]</P>
+    <P Name="Numerator">[G_b(2,2)]</P>
+    <P Name="Denominator">[1 G_a(2,2) G_b(2,2)]</P>
     <Port>
       <P Name="PortNumber">1</P>
       <P Name="Name">2Re</P>
     </Port>
   </Block>
-  <Block BlockType="TransferFcn" Name="Transfer Fcn4" SID="12">
-    <P Name="Position">[105, 202, 275, 248]</P>
-    <P Name="ZOrder">19</P>
-    <P Name="Numerator">[G2c_b]</P>
-    <P Name="Denominator">[1 G2c_a G2c_b]</P>
+  <Block BlockType="TransferFcn" Name="Transfer Fcn2" SID="27">
+    <P Name="Position">[80, 202, 280, 248]</P>
+    <P Name="ZOrder">21</P>
+    <P Name="Numerator">[G_b(2,3)]</P>
+    <P Name="Denominator">[1 G_a(2,3) G_b(2,3)]</P>
     <Port>
       <P Name="PortNumber">1</P>
       <P Name="Name">(1/2)Re</P>
@@ -57,9 +57,9 @@
       <P Name="ZOrder">20</P>
       <P Name="Points">[0, 90]</P>
       <Branch>
-        <P Name="ZOrder">19</P>
+        <P Name="ZOrder">34</P>
         <P Name="Points">[0, 90]</P>
-        <P Name="Dst">12#in:1</P>
+        <P Name="Dst">27#in:1</P>
       </Branch>
       <Branch>
         <P Name="ZOrder">18</P>
@@ -80,10 +80,10 @@
   </Line>
   <Line>
     <P Name="Name">(1/2)Re</P>
-    <P Name="ZOrder">16</P>
+    <P Name="ZOrder">33</P>
     <P Name="Labels">[0, 0]</P>
-    <P Name="Src">12#out:1</P>
-    <P Name="Points">[57, 0; 0, -140]</P>
+    <P Name="Src">27#out:1</P>
+    <P Name="Points">[52, 0; 0, -140]</P>
     <P Name="Dst">8#in:3</P>
   </Line>
   <Line>
@@ -91,7 +91,7 @@
     <P Name="ZOrder">15</P>
     <P Name="Labels">[2, 1]</P>
     <P Name="Src">11#out:1</P>
-    <P Name="Points">[26, 0; 0, -70]</P>
+    <P Name="Points">[27, 0; 0, -70]</P>
     <P Name="Dst">8#in:2</P>
   </Line>
 </System>

@@ -3,11 +3,14 @@
 % Calculates the parameters of a transfer function, modifying the
 % natural frequency.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-18t13:31R
+% When      : 2022-03-18t13:08R
 % For       : ECE 3413
-% Version   : 1.0.3
+% Version   : 1.1.0
 %
 % CHANGELOG :
+%   v1.1.0 - 2022-03-21t13:08R
+%       parameters in arrays
+%
 %   v1.0.3 - 2022-03-18t13:31R
 %       removed clear so parts can be called together
 %
@@ -27,7 +30,7 @@ a = 4
 b = 25
 
 %% transfer function G4(s; a, b)
-tfG4 = tf([b], [1 a b])
+tfG{4,1} = tf([b], [1 a b])
 
 %% solve for the dampening ratio, natural frequency
 syms szeta swn
@@ -36,14 +39,14 @@ zwab = @(zeta, wn) [2*zeta.*wn, wn.^2]
 
 %% 4f.) natural frequency is increased two times over that of task 2a
 wn4f = 2*wn
-%% update a, b, getting unique answers
+%% update a, b, getting unique answers for 4f (4,2)
 G4f_ab = double(unique(zwab(zeta, wn4f), 'rows'))
-G4f_a = G4f_ab(:, 1)
-G4f_b = G4f_ab(:, 2)
+G_a(4,2) = G4f_ab(:, 1)
+G_b(4,2) = G4f_ab(:, 2)
 
 %% 4g.) the natural frequency is increased four times over that of task 2a
 wn4g = 4*wn
-%% update a, b, getting unique answers
+%% update a, b, getting unique answers for 4g (4,3)
 G4g_ab = double(unique(zwab(zeta, wn4g), 'rows'))
-G4g_a = G4g_ab(:, 1)
-G4g_b = G4g_ab(:, 2)
+G_a(4,3) = G4g_ab(:, 1)
+G_b(4,3) = G4g_ab(:, 2)

@@ -6,7 +6,7 @@
   <P Name="SetExecutionDomain">off</P>
   <P Name="ExecutionDomainType">Deduce</P>
   <P Name="ReportName">simulink-default.rpt</P>
-  <P Name="SIDHighWatermark">25</P>
+  <P Name="SIDHighWatermark">39</P>
   <P Name="SimulinkSubDomain">Simulink</P>
   <Block BlockType="SubSystem" Name="Part I: Exercise 1&#xA;First-Order Systems" SID="7">
     <P Name="Ports">[]</P>
@@ -24,20 +24,20 @@
     <P Name="ContentPreviewEnabled">on</P>
     <System Ref="system_13"/>
   </Block>
-  <Block BlockType="SubSystem" Name="Part I: Exercise 3&#xA;Variable Imaginary Part of Roots&#xA;in Second-Order Systems" SID="19">
+  <Block BlockType="SubSystem" Name="Part I: Exercise 3&#xA;Variable Imaginary Part of Roots&#xA;in Second-Order Systems" SID="33">
     <P Name="Ports">[]</P>
-    <P Name="Position">[179, 13, 269, 138]</P>
-    <P Name="ZOrder">28</P>
+    <P Name="Position">[183, 13, 273, 138]</P>
+    <P Name="ZOrder">36</P>
     <P Name="RequestExecContextInheritance">off</P>
     <P Name="ContentPreviewEnabled">on</P>
-    <System Ref="system_19"/>
+    <System Ref="system_33"/>
   </Block>
-  <Block BlockType="SubSystem" Name="Part I: Exercise 4&#xA;Variable Natural Frequencies&#xA;in Second-Order Systems" SID="25">
+  <Block BlockType="SubSystem" Name="Part I: Exercise 4&#xA;Variable Natural Frequencies&#xA;in Second-Order Systems" SID="39">
     <P Name="Ports">[]</P>
-    <P Name="Position">[354, 13, 444, 138]</P>
-    <P Name="ZOrder">35</P>
+    <P Name="Position">[358, 13, 448, 138]</P>
+    <P Name="ZOrder">43</P>
     <P Name="RequestExecContextInheritance">off</P>
     <P Name="ContentPreviewEnabled">on</P>
-    <System Ref="system_25"/>
+    <System Ref="system_39"/>
   </Block>
 </System>
