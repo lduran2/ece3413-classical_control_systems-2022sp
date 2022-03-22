@@ -2,11 +2,14 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/part01_lin_analysis_m1.m
 % Displays each linear system analysis.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-22t04:58R
+% When      : 2022-03-22t10:03R
 % For       : ECE 3413
-% Version   : 1.0.1
+% Version   : 1.0.2
 %
 % CHANGELOG :
+%   v1.0.2 - 2022-03-22t10:03R
+%       added (illegal choice, non-exit) response to parts menu
+%
 %   v1.0.1 - 2022-03-22t04:58R
 %       parts menu
 %
@@ -50,18 +53,51 @@ while (i_part ~= -1)
     i_part = part_menu();   % ask again
 end % while ((i_part=part_menu()) ~= -1)
 
+%% report done
+disp('Done.')
+
 %% accepts an exercise number
 function i_choice = part_menu()
-    i_choice = 0;           % initial invalid choice
-    % loop until value choice
-    while (all(i_choice ~= [1:4, -1]))
+    % menu options
+    options = [ ...
+        "First-Order Systems" ...
+        "Variable Real Parts" ...
+        "Variable Imaginary Parts" ...
+        "Variable Natural Frequencies" ...
+    ];
+    [~, N_OPTIONS] = size(options);
+
+    % loop until valid choice
+    i_choice = prompt();
+    while (~is_valid(i_choice))
+        disp(newline)
+        disp('Illegal option: please try again.')
+        i_choice = prompt();
+    end % while (~is_valid(i_choice))
+
+    % repeated prompt
+    function i_choice = prompt()
         disp('Exercises:')
-        disp('    1. First-Order Systems')
-        disp('    2. Variable Real Parts')
-        disp('    3. Variable Imaginary Parts')
-        disp('    4. Variable Natural Frequencies')
+        for i_option=1:N_OPTIONS
+            disp(join(['    ' i_option '. ' options(i_option)], ''))
+        end % for option
         disp('   -1. exit')
         % allow user input
         i_choice = input('Choose: ');
-    end % while (~any(i_choice==[1:4]))
+    end % function prompt()
+
+    function flag = is_valid(i_choice)
+        % non-exit menu option
+        if (any(i_choice==1:N_OPTIONS))
+            % show option
+            disp(join(['Choice: ' options(i_choice)], ''))
+            flag = true;
+        % exit
+        elseif (i_choice==-1)
+            flag = true;
+        % ask again
+        else
+            flag = false;
+        end % if (any(i_choice==1:N_OPTIONS)) || (i_choice==-1) ||
+    end % function is_valid(i_choice)
 end % function part_menu()
