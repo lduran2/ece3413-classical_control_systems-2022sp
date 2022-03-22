@@ -24,13 +24,17 @@
 %       completed part part 01.04
 
 %% part 4a.
+i_part = 4
 
 %% parameters of G4(s; a, b) = b/(s^2 + as + b)
 a = 4
 b = 25
 
 %% transfer function G4(s; a, b)
-tfG{4,1} = tf([b], [1 a b])
+tfG{i_part,1} = tf([b], [1 a b])
+
+%% number of transfer functions
+n_tfG(i_part) = 3
 
 %% solve for the dampening ratio, natural frequency
 syms szeta swn
@@ -39,14 +43,14 @@ zwab = @(zeta, wn) [2*zeta.*wn, wn.^2]
 
 %% 4f.) natural frequency is increased two times over that of task 2a
 wn4f = 2*wn
-%% update a, b, getting unique answers for 4f (4,2)
+%% update a, b, getting unique answers for 4f (2)
 G4f_ab = double(unique(zwab(zeta, wn4f), 'rows'))
-G_a(4,2) = G4f_ab(:, 1)
-G_b(4,2) = G4f_ab(:, 2)
+G_a(i_part,2) = G4f_ab(:, 1)
+G_b(i_part,2) = G4f_ab(:, 2)
 
 %% 4g.) the natural frequency is increased four times over that of task 2a
 wn4g = 4*wn
-%% update a, b, getting unique answers for 4g (4,3)
+%% update a, b, getting unique answers for 4g (3)
 G4g_ab = double(unique(zwab(zeta, wn4g), 'rows'))
-G_a(4,3) = G4g_ab(:, 1)
-G_b(4,3) = G4g_ab(:, 2)
+G_a(i_part,3) = G4g_ab(:, 1)
+G_b(i_part,3) = G4g_ab(:, 2)

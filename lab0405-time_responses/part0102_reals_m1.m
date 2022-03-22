@@ -33,19 +33,20 @@
 %       found the roots of G2(s; a, b)
 
 %% part 2a.
+i_part = 2
 
 %% parameters of G2(s; a, b) = b/(s^2 + as + b)
 a = 4
 b = 25
 
 %% transfer function G2(s; a, b)
-tfG{2,1} = tf([b], [1 a b])
+tfG{i_part,1} = tf([b], [1 a b])
 
 %% number of transfer functions
-n_tfG{2} = 3
+n_tfG(i_part) = 3
 
 %% find as ZPK function
-zpkG2 = zpk(tfG{2,1})               % convert to ZPK form
+zpkG2 = zpk(tfG{i_part,1})          % convert to ZPK form
 G2_Z = [ zpkG2.Z{:} ]               % original zeros
 G2_P = [ zpkG2.P{:} ]               % original poles
 G2_K = zpkG2.K                      % original gain
@@ -60,10 +61,10 @@ G2b_P = (G2b_P_Re) + (G2_P_Im)*j    % combine real, imaginary parts
 den_zpkG2b = zpk(G2_Z, G2b_P, G2_K) % make zpk filter for denominator
 den_tfG2b = tf(den_zpkG2b)          % convert to standard transfer function
 
-%% extract a and b for 2b (2,2)
+%% extract a and b for 2b (2)
 G2b_den_poly = den_tfG2b.Denominator{:}
-G_a(2,2) = G2b_den_poly(2)
-G_b(2,2) = G2b_den_poly(3)
+G_a(i_part,2) = G2b_den_poly(2)
+G_b(i_part,2) = G2b_den_poly(3)
 
 %% 2c.)  real part is decreased 1/2 time over that of task 2a
 G2c_P_Re = G2_P_Re/2                % double real part
@@ -71,7 +72,7 @@ G2c_P = (G2c_P_Re) + (G2_P_Im)*j    % combine real, imaginary parts
 den_zpkG2c = zpk(G2_Z, G2c_P, G2_K) % make zpk filter for denominator
 den_tfG2c = tf(den_zpkG2c)          % convert to standard transfer function
 
-%% extract a and b for 2c (2,3)
+%% extract a and b for 2c (3)
 G2c_den_poly = den_tfG2c.Denominator{:}
-G_a(2,3) = G2c_den_poly(2)
-G_b(2,3) = G2c_den_poly(3)
+G_a(i_part,3) = G2c_den_poly(2)
+G_b(i_part,3) = G2c_den_poly(3)
