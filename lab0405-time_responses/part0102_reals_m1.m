@@ -3,33 +3,33 @@
 % Calculates the parameters of a transfer function, modifying the
 % real part.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-18t12:56R
+% When      : 2022-03-18t12:56Q
 % For       : ECE 3413
 % Version   : 1.2.0
 %
 % CHANGELOG :
-%   v1.2.0 - 2022-03-21t12:56R
+%   v1.2.0 - 2022-03-21t12:56Q
 %       parameters in arrays
 %
-%   v1.1.5 - 2022-03-18t13:31R
+%   v1.1.5 - 2022-03-18t13:31Q
 %       removed clear so parts can be called together
 %
-%   v1.1.4 - 2022-03-18t04:08R
+%   v1.1.4 - 2022-03-18t04:08Q
 %       a, b output shorter names
 %
-%   v1.1.3 - 2022-03-18t04:00R
+%   v1.1.3 - 2022-03-18t04:00Q
 %       added _m1 suffix
 %
-%   v1.1.2 - 2022-03-18t02:06R
+%   v1.1.2 - 2022-03-18t02:06Q
 %       part 2b, found a, b for (1/2)Re{s0}
 %
-%   v1.1.1 - 2022-03-18t02:03R
+%   v1.1.1 - 2022-03-18t02:03Q
 %       part 2b, found a, b for 2Re{s0}
 %
-%   v1.1.0 - 2022-03-18t01:43R
+%   v1.1.0 - 2022-03-18t01:43Q
 %       used zpk to find poles
 %
-%   v1.0.0 - 2022-03-17t11:59R
+%   v1.0.0 - 2022-03-17t11:59Q
 %       found the roots of G2(s; a, b)
 
 %% part 2a.

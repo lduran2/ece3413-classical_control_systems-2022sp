@@ -3,12 +3,12 @@
 % Clears workspace and runs the scripts for parameters for the Time
 % Response model.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-18t13:37R
+% When      : 2022-03-18t13:37Q
 % For       : ECE 3413
 % Version   : 1.0.0
 %
 % CHANGELOG :
-%   v1.0.0 - 2022-03-18t13:37R
+%   v1.0.0 - 2022-03-18t13:37Q
 %       gets the parameters for part 01
 
 clear

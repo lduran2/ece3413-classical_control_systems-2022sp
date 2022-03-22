@@ -3,24 +3,24 @@
 % Calculates the parameters of a transfer function, modifying the
 % imaginary part.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-18t13:08R
+% When      : 2022-03-18t13:08Q
 % For       : ECE 3413
 % Version   : 1.1.0
 %
 % CHANGELOG :
-%   v1.1.0 - 2022-03-21t13:08R
+%   v1.1.0 - 2022-03-21t13:08Q
 %       parameters in arrays
 %
-%   v1.0.3 - 2022-03-18t13:31R
+%   v1.0.3 - 2022-03-18t13:31Q
 %       removed clear so parts can be called together
 %
-%   v1.0.2 - 2022-03-18t04:12R
+%   v1.0.2 - 2022-03-18t04:12Q
 %       a, b output shorter names
 %
-%   v1.0.1 - 2022-03-18t04:00R
+%   v1.0.1 - 2022-03-18t04:00Q
 %       added _m1 suffix
 %
-%   v1.0.0 - 2022-03-18t02:30R
+%   v1.0.0 - 2022-03-18t02:30Q
 %       completed part part 01.03
 
 %% part 3a.

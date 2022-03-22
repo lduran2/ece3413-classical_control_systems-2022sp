@@ -2,18 +2,18 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/part01_lin_analysis_m1.m
 % Displays each linear system analysis.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-22t10:03R
+% When      : 2022-03-22t10:03Q
 % For       : ECE 3413
 % Version   : 1.0.2
 %
 % CHANGELOG :
-%   v1.0.2 - 2022-03-22t10:03R
+%   v1.0.2 - 2022-03-22t10:03Q
 %       added (illegal choice, non-exit) response to parts menu
 %
-%   v1.0.1 - 2022-03-22t04:58R
+%   v1.0.1 - 2022-03-22t04:58Q
 %       parts menu
 %
-%   v1.0.0 - 2022-03-18t19:39R
+%   v1.0.0 - 2022-03-18t19:39Q
 %       started linear analysis
 
 clear
