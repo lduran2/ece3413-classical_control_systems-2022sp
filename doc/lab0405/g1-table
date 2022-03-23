@@ -1,0 +1,10 @@
+\begin{tabular}{@{}*2l*3Sl@{}}
+	\toprule
+	 \(a\) & transfer function \(G_1(s; a)\) & Setting Time \(T_s \brac{\si\second}\) & Rising Time \(T_r \brac{\si\second}\) & Peak Time \(T_p \brac{\si\second}\) & \\*
+	\midrule
+	1 & \frac{1}{s+1} & 3.912074e+00 & 2.197006e+00 & 1.054584e+01 & \includegraphic[width=\lineheight]{fig/g1-s-1.eps}\\*
+	2 & \frac{2}{s+2} & 1.956037e+00 & 1.098503e+00 & 5.272920e+00 & \includegraphic[width=\lineheight]{fig/g1-s-2.eps}\\*
+	3 & \frac{3}{s+3} & 1.304025e+00 & 7.323355e-01 & 3.515280e+00 & \includegraphic[width=\lineheight]{fig/g1-s-3.eps}\\*
+	4 & \frac{4}{s+4} & 9.780186e-01 & 5.492516e-01 & 2.636460e+00 & \includegraphic[width=\lineheight]{fig/g1-s-4.eps}\\*
+	\bottomrule
+\end{tabular}
