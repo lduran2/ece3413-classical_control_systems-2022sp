@@ -2,11 +2,14 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/part02_transient_response_m1.m
 % The transient response plots and pole-zero plots of various systems.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-22t16:21Q
+% When      : 2022-03-22t21:58Q
 % For       : ECE 3413
-% Version   : 1.4.0
+% Version   : 1.5.0
 %
 % CHANGELOG :
+%   v1.5.0 - 2022-03-22t21:58Q
+%       graphed each transient response
+%
 %   v1.4.0 - 2022-03-22t16:21Q
 %       looping through all parameters for all systems
 %
@@ -24,12 +27,16 @@
 
 clear
 
+%% standard test signals for transient response plots
+STANDARD_TESTS = ["impulse", "step", "ramp", "parabola"]
+[~, N_STANDARD_TESTS] = size(STANDARD_TESTS)
+
 %% the range of the system subscripts
 sys_range = 3:5
 
 %% G3(s; p, z)
 % function handle for producing system G3(s; p)
-G{3} = @(p, z) zpk(z, [roots([1 4 25]); p], 25)
+G_base{3} = @(p, z) zpk(z, [roots([1 4 25]); p], 25)
 
 % poles and zeroes for G3
 the_poles{3,:} = {-200, -20, -10, -2,   [],  [],  [], [], []}
@@ -37,10 +44,10 @@ the_zeros{3,:} = {  [],  [],  [], [], -200, -50, -20, -5, -2}
 [~, N_PARAMS{3}] = size(the_poles{3,:})
 
 %% G4(s; a, b) and G5(s; a, b) as G45(s; a, b; c)
-G45 = @(c) (@(a, b) zpk([-a], [-b; roots([1 c])], (c(end)*b/a)))
+G_base45 = @(c) (@(a, b) zpk([-a], [-b; roots([1 c])], (c(end)*b/a)))
 
 % G4
-G{4} = G45([4 25])
+G_base{4} = G_base45([4 25])
 % poles and zeroes
 the_poles{4,:} = { 3.01, 3.1, 3.3, 3.5, 4.0 }
 the_zero{4} = 3
@@ -48,7 +55,7 @@ the_zero{4} = 3
 the_zeros{4,:} = num2cell( the_zero{4}*ones(1, N_PARAMS{4}) )
 
 % G5
-G{5} = G45([40 2500])
+G_base{5} = G_base45([40 2500])
 % poles and zeroes
 the_poles{5,:} = { 30.01, 30.1, 30.5, 31, 35, 40 }
 the_zero{5} = 30
@@ -58,10 +65,40 @@ the_zeros{5,:} = num2cell( the_zero{5}*ones(1, N_PARAMS{5}) )
 %% analysis
 % for each system
 for i_sys = sys_range
-    % for each pole
+    % new figure
+    fig = figure;
+    % for each pole, zero
     for i_param=1:N_PARAMS{i_sys}
-        G{i_sys}(the_poles{i_sys}{i_param}, the_zeros{i_sys}{i_param})
-    end % for for i_param
+        % build the system
+        G{i_sys,i_param} = ...
+            G_base{i_sys}( ...
+                the_poles{i_sys}{i_param}, the_zeros{i_sys}{i_param});
+        % for each test
+        for i_test=1:N_STANDARD_TESTS
+            % start plotting
+            subplot( ...
+                N_STANDARD_TESTS, N_PARAMS{i_sys}, ...
+                (N_PARAMS{i_sys}*(i_test - 1) + i_param) ...
+            )
+            % impulse plot with an additional zero for each test
+            impulseplot(G{i_sys,i_param}*zpk([], zeros(1,i_test), 1))
+            % label the test signal response
+            title(join([ ...
+                STANDARD_TESTS(i_test) ' response' ...
+            ], ''));
+            % do not y label after first column
+            if (i_param~=1)
+                ylabel('')
+            end % if (i_param~=1)
+            % subtitle to label what zeros and poles on first row
+            if (i_test==1)
+                subtitle(join([ ...
+                    'z={' string(the_zeros{i_sys}{i_param}) '}' newline ...
+                    'p={' string(the_poles{i_sys}{i_param}) '}' ...
+                ], ''))
+            end % if (i_test==1)
+        end % for i_test
+    end % for i_param
 end % for i_sys
 
 %% report done
