@@ -2,11 +2,14 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/part02_transient_response_m1.m
 % The transient response plots and pole-zero plots of various systems.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-23t01:15Q
+% When      : 2022-03-23t01:44Q
 % For       : ECE 3413
-% Version   : 1.6.1
+% Version   : 1.6.2
 %
 % CHANGELOG :
+%   v1.6.2 - 2022-03-23t01:44Q
+%       grouping plots by zero-pole pairs
+%
 %   v1.6.1 - 2022-03-23t01:15Q
 %       plotting variations of each system together
 %
@@ -82,6 +85,7 @@ for i_sys = sys_range
     subplot((N_STANDARD_TESTS + 1), 1, 1)
     hold on
     % for each pole, zero
+    plts = []                       % the plot pairs
     for i_param=1:N_PARAMS{i_sys}
         % build the system
         G{i_sys,i_param} = ...
@@ -90,6 +94,10 @@ for i_sys = sys_range
         % plot pole-zero for comparison
         [P, Z] = pzmap(G{i_sys,i_param})
         plt = plot(real(P), imag(P), 'x', real(Z), imag(Z), 'o');
+        % if neither pole or zero are empty, save them for recoloring
+        if (prod([P; Z]) ~= 0)
+            plts = [plts, plt];
+        end % if (prod([P Z]) ~= 0)
     end % for i_param
     hold off
     % for each test
