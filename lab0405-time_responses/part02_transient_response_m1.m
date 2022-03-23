@@ -2,11 +2,14 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/part02_transient_response_m1.m
 % The transient response plots and pole-zero plots of various systems.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-23t01:44Q
+% When      : 2022-03-23t02:43Q
 % For       : ECE 3413
-% Version   : 1.6.2
+% Version   : 1.6.3
 %
 % CHANGELOG :
+%   v1.6.3 - 2022-03-23t02:43Q
+%       color-coding pairs, legend
+%
 %   v1.6.2 - 2022-03-23t01:44Q
 %       grouping plots by zero-pole pairs
 %
@@ -86,6 +89,7 @@ for i_sys = sys_range
     hold on
     % for each pole, zero
     plts = []                       % the plot pairs
+    G_names = []                    % each system for the legend
     for i_param=1:N_PARAMS{i_sys}
         % build the system
         G{i_sys,i_param} = ...
@@ -96,10 +100,34 @@ for i_sys = sys_range
         plt = plot(real(P), imag(P), 'x', real(Z), imag(Z), 'o');
         % if neither pole or zero are empty, save them for recoloring
         if (prod([P; Z]) ~= 0)
-            plts = [plts, plt];
+            plts = [plts; plt];
         end % if (prod([P Z]) ~= 0)
+        G_names = [G_names ...
+            string(the_poles{i_sys}{i_param}) ...
+            string(the_zeros{i_sys}{i_param}) ...
+        ];
     end % for i_param
+    title('Pole-Zero Map')
+
+    % number of plots
+    [N_PLTS, ~] = size(plts)
+    colors = [];
+    % save colors
+    for i_color=1:N_PLTS
+        colors(i_color, :) = plts(i_color).Color
+    end % for i_color
+    % match pairs of colors, as follows
+    % i_color -> 2(i_color - 1) + [1:2] =: i_plt + [0:1]
+    % <=> i_color =: (i_plt(1) - 1)/2 + 1
+    for i_plt=1:2:N_PLTS
+        i_color = (i_plt - 1)/2 + 1
+        plts(i_plt).Color = colors(i_color, :);
+        plts(i_plt + 1).Color = colors(i_color, :);
+    end % next i_plt
+    % add legend with best placement possible
+    legend(G_names, 'Location', 'bestoutside')
     hold off
+
     % for each test
     for i_test=1:N_STANDARD_TESTS
         % start plotting the test
