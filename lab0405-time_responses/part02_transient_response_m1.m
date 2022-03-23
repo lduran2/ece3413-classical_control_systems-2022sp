@@ -2,11 +2,14 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/part02_transient_response_m1.m
 % The transient response plots and pole-zero plots of various systems.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-22t22:30Q
+% When      : 2022-03-22t23:59Q
 % For       : ECE 3413
-% Version   : 1.5.2
+% Version   : 1.6.0
 %
 % CHANGELOG :
+%   v1.6.0 - 2022-03-22t22:30Q
+%       added pzmaps as headers
+%
 %   v1.5.2 - 2022-03-22t22:30Q
 %       can new figure after each test
 %
@@ -103,7 +106,8 @@ for i_sys = sys_range
                 ROW_OFF = N_PARAMS{i_sys}*(i_test - 1);
             end % if (new_fig_per_test{i_sys})
             % start plotting
-            subplot(N_ROWS, N_PARAMS{i_sys}, (ROW_OFF + i_param))
+            subplot((N_ROWS + 1), N_PARAMS{i_sys}, ...
+                (ROW_OFF + N_PARAMS{i_sys} + i_param))
             % impulse plot with an additional zero for each test
             impulseplot(G{i_sys,i_param}*zpk([], zeros(1,i_test), 1))
             % label the test signal response
@@ -117,9 +121,14 @@ for i_sys = sys_range
             % subtitle to label what zeros and poles on first row
             % include if it's a new figure
             if (new_fig_per_test{i_sys} || (i_test==1))
+                % plot pole-zero for comparison
+                subplot((N_ROWS + 1), N_PARAMS{i_sys}, i_param)
+                pzmap(G{i_sys,i_param})
+                title('Pole-Zero Map')
+                % report exact values
                 subtitle(join([ ...
-                    'z={' string(the_zeros{i_sys}{i_param}) '}' newline ...
-                    'p={' string(the_poles{i_sys}{i_param}) '}' ...
+                    'p={' string(the_poles{i_sys}{i_param}) '}' newline ...
+                    'z={' string(the_zeros{i_sys}{i_param}) '}' ...
                 ], ''))
             end % if (new_fig_per_test{i_sys} || (i_test==1))
         end % for i_param
