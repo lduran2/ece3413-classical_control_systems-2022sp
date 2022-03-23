@@ -2,11 +2,14 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/part02_transient_response_m1.m
 % The transient response plots and pole-zero plots of various systems.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-22t21:58Q
+% When      : 2022-03-22t22:11Q
 % For       : ECE 3413
-% Version   : 1.5.0
+% Version   : 1.5.1
 %
 % CHANGELOG :
+%   v1.5.1 - 2022-03-22t22:11Q
+%       switched param and test loops
+%
 %   v1.5.0 - 2022-03-22t21:58Q
 %       graphed each transient response
 %
@@ -73,8 +76,11 @@ for i_sys = sys_range
         G{i_sys,i_param} = ...
             G_base{i_sys}( ...
                 the_poles{i_sys}{i_param}, the_zeros{i_sys}{i_param});
-        % for each test
-        for i_test=1:N_STANDARD_TESTS
+    end % for i_param
+    % for each test
+    for i_test=1:N_STANDARD_TESTS
+        % for each pole, zero
+        for i_param=1:N_PARAMS{i_sys}
             % start plotting
             subplot( ...
                 N_STANDARD_TESTS, N_PARAMS{i_sys}, ...
@@ -97,8 +103,8 @@ for i_sys = sys_range
                     'p={' string(the_poles{i_sys}{i_param}) '}' ...
                 ], ''))
             end % if (i_test==1)
-        end % for i_test
-    end % for i_param
+        end % for i_param
+    end % for i_test
 end % for i_sys
 
 %% report done
