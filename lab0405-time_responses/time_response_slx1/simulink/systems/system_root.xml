@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <System>
-  <P Name="Location">[23, 14, 1017, 751]</P>
+  <P Name="Location">[-7, -7, 1288, 688]</P>
   <P Name="SystemRect">[0.000000, 0.000000, 0.000000, 0.000000]</P>
   <P Name="Open">on</P>
   <P Name="SetExecutionDomain">off</P>
   <P Name="ExecutionDomainType">Deduce</P>
   <P Name="ReportName">simulink-default.rpt</P>
-  <P Name="SIDHighWatermark">39</P>
+  <P Name="SIDHighWatermark">63</P>
   <P Name="SimulinkSubDomain">Simulink</P>
   <Block BlockType="SubSystem" Name="Part I: Exercise 1&#xA;First-Order Systems" SID="7">
     <P Name="Ports">[]</P>
@@ -39,5 +39,13 @@
     <P Name="RequestExecContextInheritance">off</P>
     <P Name="ContentPreviewEnabled">on</P>
     <System Ref="system_39"/>
+  </Block>
+  <Block BlockType="SubSystem" Name="Part III: Added poles" SID="40">
+    <P Name="Ports">[]</P>
+    <P Name="Position">[-170, 209, -80, 331]</P>
+    <P Name="ZOrder">45</P>
+    <P Name="RequestExecContextInheritance">off</P>
+    <P Name="ContentPreviewEnabled">on</P>
+    <System Ref="system_40"/>
   </Block>
 </System>

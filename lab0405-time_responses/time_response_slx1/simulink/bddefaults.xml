@@ -119,5 +119,12 @@
       <P Name="ContinuousStateAttributes">&apos;&apos;</P>
       <P Name="Realization">auto</P>
     </Block>
+    <Block BlockType="ZeroPole">
+      <P Name="Zeros">[1]</P>
+      <P Name="Poles">[0 1]</P>
+      <P Name="Gain">[1]</P>
+      <P Name="AbsoluteTolerance">auto</P>
+      <P Name="ContinuousStateAttributes">&apos;&apos;</P>
+    </Block>
   </BlockParameterDefaults>
 </BlockDiagramDefaults>
