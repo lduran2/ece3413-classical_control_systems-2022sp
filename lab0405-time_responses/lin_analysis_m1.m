@@ -2,11 +2,14 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/lin_analysis_m1.m
 % Menu for function's linear system analyses.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-28t13:56Q
+% When      : 2022-03-28t19:16Q
 % For       : ECE 3413
-% Version   : 1.3.0
+% Version   : 1.3.1
 %
 % CHANGELOG :
+%   v1.3.1 - 2022-03-28t19:16Q
+%       normalize poles, zeroes to steady state value (III-02)
+%
 %   v1.3.0 - 2022-03-28t13:56Q
 %       normalize poles to steady state value (III-01)
 %
@@ -79,43 +82,42 @@ end % for i_part
 %% GCF for parts III 01, 02
 G3_gcf = tf([25], [1 4 25])
 
-%% systems for part III 01 analysis
-N_PARTS(1) = N_PARTS(1) + 1, i_part = N_PARTS(1)
-% the additional poles
-part030102_poles = [-200, -20, -10, -2]
-[~, N_SYS(i_part)] = size(part030102_poles)
-N_SYS(i_part) = N_SYS(i_part) + 1
-% add the GCF
-sysG{i_part,1} = G3_gcf
-% loop through poles
-for i_pole=2:N_SYS(i_part)
-    % add pole to the G3 base
-    p = part030102_poles(i_pole - 1)
-    sysG{i_part,i_pole} = G3_gcf * zpk([1], p, 1);
-    % convert to symbolic expression in terms of s
-    syms s
-    symG_s = sys2sym(sysG{i_part,i_pole})
-    % find steady state value
-    vss = double(limit(symG_s, s, 0))
-    % normalize sysG to steady state value
-    norm_sysG = (sysG{i_part,i_pole} / vss)
-    sysG{i_part,i_pole} = norm_sysG;
-end % for i_pole=2:N_SYS(i_part)
-
-%% systems for part III 02 analysis
-N_PARTS(1) = N_PARTS(1) + 1, i_part = N_PARTS(1)
-% the additional zeros
+%% systems for part III 01, 02 analysis
+% the additional poles and zeros
+part0301_poles = [-200, -20, -10, -2]
 part0302_zeros = [-200, -50, -20, -10, -5, -2]
-[~, N_SYS(i_part)] = size(part0302_zeros)
-N_SYS(i_part) = N_SYS(i_part) + 1
-% add the GCF
-sysG{i_part,1} = G3_gcf
-% loop through poles
-for i_zero=2:N_SYS(i_part)
-    % add zero to the G3 base
-    z = part0302_zeros(i_zero - 1)
-    sysG{i_part,i_zero} = G3_gcf * zpk(z, [], 1);
-end % for i_zero=1:N_SYS(i_part)
+[~, N_SYS(i_part + 1)] = size(part0301_poles)
+[~, N_SYS(i_part + 2)] = size(part0302_zeros)
+% create cells of poles and zeros
+part030102_poles{1,:} = arrayfun(@(v) v, part0301_poles, 'UniformOutput', false)
+part030102_poles{2,:} = arrayfun(@(v) [], part0302_zeros, 'UniformOutput', false)
+part030102_zeros{1,:} = arrayfun(@(v) [], part0301_poles, 'UniformOutput', false)
+part030102_zeros{2,:} = arrayfun(@(v) v, part0302_zeros, 'UniformOutput', false)
+% for each of part III 01, 02
+for i_ex=1:2
+    % combined part exercise count
+    i_part_ex = i_part + i_ex
+    % add the GCF
+    N_SYS(i_part_ex) = N_SYS(i_part_ex) + 1
+    sysG{i_part_ex,1} = G3_gcf;
+    % loop through poles
+    for i_pole=2:N_SYS(i_part_ex)
+        % add pole, zero to the G3 base
+        p = part030102_poles{i_ex}{(i_pole - 1)}
+        z = part030102_zeros{i_ex}{(i_pole - 1)}
+        sysG{i_part_ex,i_pole} = G3_gcf * zpk(z, p, 1);
+        % convert to symbolic expression in terms of s
+        syms s
+        symG_s = sys2sym(sysG{i_part_ex,i_pole})
+        % find steady state value
+        vss = double(limit(symG_s, s, 0))
+        % normalize sysG to steady state value
+        norm_sysG = (sysG{i_part_ex,i_pole} / vss)
+        sysG{i_part_ex,i_pole} = norm_sysG;
+    end % for i_pole=2:N_SYS(i_expart)
+end % for i_ex=1:2
+% update N_PARTS(1)
+N_PARTS(1) = i_part_ex, i_part = N_PARTS(1)
 
 %% GCF for parts III 03, 04
 G45_gcf{1} = G3_gcf;
@@ -133,7 +135,7 @@ for i_gcf=1:N_G34_GCF
         % current G/GCF
         curr_zpk = zpk([-curr_a], [-curr_b], curr_b/curr_a)
         % create the full function
-        sysG{i_gcf_part, i_sys} = G45_gcf{i_gcf} * curr_zpk
+        sysG{i_gcf_part, i_sys} = G45_gcf{i_gcf} * curr_zpk;
     end % for i_sys=1:N_SYS(i_gcf_part)
 end % for i_gcf=1:N_G34_GCF
 % update N_PARTS(1)
