@@ -41,35 +41,52 @@ part0103_imags_m1
 part0104_nat_freqs_m1
 % save number of parts
 N_PARTS = i_part
+% copy tfG into sysG
+% allow any type of system
+sysG = tfG
 
 %% transfer functions for part I 01 analysis
 i_part = 1
 % number of transfer functions
-n_tfG(i_part) = 4
+N_SYS(i_part) = 4
 % loop a
-for a=1:n_tfG(i_part)
-    tfG{i_part,a} = tf([a], [1 a]);
+for a=1:N_SYS(i_part)
+    sysG{i_part,a} = tf([a], [1 a]);
 end % for a=1:n_tfG(i_part)
 
 %% create modified transfer functions for part I 02-04 analysis
 % for each part
+i_part_tf = 0;
+% for each part
 for i_part=2:N_PARTS
-    for i_tf=2:n_tfG(i_part)
+    % copy n_tfG into N_SYS
+    N_SYS(i_part) = n_tfG(i_part)
+    for i_tf=2:N_SYS(i_part)
         % build the transfer function
-        tfG{i_part, i_tf} = tf( ...
+        sysG{i_part, i_tf} = tf( ...
             G_b(i_part, i_tf), ...
             [1 G_a(i_part, i_tf), G_b(i_part, i_tf)] ...
         );
     end % for i_tf
 end % for i_part
 
+%% systems for part III 01 analysis
+N_PARTS = N_PARTS + 1, i_part = N_PARTS
+% the additional poles
+part01_poles = [-200, -20, -10, -2]
+[~, N_SYS(i_part)] = size(part01_poles)
+% loop through poles
+for i_pole=1:N_SYS(i_part)
+    sysG{i_part,i_pole} = zpk([1], part01_poles(i_pole), 1);
+end % for i_pole=1:N_SYS(i_part)
+
 %% display tfG
-tfG
+sysG
 
 %% open linear system analyzer for each part
 i_part = part_menu();       % initial choice
 while (i_part ~= -1)
-    linearSystemAnalyzer(tfG{i_part, 1:n_tfG(i_part)})
+    linearSystemAnalyzer(sysG{i_part, 1:N_SYS(i_part)})
     i_part = part_menu();   % ask again
 end % while ((i_part=part_menu()) ~= -1)
 
@@ -87,10 +104,11 @@ function i_choice = part_menu()
 
     % menu options
     options = [ ...
-        "First-Order Systems" ...
-        "Variable Real Parts" ...
-        "Variable Imaginary Parts" ...
-        "Variable Natural Frequencies" ...
+        "Part I: First-Order Systems" ...
+        "Part I: Variable Real Parts" ...
+        "Part I: Variable Imaginary Parts" ...
+        "Part I: Variable Natural Frequencies" ...
+        "Part III: Added Poles" ...
     ];
     [~, N_OPTIONS] = size(options);
 
