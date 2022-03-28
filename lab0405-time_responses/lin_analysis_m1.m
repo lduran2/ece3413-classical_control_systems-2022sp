@@ -2,15 +2,18 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/lin_analysis_m1.m
 % Menu for function's linear system analyses.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-22t04:35Q
+% When      : 2022-03-22t12:32Q
 % For       : ECE 3413
 % Version   : 1.1.1
 %
 % CHANGELOG :
-%   v1.1.1 - 2022-03-22t04:35Q
+%   v1.2.0 - 2022-03-28t12:32Q
+%       parametric systems from part III
+%
+%   v1.1.1 - 2022-03-28t04:35Q
 %       extra poles, zeros from part III
 %
-%   v1.1.0 - 2022-03-22t02:50Q
+%   v1.1.0 - 2022-03-28t02:50Q
 %       linear analysis separated from pole/zero map, pole table
 %
 %   v1.0.4 - 2022-03-22t12:30Q
@@ -71,7 +74,7 @@ for i_part=2:N_PARTS(1)
 end % for i_part
 
 %% GCF for parts III 01, 02
-G4_GCF = tf([25], [1 4 25])
+G3_gcf = tf([25], [1 4 25])
 
 %% systems for part III 01 analysis
 N_PARTS(1) = N_PARTS(1) + 1, i_part = N_PARTS(1)
@@ -80,12 +83,12 @@ part0301_poles = [-200, -20, -10, -2]
 [~, N_SYS(i_part)] = size(part0301_poles)
 N_SYS(i_part) = N_SYS(i_part) + 1
 % add the GCF
-sysG{i_part,1} = G4_GCF
+sysG{i_part,1} = G3_gcf
 % loop through poles
 for i_pole=2:N_SYS(i_part)
     % add pole to the G3 base
     p = part0301_poles(i_pole - 1)
-    sysG{i_part,i_pole} = G4_GCF * zpk([1], p, 1);
+    sysG{i_part,i_pole} = G3_gcf * zpk([1], p, 1);
 end % for i_pole=2:N_SYS(i_part)
 
 %% systems for part III 02 analysis
@@ -95,18 +98,35 @@ part0302_zeros = [-200, -50, -20, -10, -5, -2]
 [~, N_SYS(i_part)] = size(part0302_zeros)
 N_SYS(i_part) = N_SYS(i_part) + 1
 % add the GCF
-sysG{i_part,1} = G4_GCF
+sysG{i_part,1} = G3_gcf
 % loop through poles
 for i_zero=2:N_SYS(i_part)
     % add zero to the G3 base
     z = part0302_zeros(i_zero - 1)
-    sysG{i_part,i_zero} = G4_GCF * zpk(z, [], 1);
+    sysG{i_part,i_zero} = G3_gcf * zpk(z, [], 1);
 end % for i_zero=1:N_SYS(i_part)
 
-%% GCF for part III 03
-G4_GCF = G3_GCF
-
-
+%% GCF for parts III 03, 04
+G45_gcf{1} = G3_gcf;
+G45_gcf{2} = tf([2500], [1 40 2500]);
+[~, N_G34_GCF] = size(G45_gcf)
+% loop through GCFs
+for i_gcf=1:N_G34_GCF
+    % calculate i_part from i_gcf
+    i_gcf_part = i_part + i_gcf
+    % for each system for this part
+    for i_sys=1:N_SYS(i_gcf_part)
+        % current parameters
+        curr_b = G_b(i_gcf_part, i_sys)
+        curr_a = G_a(i_gcf_part, i_sys)
+        % current G/GCF
+        curr_zpk = zpk([-curr_a], [-curr_b], curr_b/curr_a)
+        % create the full function
+        sysG{i_gcf_part, i_sys} = G45_gcf{i_gcf} * curr_zpk
+    end % for i_sys=1:N_SYS(i_gcf_part)
+end % for i_gcf=1:N_G34_GCF
+% update N_PARTS(1)
+N_PARTS(1) = N_PARTS(1) + N_G34_GCF, i_part = N_PARTS(1)
 
 %% display tfG
 sysG
@@ -115,7 +135,7 @@ sysG
 i_part = part_menu(N_SYS);  % initial choice
 while (i_part ~= -1)
     linearSystemAnalyzer(sysG{i_part, 1:N_SYS(i_part)})
-    i_part = part_menu();   % ask again
+    i_part = part_menu(N_SYS);   % ask again
 end % while ((i_part=part_menu()) ~= -1)
 
 %% report done
@@ -139,6 +159,8 @@ function i_choice = part_menu(n_sys)
         "Part I: Variable Natural Frequencies" ...
         "Part III: Added Poles" ...
         "Part III: Added Zeros" ...
+        "Part III: Parametric Transfer Function I" ...
+        "Part III: Parametric Transfer Function II" ...
     ];
     [~, N_OPTIONS] = size(options);
 
@@ -154,9 +176,10 @@ function i_choice = part_menu(n_sys)
     function i_choice = prompt()
         disp('Exercises:')
         for i_option=1:N_OPTIONS
+            CURR_N_SYS = n_sys(i_option);
             disp(join([ ...
                 '    ' i_option '. ' options(i_option) ...
-                ' (' string(n_sys(i_option)) ')' ...
+                ' (' string(CURR_N_SYS) ')' ...
             ], ''))
         end % for option
         disp(join(['   ' string(PART_SENTINEL) '. exit'], ''))
