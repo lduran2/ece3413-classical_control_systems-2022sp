@@ -38,12 +38,9 @@ DO_SKIP_PART_MENU = false
 global PART_SENTINEL
 PART_SENTINEL = -1
 
-%% parameters for part I 02-04 analysis
-part0102_reals_m1
-part0103_imags_m1
-part0104_nat_freqs_m1
-% save number of parts
-N_PARTS = i_part
+%% parameters for analysis
+% time_response_params_m1
+time_response_params_m1
 % copy tfG into sysG
 % allow any type of system
 sysG = tfG
@@ -61,7 +58,7 @@ end % for a=1:n_tfG(i_part)
 % for each part
 i_part_tf = 0;
 % for each part
-for i_part=2:N_PARTS
+for i_part=2:N_PARTS(1)
     % copy n_tfG into N_SYS
     N_SYS(i_part) = n_tfG(i_part)
     for i_tf=2:N_SYS(i_part)
@@ -77,7 +74,7 @@ end % for i_part
 G3_GCF = tf([25], [1 4 25])
 
 %% systems for part III 01 analysis
-N_PARTS = N_PARTS + 1, i_part = N_PARTS
+N_PARTS(1) = N_PARTS(1) + 1, i_part = N_PARTS(1)
 % the additional poles
 part0301_poles = [-200, -20, -10, -2]
 [~, N_SYS(i_part)] = size(part0301_poles)
@@ -92,7 +89,7 @@ for i_pole=2:N_SYS(i_part)
 end % for i_pole=2:N_SYS(i_part)
 
 %% systems for part III 02 analysis
-N_PARTS = N_PARTS + 1, i_part = N_PARTS
+N_PARTS(1) = N_PARTS(1) + 1, i_part = N_PARTS(1)
 % the additional zeros
 part0302_zeros = [-200, -50, -20, -10, -5, -2]
 [~, N_SYS(i_part)] = size(part0302_zeros)
@@ -121,7 +118,8 @@ disp('Done.')
 
 %% accepts an exercise number
 function i_choice = part_menu(n_sys)
-    global  DO_SKIP_PART_MENU  PART_SENTINEL  n_sys
+    global DO_SKIP_PART_MENU
+    global PART_SENTINEL
     % check whether to skip
     if (DO_SKIP_PART_MENU)
         i_choice = PART_SENTINEL;
@@ -153,7 +151,7 @@ function i_choice = part_menu(n_sys)
         for i_option=1:N_OPTIONS
             disp(join([ ...
                 '    ' i_option '. ' options(i_option) ...
-                ' (' string(n_sys(i_option)) ')'
+                ' (' string(n_sys(i_option)) ')' ...
             ], ''))
         end % for option
         disp(join(['   ' string(PART_SENTINEL) '. exit'], ''))
