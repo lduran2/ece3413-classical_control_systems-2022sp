@@ -2,11 +2,14 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/lin_analysis_m1.m
 % Menu for function's linear system analyses.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-22t02:50Q
+% When      : 2022-03-22t04:35Q
 % For       : ECE 3413
-% Version   : 1.1.0
+% Version   : 1.1.1
 %
 % CHANGELOG :
+%   v1.1.1 - 2022-03-22t04:35Q
+%       extra poles, zeros from part III
+%
 %   v1.1.0 - 2022-03-22t02:50Q
 %       linear analysis separated from pole/zero map, pole table
 %
@@ -73,12 +76,22 @@ end % for i_part
 %% systems for part III 01 analysis
 N_PARTS = N_PARTS + 1, i_part = N_PARTS
 % the additional poles
-part01_poles = [-200, -20, -10, -2]
-[~, N_SYS(i_part)] = size(part01_poles)
+part0301_poles = [-200, -20, -10, -2]
+[~, N_SYS(i_part)] = size(part0301_poles)
 % loop through poles
 for i_pole=1:N_SYS(i_part)
-    sysG{i_part,i_pole} = zpk([1], part01_poles(i_pole), 1);
+    sysG{i_part,i_pole} = zpk([1], part0301_poles(i_pole), 1);
 end % for i_pole=1:N_SYS(i_part)
+
+%% systems for part III 02 analysis
+N_PARTS = N_PARTS + 1, i_part = N_PARTS
+% the additional zeros
+part0302_zeros = [-200, -20, -10, -2]
+[~, N_SYS(i_part)] = size(part0302_zeros)
+% loop through zeros
+for i_zero=1:N_SYS(i_part)
+    sysG{i_part,i_zero} = zpk(part0302_zeros(i_zero), [], 1);
+end % for i_zero=1:N_SYS(i_part)
 
 %% display tfG
 sysG
@@ -109,6 +122,7 @@ function i_choice = part_menu()
         "Part I: Variable Imaginary Parts" ...
         "Part I: Variable Natural Frequencies" ...
         "Part III: Added Poles" ...
+        "Part III: Added Zeros" ...
     ];
     [~, N_OPTIONS] = size(options);
 
