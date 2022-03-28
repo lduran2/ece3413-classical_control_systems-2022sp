@@ -6,7 +6,7 @@
   <P Name="SetExecutionDomain">off</P>
   <P Name="ExecutionDomainType">Deduce</P>
   <P Name="ReportName">simulink-default.rpt</P>
-  <P Name="SIDHighWatermark">63</P>
+  <P Name="SIDHighWatermark">96</P>
   <P Name="SimulinkSubDomain">Simulink</P>
   <Block BlockType="SubSystem" Name="Part I: Exercise 1&#xA;First-Order Systems" SID="7">
     <P Name="Ports">[]</P>
@@ -40,7 +40,15 @@
     <P Name="ContentPreviewEnabled">on</P>
     <System Ref="system_39"/>
   </Block>
-  <Block BlockType="SubSystem" Name="Part III: Added poles" SID="40">
+  <Block BlockType="SubSystem" Name="Part III: Excercise 2&#xA;Added Zeros" SID="64">
+    <P Name="Ports">[]</P>
+    <P Name="Position">[5, 209, 95, 331]</P>
+    <P Name="ZOrder">47</P>
+    <P Name="RequestExecContextInheritance">off</P>
+    <P Name="ContentPreviewEnabled">on</P>
+    <System Ref="system_64"/>
+  </Block>
+  <Block BlockType="SubSystem" Name="Part III: Exercise 1&#xA;Added Poles" SID="40">
     <P Name="Ports">[]</P>
     <P Name="Position">[-170, 209, -80, 331]</P>
     <P Name="ZOrder">45</P>
