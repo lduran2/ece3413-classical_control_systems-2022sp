@@ -71,7 +71,7 @@ for i_part=2:N_PARTS(1)
 end % for i_part
 
 %% GCF for parts III 01, 02
-G3_GCF = tf([25], [1 4 25])
+G4_GCF = tf([25], [1 4 25])
 
 %% systems for part III 01 analysis
 N_PARTS(1) = N_PARTS(1) + 1, i_part = N_PARTS(1)
@@ -80,12 +80,12 @@ part0301_poles = [-200, -20, -10, -2]
 [~, N_SYS(i_part)] = size(part0301_poles)
 N_SYS(i_part) = N_SYS(i_part) + 1
 % add the GCF
-sysG{i_part,1} = G3_GCF
+sysG{i_part,1} = G4_GCF
 % loop through poles
 for i_pole=2:N_SYS(i_part)
     % add pole to the G3 base
     p = part0301_poles(i_pole - 1)
-    sysG{i_part,i_pole} = G3_GCF * zpk([1], p, 1);
+    sysG{i_part,i_pole} = G4_GCF * zpk([1], p, 1);
 end % for i_pole=2:N_SYS(i_part)
 
 %% systems for part III 02 analysis
@@ -95,13 +95,18 @@ part0302_zeros = [-200, -50, -20, -10, -5, -2]
 [~, N_SYS(i_part)] = size(part0302_zeros)
 N_SYS(i_part) = N_SYS(i_part) + 1
 % add the GCF
-sysG{i_part,1} = G3_GCF
+sysG{i_part,1} = G4_GCF
 % loop through poles
 for i_zero=2:N_SYS(i_part)
     % add zero to the G3 base
     z = part0302_zeros(i_zero - 1)
-    sysG{i_part,i_zero} = G3_GCF * zpk(z, [], 1);
+    sysG{i_part,i_zero} = G4_GCF * zpk(z, [], 1);
 end % for i_zero=1:N_SYS(i_part)
+
+%% GCF for part III 03
+G4_GCF = G3_GCF
+
+
 
 %% display tfG
 sysG

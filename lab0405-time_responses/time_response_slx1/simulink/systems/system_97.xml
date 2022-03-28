@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<System>
+  <P Name="Location">[-7, -7, 1288, 688]</P>
+  <P Name="SystemRect">[0.000000, 0.000000, 0.000000, 0.000000]</P>
+  <P Name="Open">on</P>
+  <P Name="SetExecutionDomain">off</P>
+  <P Name="ExecutionDomainType">Deduce</P>
+  <P Name="SimulinkSubDomain">Simulink</P>
+  <Block BlockType="TransferFcn" Name="G4(s) GCF" SID="102">
+    <P Name="Position">[215, 77, 320, 123]</P>
+    <P Name="ZOrder">290</P>
+    <P Name="Numerator">[25]</P>
+    <P Name="Denominator">[1 4 25]</P>
+  </Block>
+  <Block BlockType="Scope" Name="Scope" SID="99">
+    <P Name="Ports">[6]</P>
+    <P Name="Position">[720, 90, 790, 185]</P>
+    <P Name="ZOrder">28</P>
+    <P Name="ScopeSpecificationString">Simulink.scopes.TimeScopeBlockCfg(&apos;CurrentConfiguration&apos;, extmgr.ConfigurationSet(extmgr.Configuration(&apos;Core&apos;,&apos;General UI&apos;,true),extmgr.Configuration(&apos;Core&apos;,&apos;Source UI&apos;,true),extmgr.Configuration(&apos;Sources&apos;,&apos;WiredSimulink&apos;,true,&apos;DataLoggingVariableName&apos;,&apos;ScopeData1&apos;),extmgr.Configuration(&apos;Visuals&apos;,&apos;Time Domain&apos;,true,&apos;SerializedDisplays&apos;,{struct(&apos;MinYLimReal&apos;,&apos;-0.17149&apos;,&apos;MaxYLimReal&apos;,&apos;1.54342&apos;,&apos;YLabelReal&apos;,&apos;&apos;,&apos;MinYLimMag&apos;,&apos;0.00000&apos;,&apos;MaxYLimMag&apos;,&apos;1.54342&apos;,&apos;LegendVisibility&apos;,&apos;On&apos;,&apos;XGrid&apos;,true,&apos;YGrid&apos;,true,&apos;PlotMagPhase&apos;,false,&apos;AxesColor&apos;,[0 0 0],&apos;AxesTickColor&apos;,[0.686274509803922 0.686274509803922 0.686274509803922],&apos;ColorOrder&apos;,[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],&apos;Title&apos;,&apos;%&lt;SignalLabel&gt;&apos;,&apos;LinePropertiesCache&apos;,{{}},&apos;UserDefinedChannelNames&apos;,{{}},&apos;NumLines&apos;,6,&apos;LineNames&apos;,{{&apos;G41(s)&apos;,&apos;G42(s)&apos;,&apos;G43(s)&apos;,&apos;G44(s)&apos;,&apos;G45(s)&apos;,&apos;G46(s)&apos;}},&apos;ShowContent&apos;,true,&apos;Placement&apos;,1)},&apos;DisplayPropertyDefaults&apos;,struct(&apos;MinYLimReal&apos;,&apos;-0.17149&apos;,&apos;MaxYLimReal&apos;,&apos;1.54342&apos;,&apos;YLabelReal&apos;,&apos;&apos;,&apos;MinYLimMag&apos;,&apos;0.00000&apos;,&apos;MaxYLimMag&apos;,&apos;1.54342&apos;,&apos;LegendVisibility&apos;,&apos;On&apos;,&apos;XGrid&apos;,true,&apos;YGrid&apos;,true,&apos;PlotMagPhase&apos;,false,&apos;AxesColor&apos;,[0 0 0],&apos;AxesTickColor&apos;,[0.686274509803922 0.686274509803922 0.686274509803922],&apos;ColorOrder&apos;,[0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration(&apos;Tools&apos;,&apos;Plot Navigation&apos;,true),extmgr.Configuration(&apos;Tools&apos;,&apos;Measurements&apos;,true,&apos;Version&apos;,&apos;2020b&apos;)),&apos;Version&apos;,&apos;2020b&apos;,&apos;Position&apos;,[1 41 1280 607.333333333333],&apos;VisibleAtModelOpen&apos;,&apos;on&apos;)</P>
+    <P Name="NumInputPorts">6</P>
+    <P Name="Floating">off</P>
+  </Block>
+  <Block BlockType="Step" Name="Step" SID="100">
+    <P Name="Position">[125, 85, 155, 115]</P>
+    <P Name="ZOrder">25</P>
+    <P Name="Time">0</P>
+    <P Name="SampleTime">0</P>
+  </Block>
+  <Block BlockType="ZeroPole" Name="Zero-Pole" SID="109">
+    <P Name="Position">[385, 78, 600, 122]</P>
+    <P Name="ZOrder">291</P>
+    <P Name="Zeros">[-G_a(7,1)]</P>
+    <P Name="Poles">[-G_b(7,1)]</P>
+    <P Name="Gain">G_b(7,1)/G_a(7,1)</P>
+    <Port>
+      <P Name="PortNumber">1</P>
+      <P Name="Name">G41(s)</P>
+    </Port>
+  </Block>
+  <Block BlockType="ZeroPole" Name="Zero-Pole1" SID="110">
+    <P Name="Position">[385, 153, 600, 197]</P>
+    <P Name="ZOrder">292</P>
+    <P Name="Zeros">[-G_a(7,2)]</P>
+    <P Name="Poles">[-G_b(7,2)]</P>
+    <P Name="Gain">G_b(7,2)/G_a(7,2)</P>
+    <Port>
+      <P Name="PortNumber">1</P>
+      <P Name="Name">G42(s)</P>
+    </Port>
+  </Block>
+  <Block BlockType="ZeroPole" Name="Zero-Pole2" SID="111">
+    <P Name="Position">[385, 228, 600, 272]</P>
+    <P Name="ZOrder">293</P>
+    <P Name="Zeros">[-G_a(7,3)]</P>
+    <P Name="Poles">[-G_b(7,3)]</P>
+    <P Name="Gain">G_b(7,3)/G_a(7,3)</P>
+    <Port>
+      <P Name="PortNumber">1</P>
+      <P Name="Name">G43(s)</P>
+    </Port>
+  </Block>
+  <Block BlockType="ZeroPole" Name="Zero-Pole3" SID="112">
+    <P Name="Position">[385, 303, 600, 347]</P>
+    <P Name="ZOrder">294</P>
+    <P Name="Zeros">[-G_a(7,4)]</P>
+    <P Name="Poles">[-G_b(7,4)]</P>
+    <P Name="Gain">G_b(7,4)/G_a(7,4)</P>
+    <Port>
+      <P Name="PortNumber">1</P>
+      <P Name="Name">G44(s)</P>
+    </Port>
+  </Block>
+  <Block BlockType="ZeroPole" Name="Zero-Pole4" SID="113">
+    <P Name="Position">[385, 378, 600, 422]</P>
+    <P Name="ZOrder">295</P>
+    <P Name="Zeros">[-G_a(7,5)]</P>
+    <P Name="Poles">[-G_b(7,5)]</P>
+    <P Name="Gain">G_b(7,5)/G_a(7,5)</P>
+    <Port>
+      <P Name="PortNumber">1</P>
+      <P Name="Name">G45(s)</P>
+    </Port>
+  </Block>
+  <Block BlockType="ZeroPole" Name="Zero-Pole5" SID="114">
+    <P Name="Position">[385, 453, 600, 497]</P>
+    <P Name="ZOrder">296</P>
+    <P Name="Zeros">[-G_a(7,6)]</P>
+    <P Name="Poles">[-G_b(7,6)]</P>
+    <P Name="Gain">G_b(7,6)/G_a(7,6)</P>
+    <Port>
+      <P Name="PortNumber">1</P>
+      <P Name="Name">G46(s)</P>
+    </Port>
+  </Block>
+  <Line>
+    <P Name="ZOrder">26</P>
+    <P Name="Src">100#out:1</P>
+    <P Name="Dst">102#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">27</P>
+    <P Name="Src">102#out:1</P>
+    <P Name="Points">[21, 0]</P>
+    <Branch>
+      <P Name="ZOrder">30</P>
+      <P Name="Points">[0, 75]</P>
+      <Branch>
+        <P Name="ZOrder">32</P>
+        <P Name="Points">[0, 75]</P>
+        <Branch>
+          <P Name="ZOrder">34</P>
+          <P Name="Points">[0, 75]</P>
+          <Branch>
+            <P Name="ZOrder">36</P>
+            <P Name="Points">[0, 75]</P>
+            <Branch>
+              <P Name="ZOrder">38</P>
+              <P Name="Points">[0, 75]</P>
+              <P Name="Dst">114#in:1</P>
+            </Branch>
+            <Branch>
+              <P Name="ZOrder">37</P>
+              <P Name="Dst">113#in:1</P>
+            </Branch>
+          </Branch>
+          <Branch>
+            <P Name="ZOrder">35</P>
+            <P Name="Dst">112#in:1</P>
+          </Branch>
+        </Branch>
+        <Branch>
+          <P Name="ZOrder">33</P>
+          <P Name="Dst">111#in:1</P>
+        </Branch>
+      </Branch>
+      <Branch>
+        <P Name="ZOrder">31</P>
+        <P Name="Dst">110#in:1</P>
+      </Branch>
+    </Branch>
+    <Branch>
+      <P Name="ZOrder">29</P>
+      <P Name="Dst">109#in:1</P>
+    </Branch>
+  </Line>
+  <Line>
+    <P Name="Name">G41(s)</P>
+    <P Name="ZOrder">28</P>
+    <P Name="Labels">[1, 1]</P>
+    <P Name="Src">109#out:1</P>
+    <P Name="Dst">99#in:1</P>
+  </Line>
+  <Line>
+    <P Name="Name">G42(s)</P>
+    <P Name="ZOrder">39</P>
+    <P Name="Labels">[1, 1]</P>
+    <P Name="Src">110#out:1</P>
+    <P Name="Points">[29, 0; 0, -60]</P>
+    <P Name="Dst">99#in:2</P>
+  </Line>
+  <Line>
+    <P Name="Name">G43(s)</P>
+    <P Name="ZOrder">40</P>
+    <P Name="Labels">[1, 1]</P>
+    <P Name="Src">111#out:1</P>
+    <P Name="Points">[43, 0; 0, -120]</P>
+    <P Name="Dst">99#in:3</P>
+  </Line>
+  <Line>
+    <P Name="Name">G44(s)</P>
+    <P Name="ZOrder">41</P>
+    <P Name="Labels">[1, 1]</P>
+    <P Name="Src">112#out:1</P>
+    <P Name="Points">[57, 0; 0, -180]</P>
+    <P Name="Dst">99#in:4</P>
+  </Line>
+  <Line>
+    <P Name="Name">G45(s)</P>
+    <P Name="ZOrder">42</P>
+    <P Name="Labels">[1, 1]</P>
+    <P Name="Src">113#out:1</P>
+    <P Name="Points">[71, 0; 0, -240]</P>
+    <P Name="Dst">99#in:5</P>
+  </Line>
+  <Line>
+    <P Name="Name">G46(s)</P>
+    <P Name="ZOrder">43</P>
+    <P Name="Labels">[1, 1]</P>
+    <P Name="Src">114#out:1</P>
+    <P Name="Points">[86, 0; 0, -300]</P>
+    <P Name="Dst">99#in:6</P>
+  </Line>
+</System>
