@@ -2,11 +2,14 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/lin_analysis_m1.m
 % Menu for function's linear system analyses.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-22t12:32Q
+% When      : 2022-03-28t13:56Q
 % For       : ECE 3413
-% Version   : 1.1.1
+% Version   : 1.3.0
 %
 % CHANGELOG :
+%   v1.3.0 - 2022-03-28t13:56Q
+%       normalize poles to steady state value (III-01)
+%
 %   v1.2.0 - 2022-03-28t12:32Q
 %       parametric systems from part III
 %
@@ -79,16 +82,24 @@ G3_gcf = tf([25], [1 4 25])
 %% systems for part III 01 analysis
 N_PARTS(1) = N_PARTS(1) + 1, i_part = N_PARTS(1)
 % the additional poles
-part0301_poles = [-200, -20, -10, -2]
-[~, N_SYS(i_part)] = size(part0301_poles)
+part030102_poles = [-200, -20, -10, -2]
+[~, N_SYS(i_part)] = size(part030102_poles)
 N_SYS(i_part) = N_SYS(i_part) + 1
 % add the GCF
 sysG{i_part,1} = G3_gcf
 % loop through poles
 for i_pole=2:N_SYS(i_part)
     % add pole to the G3 base
-    p = part0301_poles(i_pole - 1)
+    p = part030102_poles(i_pole - 1)
     sysG{i_part,i_pole} = G3_gcf * zpk([1], p, 1);
+    % convert to symbolic expression in terms of s
+    syms s
+    symG_s = sys2sym(sysG{i_part,i_pole})
+    % find steady state value
+    vss = double(limit(symG_s, s, 0))
+    % normalize sysG to steady state value
+    norm_sysG = (sysG{i_part,i_pole} / vss)
+    sysG{i_part,i_pole} = norm_sysG;
 end % for i_pole=2:N_SYS(i_part)
 
 %% systems for part III 02 analysis
