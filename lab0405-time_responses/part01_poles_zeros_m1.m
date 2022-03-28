@@ -1,12 +1,15 @@
 %%
-% Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/part01_lin_analysis_m1.m
-% Displays each function's poles and each group of linear system analyses.
+% Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/part01_poles_zeros_m1.m
+% Displays each function's poles for part I.
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-22t12:30Q
+% When      : 2022-03-28t02:37Q
 % For       : ECE 3413
-% Version   : 1.0.4
+% Version   : 1.1.0
 %
 % CHANGELOG :
+%   v1.1.0 - 2022-03-28t02:37Q
+%       pole/zero map, pole table separated from linear analysis
+%
 %   v1.0.4 - 2022-03-22t12:30Q
 %       pole table
 %
@@ -23,14 +26,6 @@
 %       started linear analysis
 
 clear
-
-%% debug modes
-global DO_SKIP_PART_MENU
-DO_SKIP_PART_MENU = true
-
-%% constants
-global PART_SENTINEL
-PART_SENTINEL = -1
 
 %% parameters for part I 02-04 analysis
 part0102_reals_m1
@@ -98,13 +93,6 @@ end % for i_part
 %% display tfG
 tfG
 
-%% open linear system analyzer for each part
-i_part = part_menu();       % initial choice
-while (i_part ~= -1)
-    linearSystemAnalyzer(tfG{i_part, 1:n_tfG(i_part)})
-    i_part = part_menu();   % ask again
-end % while ((i_part=part_menu()) ~= -1)
-
 %% show pole table
 pole_2nd_ord_table = cell2table(poles_0102_0104, 'VariableNames', [ ...
     "tf a pole+" "tf a pole-" "tf b,d,f pole+" "tf b,d,f pole-" ...
@@ -113,56 +101,3 @@ pole_2nd_ord_table = cell2table(poles_0102_0104, 'VariableNames', [ ...
 
 %% report done
 disp('Done.')
-
-%% accepts an exercise number
-function i_choice = part_menu()
-    global  DO_SKIP_PART_MENU  PART_SENTINEL
-    % check whether to skip
-    if (DO_SKIP_PART_MENU)
-        i_choice = PART_SENTINEL;
-        return
-    end % if (DO_SKIP_PART_MENU)
-
-    % menu options
-    options = [ ...
-        "First-Order Systems" ...
-        "Variable Real Parts" ...
-        "Variable Imaginary Parts" ...
-        "Variable Natural Frequencies" ...
-    ];
-    [~, N_OPTIONS] = size(options);
-
-    % loop until valid choice
-    i_choice = prompt();
-    while (~is_valid(i_choice))
-        disp(newline)
-        disp('Illegal option: please try again.')
-        i_choice = prompt();
-    end % while (~is_valid(i_choice))
-
-    % repeated prompt
-    function i_choice = prompt()
-        disp('Exercises:')
-        for i_option=1:N_OPTIONS
-            disp(join(['    ' i_option '. ' options(i_option)], ''))
-        end % for option
-        disp(join(['   ' string(PART_SENTINEL) '. exit'], ''))
-        % allow user input
-        i_choice = input('Choose: ');
-    end % function prompt()
-
-    function flag = is_valid(i_choice)
-        if (i_choice==PART_SENTINEL)
-            % exit option
-            flag = true;
-        elseif (any(i_choice==1:N_OPTIONS))
-            % non-exit menu option: show option
-            disp(join(['Choice: ' options(i_choice)], ''))
-            flag = true;
-        else
-            % illegal option: ask again
-            flag = false;
-        end % if (any(i_choice==1:N_OPTIONS)) ||
-            %       (i_choice==PART_SENTINEL) ||
-    end % function is_valid(i_choice)
-end % function part_menu()
