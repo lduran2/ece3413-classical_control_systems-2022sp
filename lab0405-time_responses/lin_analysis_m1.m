@@ -73,38 +73,44 @@ for i_part=2:N_PARTS
     end % for i_tf
 end % for i_part
 
-%% base system for parts III 01, 02
-G3_base = tf([25], [1 4 25])
+%% GCF for parts III 01, 02
+G3_GCF = tf([25], [1 4 25])
 
 %% systems for part III 01 analysis
 N_PARTS = N_PARTS + 1, i_part = N_PARTS
 % the additional poles
 part0301_poles = [-200, -20, -10, -2]
 [~, N_SYS(i_part)] = size(part0301_poles)
+N_SYS(i_part) = N_SYS(i_part) + 1
+% add the GCF
+sysG{i_part,1} = G3_GCF
 % loop through poles
-for i_pole=1:N_SYS(i_part)
+for i_pole=2:N_SYS(i_part)
     % add pole to the G3 base
-    pole = part0301_poles(i_pole)
-    sysG{i_part,i_pole} = G3_base * zpk([1], pole, 1);
-end % for i_pole=1:N_SYS(i_part)
+    p = part0301_poles(i_pole - 1)
+    sysG{i_part,i_pole} = G3_GCF * zpk([1], p, 1);
+end % for i_pole=2:N_SYS(i_part)
 
 %% systems for part III 02 analysis
 N_PARTS = N_PARTS + 1, i_part = N_PARTS
 % the additional zeros
 part0302_zeros = [-200, -50, -20, -10, -5, -2]
 [~, N_SYS(i_part)] = size(part0302_zeros)
-% loop through zeros
-for i_zero=1:N_SYS(i_part)
-    % add pole to the G3 base
-    zero = part0302_zeros(i_zero)
-    sysG{i_part,i_zero} = G3_base * zpk(zero, [], 1);
+N_SYS(i_part) = N_SYS(i_part) + 1
+% add the GCF
+sysG{i_part,1} = G3_GCF
+% loop through poles
+for i_zero=2:N_SYS(i_part)
+    % add zero to the G3 base
+    z = part0302_zeros(i_zero - 1)
+    sysG{i_part,i_zero} = G3_GCF * zpk(z, [], 1);
 end % for i_zero=1:N_SYS(i_part)
 
 %% display tfG
 sysG
 
 %% open linear system analyzer for each part
-i_part = part_menu();       % initial choice
+i_part = part_menu(N_SYS);  % initial choice
 while (i_part ~= -1)
     linearSystemAnalyzer(sysG{i_part, 1:N_SYS(i_part)})
     i_part = part_menu();   % ask again
@@ -114,8 +120,8 @@ end % while ((i_part=part_menu()) ~= -1)
 disp('Done.')
 
 %% accepts an exercise number
-function i_choice = part_menu()
-    global  DO_SKIP_PART_MENU  PART_SENTINEL
+function i_choice = part_menu(n_sys)
+    global  DO_SKIP_PART_MENU  PART_SENTINEL  n_sys
     % check whether to skip
     if (DO_SKIP_PART_MENU)
         i_choice = PART_SENTINEL;
@@ -145,7 +151,10 @@ function i_choice = part_menu()
     function i_choice = prompt()
         disp('Exercises:')
         for i_option=1:N_OPTIONS
-            disp(join(['    ' i_option '. ' options(i_option)], ''))
+            disp(join([ ...
+                '    ' i_option '. ' options(i_option) ...
+                ' (' string(n_sys(i_option)) ')'
+            ], ''))
         end % for option
         disp(join(['   ' string(PART_SENTINEL) '. exit'], ''))
         % allow user input

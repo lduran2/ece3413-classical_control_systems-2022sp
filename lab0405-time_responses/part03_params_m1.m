@@ -10,6 +10,8 @@
 %   v1.0.0 - 2022-03-28t10:12Q
 %       parameters for part III 01, 02
 
+INIT_I_PART = 7
+
 %% zero padding
 % temporarily store G_b and G_a
 if (exist('G_b') && exist('G_a'))
@@ -34,7 +36,7 @@ G_a(1:N_OLD_PARTS, 1:N_OLD_SYS) = old_G_a
 
 %% part III 02.
 % update indices
-i_part = 5
+i_part = INIT_I_PART
 i_b = 1
 % multiplicity of new values
 N_SYS(i_part) = sum(new_b(i_b, :) ~= 0)
