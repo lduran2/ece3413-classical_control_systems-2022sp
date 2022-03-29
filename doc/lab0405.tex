@@ -2,9 +2,9 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/doc/lab0405.tex
 % Lab report
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-28t22:09Q
+% When      : 2022-03-29t00:05Q
 % For       : ECE 3413
-% Version   : 1.1.0
+% Version   : 1.2.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -29,6 +29,11 @@
             & Comments
     \\*
     \midrule
+        1.2.0
+            & Leomar Durán
+            & 2022-03-29t00:05Q
+            & explaining model of \(G_1(\cdot;\cdot)\)
+    \\*
         1.1.0
             & Leomar Durán
             & 2022-03-28t22:09Q
@@ -65,8 +70,29 @@ the impulse response, step response, ramp response, and parabola response. The M
 
 \section{Procedure}
 
-\begin{adjustwidth}{0.5in}{0.5in}
+\begin{adjustwidth}{0.5in}{0in}
     \subsection{Part I}
+        In Part I, we will practice by first performing modifications to the parametric first-order system
+        \[
+            G_1\brao{s; a} := \frac{a}{s + a},
+        \]
+        and analyze the resulting effects with the \mintinline{matlab}{linearSystemAnalyzer}.
+
+        We will analyze \(G_1\brao{s;a}\) for \(a \in \brac{1..4}\). These systems are modelled by the Simulink subsystem in Fig. \ref{fig:1st order pole}.
+
+        \begin{figure}
+            \centering
+            \includegraphics[
+                page=2,%
+                trim=3.375in 2.125in 3.375in 2.0625in,%
+                clip,
+                width=0.75\linewidth%
+            ]{lab0405/fig/time_response_slx1.pdf}
+            \caption{Part I: Manipulating the pole in a First-Order System.}
+            \label{fig:1st order pole}
+        \end{figure}
+
+        Effectively, this is manipulation of the pole of \(G_1\brao{s;a}\). The gain is also changed simultaneously to keep the steady state value at \(1\). The steady state value is specified by \(\lim_{s\to0} G(s)\).
     \subsection{Part II}
     \subsection{Part III}
 \end{adjustwidth}
