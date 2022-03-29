@@ -2,9 +2,9 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/doc/lab0405.tex
 % Lab report
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-29t06:12Q
+% When      : 2022-03-29t15:20Q
 % For       : ECE 3413
-% Version   : 1.3.0
+% Version   : 1.4.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -29,6 +29,11 @@
             & Comments
     \\*
     \midrule
+        1.4.0
+            & Leomar Durán
+            & 2022-03-29t15:20Q
+            & second-order peak time, overshoot
+    \\*
         1.3.0
             & Leomar Durán
             & 2022-03-29t06:12Q
@@ -117,26 +122,6 @@ the impulse response, step response, ramp response, and parabola response. The M
         \]
         Specifically, we will change independently the real \(x\) and imaginary \(y\) parts of the pole \(x + y\mathcal{j}\), and the natural frequency \(\omega_n\), which relates to the pole \(2\zeta\omega_n\).
 
-        The analysis for the second-order systems in Part I, all use models with the form described in Fig. \ref{fig:2nd order pole}. However, with the values in \(G_b\) and \(G_a\) changed depending on the analysis.
-
-        In exercises 2 and 3 respectively, we vary the real part of the pole and the imaginary part of the pole, respectively, each by multiplying it by a coefficient.
-
-        Well, the poles of \(G_2\brao{s; a,b}\) are
-        \[
-            \mathbf{s} = \brac*{
-                \begin{matrix}
-                    1 & 1 \\* 1 & -1 \\*
-                \end{matrix}
-            }\brac*{
-                \begin{matrix}
-                    \brao*{\frac{-a}{2}} \\*
-                    \brao*{
-                        \frac{\sqrt{4b - a^2}}{2}
-                    } \mathcal{j} \\*
-                \end{matrix}
-            }.
-        \]
-
         \begin{figure}
             \centering
             \includegraphics[%
@@ -149,23 +134,142 @@ the impulse response, step response, ramp response, and parabola response. The M
             \label{fig:2nd order pole}
         \end{figure}
 
-        Now let \(k, l \in \mathbb{F}\). We set
+        The analysis for the second-order systems in Part I, all use models with the form described in Fig. \ref{fig:2nd order pole}. However, with the values in \(G_b\) and \(G_a\) changed depending on the analysis.
+
+        In exercises 2 and 3 respectively, we vary the real part of the pole and the imaginary part of the pole, respectively, each by multiplying it by a coefficient.
+
+        Well, the poles of \(G_2\brao{s; a,b} = \frac{B}A\brao{s}\) have
         \[
-            \setprime{\mathbf{s}} = \brac*{
+            \begin{aligned}
+                \brao*{
+                    \mathfrak{Re}\Brac{s} \middle| A(s) = 0%
+                    \,
+                } &{}= \brao*{\frac{-a}{2}}\brac*{
+                    \begin{matrix}
+                        1 \\* 1 \\*
+                    \end{matrix}
+                },
+            \\*
+                \brao*{
+                    \mathfrak{Im}\Brac{s} \middle| A(s) = 0%
+                    \,
+                } &{}= \brao*{\frac{\sqrt{4b - a^2}}{2}}\brac*{
+                    \begin{matrix}
+                        1 \\* -1 \\*
+                    \end{matrix}
+                }.
+            \\*
+            \end{aligned}
+        \]
+
+        Now let \(
+            k, l \in \mathbb{C},
+            \setprime{A} : \mathbb{C} \to \mathbb{C}
+        \), s.t.
+        \(
+            \brao*{\mathfrak{Re}\Brac{s} \middle| \setprime{A}\brao{s} = 0} = k\brao*{\mathfrak{Re}\Brac{s} \middle| A\brao{s} = 0}
+        \),
+        \(
+            \brao*{\mathfrak{Im}\Brac{s} \middle| \setprime{A}\brao{s} = 0} = l\brao*{\mathfrak{Im}\Brac{s} \middle| A\brao{s} = 0}
+        \),
+        then
+        \[
+            \setprime{{\vec{s}\,{\vphantom{1^1}}}}
+            := \brao*{s \middle| \setprime{A}\brao{s} = 0}
+            = \brac*{
                 \begin{matrix}
-                    1 & 1 \\* 1 & -1 \\*
+                    1 & \mathcal{j} \\* 1 & -\mathcal{j} \\*
                 \end{matrix}
             }\brac*{
                 \begin{matrix}
                     k\brao*{\frac{-a}{2}} \\*
-                    l\brao*{
-                        \frac{\sqrt{4b - a^2}}{2}
-                    } \mathcal{j} \\*
+                    l\sqrt{b - \brao*{\frac{a}2}^2}
+                    \\*
                 \end{matrix}
             }.
         \]
-        These are the roots of \(s^2 + kas + (k^2 - L^2)a^2/4 + L^2 b\).
-        
+        These are the roots of \(
+            s^2 + kas + \brao*{l^2 b + \brao*{k^2 - l^2}\brao*{\frac{a}2}^2}
+            = s^2 + 2\zeta\omega_ns + \omega_n^2
+        \).
+        So \(2\zeta\omega_n = ka\)
+        and \(\omega_n^2 = \brao{k^2 - l^2}\frac{a^2}4 + l^2 b\).
+        Thus the natural frequency and damping ratio respectively
+        \[
+            \begin{gathered}
+                \omega_n = \sqrt{l^2 b + \brao*{k^2 - l^2}\brao*{\frac{a}2}^2},
+            \\*
+                \zeta = \frac{ka}{2\omega_n}.
+            \\*
+            \end{gathered}
+        \]
+
+        % Let's further multiply
+        % \(\setprime[2]{\omega_n} = m\omega_n\).
+
+        % In which case, these are the roots of \(
+            % s^2 + kas + m\brao*{\brao*{k^2 - l^2}\frac{a^2}4 + l^2 b}
+            % = 2\zeta\omega_ns + \setprime[2]{\omega_n^2}
+        % \).
+        % \[
+            % \begin{gathered}
+                % \setprime[2]{\omega_n} = m\sqrt{\brao{k^2 - l^2}\frac{a^2}4 + l^2 b},
+            % \\*
+                % \zeta = \frac{ka}{2\setprime[2]{\omega_n^2}}.
+            % \\*
+            % \end{gathered}
+        % \]
+
+        % From this, we can see that
+        % \begin{enumerate}
+            % \item
+                % real part through \(k\) is proportional to the natural frequency \(w_n\), but changing it maintains the damping ratio \(\zeta\) at a similar value. Thus
+                % \begin{enumerate}
+                    % \item
+                        % peak time \(T_p\) and settling time \(T_s\) decrease as the real part increases.
+                    % \item
+                        % there is very little effect on overshoot \(\si\percent OS\) as the real part changes.
+                % \end{enumerate}
+            % \item
+                % it must be that \(b > \brao{l^{-2} - 1}\hfrac{a^2}4\). So the imaginary part through \(l\) is proportional to the natural frequency \(w_n\) and inversely proportional to the  the damping ratio \(\zeta\).
+        % \end{enumerate}
+
+        Then the new peak time for \(s \in \setprime{\mathbf{s}}\),
+        \[
+            \setprime{T}_p
+            := \frac\pi{\abs{\mathfrak{Im}\Brac{s}}}
+            = \frac\pi{l\sqrt{b - \brao*{\frac{a}2}^2}}
+            = \frac{1}l \brao*{\frac\pi{\sqrt{b - \brao*{\frac{a}2}^2}}}
+            = \frac{T_p}l.
+        \].
+
+        We see that the coefficient of the real part \(k\) has no effect on the peak time. However, the coefficient of the imaginary part \(l\) is inversely proportional to peak time.
+
+        Now the overshoot
+        \[
+                \setprime{OS}
+                := \exp\brao*{\pi\brao*{\frac{\mathfrak{Re}}{\abs{\mathfrak{Im}}}}\Brac{s}}
+                = \exp\brao*{\brao\pi\frac
+                    {k\brao*{\frac{-a}2}}
+                    {l\sqrt{b - \brao*{\frac{a}2}^2}}
+                }
+                = \exp\brao*{\frac{k}l\brao*{\brao\pi\frac
+                    {\brao*{\frac{-a}2}}
+                    {\sqrt{b - \brao*{\frac{a}2}^2}}
+                }}
+        \]
+        is necessary and sufficient for
+        \[
+            \ln\brao{\setprime{OS}} = \frac{k}l\ln\brao*{OS}.
+        \]
+        Thus we see that \(\hfrac{k}l\) is proportional to the logarithm of the overshoot.
+
+        Finally, the settling time
+        \[
+            \setprime{T}_s
+            := \frac{\ln\brao*{\SI2\percent}}{\mathfrak{Re}\Brac{s}}
+        \]
+
     \subsection{Part II}
     \subsection{Part III}
 \end{adjustwidth}

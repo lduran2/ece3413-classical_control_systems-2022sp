@@ -1,4 +1,4 @@
-[1%%
+%%
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/lab0405-time_responses/time_response_params_m1.m
 % Clears workspace and runs the scripts for parameters for the Time
 % Response model.

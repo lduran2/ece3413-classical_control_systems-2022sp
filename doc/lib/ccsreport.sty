@@ -4,7 +4,7 @@
 \usepackage{amsmath,amssymb}
 \usepackage{extarrows}
 \usepackage{dutchcal}
-\usepackage{mathbbol}
+%\usepackage{mathbbol}
 
 \usepackage{titling}
 
@@ -41,12 +41,18 @@
 \usepackage{minted}
 \usepackage{tabto}
 
+\usepackage{siunitx}
+
 % math delimiters
 \usepackage{mathtools}%
 \DeclarePairedDelimiter\brao()%
 \DeclarePairedDelimiter\brac[]%
+\DeclarePairedDelimiter\Brac\{\}%
+\DeclarePairedDelimiter\abs||%
 
 \let\tg\textgreater
+
+\newcommand*\hfrac[2]{#1/#2}
 
 % sets prime on an expression
 \usepackage{adjustbox}
