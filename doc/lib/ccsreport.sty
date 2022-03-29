@@ -1,7 +1,15 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{changepage}
 
+\usepackage{amsmath,amssymb}
+
 \usepackage{titling}
+
+% table width, rules, row spacing
+\usepackage{tabularx}
+\usepackage{booktabs}
+\newcommand*\ra[1]{\renewcommand*\arraystretch{#1}}%
+\ra{1.27273}
 
 \usepackage{titlesec}
 \usepackage{soul}
@@ -11,9 +19,11 @@
 % underline section titles
 \titleformat{\section}{\normalfont\Large\bfseries}{\titlelabelformat}{0pt}{\ul}
 
+\usepackage[inline]{enumitem}
+
 \usepackage{changepage}
 
-\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{xcolor}
 \definecolor{hrefBlue}{RGB}{5,99,193}
 \definecolor{BlueDarker25}{RGB}{47,84,150}
 \definecolor{BlueDarker50}{RGB}{31,55,99}
