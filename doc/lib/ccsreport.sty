@@ -1,0 +1,30 @@
+\usepackage[margin=1in]{geometry}
+\usepackage{changepage}
+
+\usepackage{titling}
+
+\usepackage{titlesec}
+\usepackage{soul}
+\newcommand*\titlelabelformat{\llap{\thetitle\quad}}
+% hanging indent all titles
+\titlelabel{\titlelabelformat}
+% underline section titles
+\titleformat{\section}{\normalfont\Large\bfseries}{\titlelabelformat}{0pt}{\ul}
+
+\usepackage{changepage}
+
+\usepackage[usenames,dvipsnames]{xcolor}
+\definecolor{hrefBlue}{RGB}{5,99,193}
+\definecolor{BlueDarker25}{RGB}{47,84,150}
+\definecolor{BlueDarker50}{RGB}{31,55,99}
+\definecolor{BlueGray}{RGB}{68,84,106}
+
+\usepackage{lib/nonfloatenvirons}
+\usepackage{subcaption}
+\usepackage[font={scriptsize,sf,it,color=BlueGray}]{caption}
+\usepackage{graphicx}
+\usepackage{minted}
+
+\usepackage{tabto}
+
+\let\tg\textgreater
