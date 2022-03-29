@@ -2,6 +2,9 @@
 \usepackage{changepage}
 
 \usepackage{amsmath,amssymb}
+\usepackage{extarrows}
+\usepackage{dutchcal}
+\usepackage{mathbbol}
 
 \usepackage{titling}
 
@@ -44,3 +47,18 @@
 \DeclarePairedDelimiter\brac[]%
 
 \let\tg\textgreater
+
+% sets prime on an expression
+\usepackage{adjustbox}
+\newcommand{\setprime}[2][1]{%
+    {#2}^{%
+        \raisebox{1pt}{%
+            \scalebox{0.5}{%
+                \itshape\sffamily\uppercase%
+                \expandafter{%
+                    \romannumeral#1%
+                }%
+            }%
+        }
+    }%
+}%
