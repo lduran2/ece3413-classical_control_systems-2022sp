@@ -14,11 +14,27 @@
 \newcommand*\ra[1]{\renewcommand*\arraystretch{#1}}%
 \ra{1.3182}
 
+% long tables
+\usepackage{pdflscape}
+\usepackage{tabularray}
+\UseTblrLibrary{booktabs}
+\NewTableCommand\dashrule{\hline[0.25pt,dashed]}%
+
 \usepackage{xcolor}
+
 \definecolor{hrefBlue}{RGB}{5,99,193}
 \definecolor{BlueDarker25}{RGB}{47,84,150}
 \definecolor{BlueDarker50}{RGB}{31,55,99}
 \definecolor{BlueGray}{RGB}{68,84,106}
+
+\definecolor{legend1}{RGB}{0,114,189}
+\definecolor{legend2}{RGB}{217,83,25}
+\definecolor{legend3}{RGB}{237,117,32}
+\definecolor{legend4}{RGB}{126,47,142}
+\definecolor{legend5}{RGB}{119,172,48}
+\definecolor{legend6}{RGB}{99,198,240}
+\definecolor{legend7}{RGB}{99,198,240}
+\definecolor{legend7}{RGB}{174,49,73}
 
 \usepackage[bookmarks]{hyperref}
 \usepackage{titlesec}
@@ -42,7 +58,7 @@
 \usepackage{graphicx}
 \usepackage{pdfpages}
 \usepackage{minted}
-\usepackage{tabto}
+% \usepackage{tabto}
 
 \usepackage{siunitx}
 

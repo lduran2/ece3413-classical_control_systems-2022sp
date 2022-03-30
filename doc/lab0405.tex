@@ -2,9 +2,9 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/doc/lab0405.tex
 % Lab report
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-30t11:13Q
+% When      : 2022-03-30t14:37Q
 % For       : ECE 3413
-% Version   : 1.10.0
+% Version   : 1.11.1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -29,6 +29,16 @@
             & Comments
     \\*
     \midrule
+        1.11.1
+            & Leomar Durán
+            & 2022-03-30t14:37Q
+            & made long table a little nicer
+    \\*
+        1.11.0
+            & Leomar Durán
+            & 2022-03-30t12:57Q
+            & all transfer functions in table
+    \\*
         1.10.0
             & Leomar Durán
             & 2022-03-30t11:13Q
@@ -744,6 +754,192 @@ the impulse response, step response, ramp response, and parabola response. The M
 \end{adjustwidth}
 
 \section{Results}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{lab0405/fig/lti-0101-first_order.eps}
+    \caption{Linear analysis of the first order system in Part I.}
+    \label{fig:lti part 01 first order}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{lab0405/fig/lti-0101-first_order.eps}
+    \caption{Linear analysis of variation of real and complex pole parts in the second order system in Part I.}
+    \label{fig:lti part 01 real}
+\end{figure}
+
+\begin{landscape}
+  \centering
+  \ra{2.3182}
+  \begin{longtblr}[%
+        caption = {The features of the variations of the systems in Parts I and III.},%
+        label={tab:varying features in parts I and II}%
+  ]{%
+        colspec={@{}*4l*4rl@{}},%
+        rowhead={2}%
+  }
+  \toprule
+    Independent & Value 1 & Value 2 & Transfer
+        & Settling time
+        & Rise time
+        & Peak time
+        & Overshoot
+        & Plot
+  \\*
+    variables
+        &         &         & function \(G\brao{s}\)
+        & \(T_s \brac{\si\percent}\)
+        & \(T_r \brac{\si\percent}\)
+        & \(T_p \brac{\si\percent}\)
+        & \(OS \brac{\si\percent}\)
+  \\*
+  \midrule
+    \(\brao{a}\)
+        & \(1\)   &         & \(\hfrac1{\brao{s+1}}\)
+        & \(\num{0.0381}\)
+        & \(\num{2.085}\) % = 2.21 - 0.125
+        & \(\num{5.64}\)
+        & \(\num{0.000}\)
+        & {\color{legend1}Fig. \ref{fig:lti part 01 first order}}
+  \\*
+        & \(2\)   &         & \(\hfrac2{\brao{s+2}}\)
+        & \(\num{0.0104}\)
+        & \(\num{1.0803}\) % = 1.14 - 0.0597
+        & \(\num{2.86}\)
+        & \(\num{0.000}\)
+        & {\color{legend2}Fig. \ref{fig:lti part 01 first order}}
+  \\*
+        & \(3\)   &         & \(\hfrac3{\brao{s+3}}\)
+        & \(\num{0.0104}\)
+        & \(\num{0.7405}\) % = 0.767 - 0.0265
+        & \(\num{1.93}\)
+        & \(\num{0.000}\)
+        & {\color{legend3}Fig. \ref{fig:lti part 01 first order}}
+  \\*
+        & \(4\)   &         & \(\hfrac4{\brao{s+4}}\)
+        & \(\num{0.0104}\)
+        & \(\num{0.544}\) % = 0.555 - 0.011
+        & \(\num{1.39}\)
+        & \(\num{0.000}\)
+        & {\color{legend4}Fig. \ref{fig:lti part 01 first order}}
+  \\*
+  \midrule
+    \(\brao{k,l} : s \gets kx \pm ly\mathcal{j}\)
+        & \(1\) & \(1\)     & \(\hfrac{25}{\brao{s^2 + 4s + 25}}\)
+        & \(\num{0.0511}\)
+        & \(\num{0.2885}\) % = 0.3935 - 0.105
+        & \(\num{0.684}\)
+        & \(\num{25.1251}\) % = (1.25 - 0.999)/0.999
+        & {\color{legend1}Fig. \ref{fig:lti part 01 real}}
+  \\*
+        & \(2\) & \(1\)     & \(\hfrac{37}{\brao{s^2 + 8s + 37}}\)
+        & {\color{legend2}Fig. \ref{fig:lti part 01 real}}
+  \\*
+        & \(\hfrac12\) & \(1\)     & \(\hfrac{22}{\brao{s^2 + 2s + 22}}\)
+        & {\color{legend3}Fig. \ref{fig:lti part 01 real}}
+  \\*
+        & \(1\) & \(1\)     & \(\hfrac{25}{\brao{s^2 + 4s + 25}}\)
+        & {\color{legend1}Fig. \ref{fig:lti part 01 imaginary}}
+  \\*
+        & \(1\) & \(2\)     & \(\hfrac{88}{\brao{s^2 + 4s + 88}}\)
+        & {\color{legend2}Fig. \ref{fig:lti part 01 imaginary}}
+  \\*
+        & \(1\) & \(4\)     & \(\hfrac{340}{\brao{s^2 + 4s + 340}}\)
+        & {\color{legend3}Fig. \ref{fig:lti part 01 imaginary}}
+  \\*
+  \midrule
+    \(\brao{m} : \omega_n \gets m\omega_n\)
+        & \(1\) &           & \(\hfrac{25}{\brao{s^2 + 4s + 25}}\)
+        & {\color{legend1}Fig. \ref{fig:lti part 01 natural frequency}}
+  \\*
+        & \(2\) &           & \(\hfrac{100}{\brao{s^2 + 8s + 100}}\)
+        & {\color{legend2}Fig. \ref{fig:lti part 01 natural frequency}}
+  \\*
+        & \(4\) &           & \(\hfrac{400}{\brao{s^2 + 16s + 400}}\)
+        & {\color{legend3}Fig. \ref{fig:lti part 01 natural frequency}}
+  \\*
+  \midrule
+    \(\brao{p} : \operatorname{norm}\Brac{\hfrac{G\brao{s}}{\brao{s - p}}}\)
+        & \(-200\) &        & \(\hfrac{5000}{\brao{\brao{s + 200}\brao{s^2 + 4s + 25}}}\)
+        & {\color{legend2}Fig. \ref{fig:lti part 03 poles}}
+  \\*
+        & \(-20\) &         & \(\hfrac{500}{\brao{\brao{s + 20}\brao{s^2 + 4s + 25}}}\)
+        & {\color{legend3}Fig. \ref{fig:lti part 03 poles}}
+  \\*
+        & \(-10\) &         & \(\hfrac{250}{\brao{\brao{s + 10}\brao{s^2 + 16s + 25}}}\)
+        & {\color{legend4}Fig. \ref{fig:lti part 03 poles}}
+  \\*
+        & \(-2\) &          & \(\hfrac{250}{\brao{\brao{s + 2}\brao{s^2 + 16s + 25}}}\)
+        & {\color{legend5}Fig. \ref{fig:lti part 03 poles}}
+  \\*
+  \midrule
+    \(\brao{r} : \operatorname{norm}\Brac{{G\brao{s}}{\brao{s - r}}}\)
+        & \(-200\) &        & \(\hfrac{0.125\brao{s + 200}}{\brao{{s^2 + 4s + 25}}}\)
+        & {\color{legend2}Fig. \ref{fig:lti part 03 poles}}
+  \\*
+        & \(-50\) &        & \(\hfrac{0.5\brao{s + 50}}{\brao{{s^2 + 4s + 25}}}\)
+        & {\color{legend3}Fig. \ref{fig:lti part 03 poles}}
+  \\*
+        & \(-20\) &        & \(\hfrac{1.25\brao{s + 20}}{\brao{{s^2 + 4s + 25}}}\)
+        & {\color{legend4}Fig. \ref{fig:lti part 03 poles}}
+  \\*
+        & \(-10\) &        & \(\hfrac{2.5\brao{s + 10}}{\brao{{s^2 + 4s + 25}}}\)
+        & {\color{legend5}Fig. \ref{fig:lti part 03 poles}}
+  \\*
+        & \(-5\) &        & \(\hfrac{5\brao{s + 5}}{\brao{{s^2 + 4s + 25}}}\)
+        & {\color{legend6}Fig. \ref{fig:lti part 03 poles}}
+  \\*
+        & \(-2\) &        & \(\hfrac{12.5\brao{s + 2}}{\brao{{s^2 + 4s + 25}}}\)
+        & {\color{legend7}Fig. \ref{fig:lti part 03 poles}}
+  \\*
+  \midrule
+    \(\brao{a, b} : G\brao{s} \times\!\!\gets \dfrac{\brao{\hfrac{b}a}\brao{s + a}}{s + b}\)
+        & \(3\) & \(3\)  & \(\dfrac{25\brao{s + 3}}{\brao{s + 3}\brao{s^2 + 4s + 25}}\)
+        & {\color{legend1}Fig. \ref{fig:lti part 03 param 1}}
+  \\*
+        & \(3\) & \(3.01\)  & \(\dfrac{25.083\brao{s + 3}}{\brao{s + 3.01}\brao{s^2 + 4s + 25}}\)
+        & {\color{legend2}Fig. \ref{fig:lti part 03 param 1}}
+  \\*
+        & \(3\) & \(3.1\)  & \(\dfrac{25.833\brao{s + 3}}{\brao{s + 3.1}\brao{s^2 + 4s + 25}}\)
+        & {\color{legend3}Fig. \ref{fig:lti part 03 param 1}}
+  \\*
+        & \(3\) & \(3.3\)  & \(\dfrac{27.5\brao{s + 3}}{\brao{s + 3.3}\brao{s^2 + 4s + 25}}\)
+        & {\color{legend4}Fig. \ref{fig:lti part 03 param 1}}
+  \\*
+        & \(3\) & \(3.5\)  & \(\dfrac{29.167\brao{s + 3}}{\brao{s + 3.5}\brao{s^2 + 4s + 25}}\)
+        & {\color{legend5}Fig. \ref{fig:lti part 03 param 1}}
+  \\*
+        & \(3\) & \(4\)  & \(\dfrac{33.333\brao{s + 3}}{\brao{s + 4}\brao{s^2 + 4s + 25}}\)
+        & {\color{legend6}Fig. \ref{fig:lti part 03 param 1}}
+  \\*[2.5pt]
+  \dashrule
+    % \(\brao{a, b} : G\brao{s} \times\!\!\gets \dfrac{\brao{\hfrac{b}a}\brao{s + a}}{s + b}\)
+        & \(30\) & \(30\)  & \(\dfrac{2500\brao{s + 30}}{\brao{s + 30}\brao{s^2 + 40s + 2500}}\)
+        & {\color{legend1}Fig. \ref{fig:lti part 03 param 2}}
+  \\*
+        & \(30\) & \(30.01\)  & \(\dfrac{2500.8\brao{s + 30}}{\brao{s + 30.01}\brao{s^2 + 40s + 2500}}\)
+        & {\color{legend2}Fig. \ref{fig:lti part 03 param 2}}
+  \\*
+        & \(30\) & \(30.1\)  & \(\dfrac{2508.3\brao{s + 30}}{\brao{s + 30.1}\brao{s^2 + 40s + 2500}}\)
+        & {\color{legend3}Fig. \ref{fig:lti part 03 param 2}}
+  \\*
+        & \(30\) & \(30.5\)  & \(\dfrac{2541.7\brao{s + 30}}{\brao{s + 30.5}\brao{s^2 + 40s + 2500}}\)
+        & {\color{legend4}Fig. \ref{fig:lti part 03 param 2}}
+  \\*
+        & \(30\) & \(31\)  & \(\dfrac{2583.3\brao{s + 30}}{\brao{s + 31}\brao{s^2 + 40s + 2500}}\)
+        & {\color{legend5}Fig. \ref{fig:lti part 03 param 2}}
+  \\*
+        & \(30\) & \(35\)  & \(\dfrac{2916.7\brao{s + 30}}{\brao{s + 35}\brao{s^2 + 40s + 2500}}\)
+        & {\color{legend6}Fig. \ref{fig:lti part 03 param 2}}
+  \\*
+        & \(30\) & \(40\)  & \(\dfrac{3333.3\brao{s + 30}}{\brao{s + 40}\brao{s^2 + 40s + 2500}}\)
+        & {\color{legend7}Fig. \ref{fig:lti part 03 param 2}}
+  \\*
+  \bottomrule
+  \end{longtblr}
+\end{landscape}
+
 \section{Discussion}
 
 \newpage
