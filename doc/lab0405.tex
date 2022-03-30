@@ -2,9 +2,9 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/doc/lab0405.tex
 % Lab report
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-30t00:45Q
+% When      : 2022-03-30t02:05Q
 % For       : ECE 3413
-% Version   : 1.7.2
+% Version   : 1.8.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -29,6 +29,11 @@
             & Comments
     \\*
     \midrule
+        1.8.0
+            & Leomar Durán
+            & 2022-03-30t02:05Q
+            & finished adding scripts, related 
+    \\*
         1.7.2
             & Leomar Durán
             & 2022-03-30t00:45Q
@@ -210,21 +215,24 @@ the impulse response, step response, ramp response, and parabola response. The M
             \brao*{\mathfrak{Im}\Brac{s} \middle| \setprime{A}\brao{s} = 0} = l\brao*{\mathfrak{Im}\Brac{s} \middle| A\brao{s} = 0}
         \),
         then
-        \[
-            \setprime{{\vec{s}\,{\vphantom{1^1}}}}
-            := \brao*{s \middle| \setprime{A}\brao{s} = 0}
-            = \brac*{
-                \begin{matrix}
-                    1 & \mathcal{j} \\* 1 & -\mathcal{j} \\*
-                \end{matrix}
-            }\brac*{
-                \begin{matrix}
-                    k\brao*{\frac{-a}{2}} \\*
-                    l\sqrt{b - \brao*{\frac{a}2}^2}
-                    \\*
-                \end{matrix}
-            }.
-        \]
+        \newcommand*\realimaginarypoles{%
+            \[
+                \setprime{{\vec{s}\,{\vphantom{1^1}}}}
+                := \brao*{s \middle| \setprime{A}\brao{s} = 0}
+                = \brac*{
+                    \begin{matrix}
+                        1 & \mathcal{j} \\* 1 & -\mathcal{j} \\*
+                    \end{matrix}
+                }\brac*{
+                    \begin{matrix}
+                        k\brao*{\frac{-a}{2}} \\*
+                        l\sqrt{b - \brao*{\frac{a}2}^2}
+                        \\*
+                    \end{matrix}
+                }.
+            \]%
+        }%
+        \realimaginarypoles
         These are the roots of \(
             s^2 + kas + \brao*{l^2 b + \brao*{k^2 - l^2}\brao*{\frac{a}2}^2}
         \).
@@ -478,21 +486,24 @@ the impulse response, step response, ramp response, and parabola response. The M
         \]
 
         Well, let \(m \in \mathbb{C}, \setprime[2]A : \mathbb{C} \to \mathbb{C}\), s.t. the modified natural frequency \(\setprime[2]\omega_n = m\omega_n\). Then
-        \[
-            \setprime[2]{{\vec{s}\,{\vphantom{1^1}}}}
-            := \brao*{s \middle| \setprime[2]{A}\brao{s} = 0}
-            = \brac*{
-                \begin{matrix}
-                    1 & \mathcal{j} \\* 1 & -\mathcal{j} \\*
-                \end{matrix}
-            }\brao*{m\omega_n}\brac*{
-                \begin{matrix}
-                    -\zeta \\*
-                    \sqrt{1 - \zeta^2}
-                    \\*
-                \end{matrix}
-            }.
-        \]
+        \newcommand*\naturalfrequencypoles{%
+            \[
+                \setprime[2]{{\vec{s}\,{\vphantom{1^1}}}}
+                := \brao*{s \middle| \setprime[2]{A}\brao{s} = 0}
+                = \brac*{
+                    \begin{matrix}
+                        1 & \mathcal{j} \\* 1 & -\mathcal{j} \\*
+                    \end{matrix}
+                }\brao*{m\omega_n}\brac*{
+                    \begin{matrix}
+                        -\zeta \\*
+                        \sqrt{1 - \zeta^2}
+                        \\*
+                    \end{matrix}
+                }.
+            \]%
+        }%
+        \naturalfrequencypoles
         These are the roots of \(s^2 + 2\zeta\brao*{m\omega_n} + \brao*{m\omega_n}^2\).
 
         \paragraph{Peak time}
@@ -556,11 +567,66 @@ the impulse response, step response, ramp response, and parabola response. The M
         \paragraph{Summary}
         With the natural frequency, its coefficient is inversely proportional to peak time, settling time and rise time. However, it has no effect on the overshoot.
 
+        \subsubsection{Linear analysis}
+        The linear analysis is performed
+        using a REPL-style program
+        available in \ref{apx:linear analysis}.
+        This allows the user to choose
+        any of the systems modeled in this lab
+        and view its linear analysis.
+
+        Additionally, the overshoot, settling time, peak time and rise time are recorded in the Results.
+
+        \subsubsection{Pole locations}
+        To find the pole locations, we use the script in Appendix \ref{apx:part 01 pz map}.
+        However formulas for the poles have been described earlier in rectangular form and are provided again for convenience with the original poles.
+
+        \[
+            \vec{s}
+            := \brao*{s \middle| A\brao{s} = 0}
+            = \brac*{
+                \begin{matrix}
+                    1 & \mathcal{j} \\* 1 & -\mathcal{j} \\*
+                \end{matrix}
+            }\brac*{
+                \begin{matrix}
+                    \brao*{\frac{-a}{2}} \\*
+                    \sqrt{b - \brao*{\frac{a}2}^2}
+                    \\*
+                \end{matrix}
+            }
+            =\brac*{
+                \begin{matrix}
+                    1 & \mathcal{j} \\* 1 & -\mathcal{j} \\*
+                \end{matrix}
+            }\omega_n\brac*{
+                \begin{matrix}
+                    -\zeta \\*
+                    \sqrt{1 - \zeta^2}
+                    \\*
+                \end{matrix}
+            }.
+        \]%
+
+        \realimaginarypoles
+        \naturalfrequencypoles
+
     \subsection{Part II}
     For Part II, we use MATLAB to create the transient response plots and the pole-zero map.
+    The script is included in Appendix \ref{apx:part 03 transient responses}.
 
     \subsection{Part III}
     Many of the parameters for the Simulink model of Part I are calculated in MATLAB. Because of this I have included the corresponding scripts in Appendix \ref{apx:top param}--\ref{apx:last param}.
+
+        \subsubsection{Linear analysis}
+        The linear analysis is performed
+        using a REPL-style program
+        available in \ref{apx:linear analysis}.
+        This allows the user to choose
+        any of the systems modeled in this lab
+        and view its linear analysis.
+
+        Additionally, the overshoot, settling time, peak time and rise time are recorded in the Results.
 
 \end{adjustwidth}
 
@@ -595,5 +661,17 @@ the impulse response, step response, ramp response, and parabola response. The M
 
 \section{Script to calculate parameters for parametric system in Part III}\label{apx:last param}
 \inputminted{matlab}{lab0405/programs/part03_params_m1.m}
+
+\section{Script for linear analysis of systems}\label{apx:linear analysis}
+\inputminted{matlab}{lab0405/programs/lin_analysis_m1.m}
+
+\section{Script for finding the poles for the systems in Part I}\label{apx:part 01 pz map}
+\inputminted{matlab}{lab0405/programs/part01_poles_zeros_m1.m}
+
+\section{Script for finding the transient responses in Part II}\label{apx:part 03 transient responses}
+\inputminted{matlab}{lab0405/programs/part02_transient_response_m1.m}
+
+\section{Function for converting systems to symbolic expressions}
+\inputminted{matlab}{lab0405/programs/sys2sym.m}
 
 \end{document}
