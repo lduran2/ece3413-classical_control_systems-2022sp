@@ -2,9 +2,9 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/doc/lab0405.tex
 % Lab report
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-29t21:02Q
+% When      : 2022-03-29t23:40Q
 % For       : ECE 3413
-% Version   : 1.6.1
+% Version   : 1.7.1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -29,6 +29,21 @@
             & Comments
     \\*
     \midrule
+        1.7.1
+            & Leomar Durán
+            & 2022-03-29t23:40Q
+            & part I procedure done
+    \\*
+        1.7.0
+            & Leomar Durán
+            & 2022-03-29t22:47Q
+            & rise time added to real, imaginary
+    \\*
+        1.6.2
+            & Leomar Durán
+            & 2022-03-29t22:09Q
+            & rise time added to real, imaginary
+    \\*
         1.6.1
             & Leomar Durán
             & 2022-03-29t21:02Q
@@ -129,7 +144,7 @@ the impulse response, step response, ramp response, and parabola response. The M
             G_1\brao{s;a} = \frac{1}{s + a} \div \frac1a = \frac{a}{s + a}.
         \]
 
-        \subsubsection{Poles in second-order systems}
+        \subsubsection{Real and imaginary parts of poles in second-order systems}
 
         Next in Part I, we analyze the manipulation of the poles in the second-order function
         \[
@@ -145,7 +160,7 @@ the impulse response, step response, ramp response, and parabola response. The M
                 clip,%
                 width=0.75\linewidth%
             ]{lab0405/fig/time_response_slx1.pdf}%
-            \caption{Caption}
+            \caption{Manipulating the pole in a Second-Order System \tbrao{of the real part, the imaginary part, or the natural frequency}.}
             \label{fig:2nd order pole}
         \end{figure}
 
@@ -265,7 +280,7 @@ the impulse response, step response, ramp response, and parabola response. The M
         % So  w = sqrt(x^2 + y^2) = sqrt(Re^2{s} + Im^2{s})
         % and z = -x/w = -Re{s}/w
 
-        Finally, the settling time
+        Next the settling time
         \[
             T_s
             := \frac{\ln\brao*{\SI2\percent \sqrt{1 - \zeta^2}}}{\mathfrak{Re}\Brac{s}}.
@@ -363,31 +378,176 @@ the impulse response, step response, ramp response, and parabola response. The M
         Thus the coefficient of the imaginary part of the poles \(l\) has no effect on settling time.
         However, the coefficient of the real part \(k\) is inversely proportional to settling time.
 
+        \paragraph{Rise time}
+        In the case of the rise time generally,
+        \[
+            T_r
+            :=
+                \frac{\ln\brao*{\SI{90}\percent \sqrt{1 - \zeta^2}}}{\mathfrak{Re}\Brac{s}}
+                - \frac{\ln\brao*{\SI{10}\percent \sqrt{1 - \zeta^2}}}{\mathfrak{Re}\Brac{s}}.
+            = \frac{\ln\brao*{\frac
+                {\SI{90}\percent}
+                {\SI{10}\percent}
+            }}{\mathfrak{Re}\Brac{s}}.
+        \]
+        So there is no need for approximation. The new rise time
+        \[
+            \setprime{T}_r
+            := \frac{\ln\brao*{\frac
+                {\SI{90}\percent}
+                {\SI{10}\percent}
+            }}{k \mathfrak{Re}\Brac{s}}
+            = \frac1k \brao*{\frac{\ln\brao*{\frac
+                {\SI{90}\percent}
+                {\SI{10}\percent}
+            }}{\mathfrak{Re}\Brac{s}}}
+            = \frac{T_r}{k}
+        \]
+
+        However, like with settling time,
+        the coefficient of the real part of the poles is inversely proportional to the rise time.
+
         \paragraph{Summary}
-        We have the following equations
+        Given coefficients \(k, l \in \mathbb{C}\)
+        for the real and imaginary parts of the poles respectively,
+        we have the following relations
         \begin{eqnarray}
             \llap{\(
                 \setprime{T}_p
             \)} = \rlap{\(
-                \frac{T_p}l,
+                \dfrac{T_p}l,
             \)}
         \\*
             \llap{\(
                 \ln\brao{\setprime{OS}}
             \)} = \rlap{\(
-                \frac{k}l\ln\brao*{OS},
+                \dfrac{k}l\ln\brao*{OS},
             \)}
         \\*
             \llap{\(
                 \widehat{\setprime{T}_s}
             \)} = \rlap{\(
-                \frac{\widehat{T_s}}k.
+                \dfrac{\widehat{T_s}}k,
+            \)}
+        \\*
+            \llap{\(
+                \setprime{T}_r
+            \)} = \rlap{\(
+                \dfrac{T_r}k.
             \)}
         \end{eqnarray}
 
-        Therefore, the coefficient of the imaginary part \(l\) is inversely proportional to the peak time \(\setprime{T}_p\),
+        That is, the coefficient of the imaginary part \(l\) is inversely proportional to the peak time \(\setprime{T}_p\),
         the ratio \(\frac{k}l\) is proportional to overshoot \(\setprime{OS}\),
-        and the real part \(k\) is inversely proportional to the settling time \(\setprime{T}_s\).
+        and the real part \(k\) is inversely proportional to both
+        the approximation of the settling time \(\setprime{T}_s\)
+        and the rise time \(\setprime{T}_r\).
+
+        \subsubsection{Natural frequency of poles in second-order systems}
+
+        Like in the previous section,
+        we use Fig. \ref{fig:2nd order pole}
+        for the model for varying natural frequency.
+
+        Well it is also the case that
+        \(
+            A\Brac{s}
+            = s^2 + 2\zeta\omega_n + \omega_n^2
+        \). Thus
+        \[
+            \begin{aligned}
+                \brao*{\mathfrak{Re}\Brac{s} \middle| A\brao{s} = 0}
+                &{}= \brao{-\zeta\omega_n} \brac*{
+                    \begin{matrix} 1 \\* 1\\* \end{matrix}
+                },
+            \\*
+                \brao*{\mathfrak{Im}\Brac{s} \middle| A\brao{s} = 0}
+                &{}= \brao*{\omega_n\sqrt{1 - \zeta^2}}
+                \brac*{
+                    \begin{matrix} 1 \\* -1\\* \end{matrix}
+                },
+            \\*
+            \end{aligned}
+        \]
+
+        Well, let \(m \in \mathbb{C}, \setprime[2]A : \mathbb{C} \to \mathbb{C}\), s.t. the modified natural frequency \(\setprime[2]\omega_n = m\omega_n\). Then
+        \[
+            \setprime[2]{{\vec{s}\,{\vphantom{1^1}}}}
+            := \brao*{s \middle| \setprime[2]{A}\brao{s} = 0}
+            = \brac*{
+                \begin{matrix}
+                    1 & \mathcal{j} \\* 1 & -\mathcal{j} \\*
+                \end{matrix}
+            }\brao*{m\omega_n}\brac*{
+                \begin{matrix}
+                    -\zeta \\*
+                    \sqrt{1 - \zeta^2}
+                    \\*
+                \end{matrix}
+            }.
+        \]
+        These are the roots of \(s^2 + 2\zeta\brao*{m\omega_n} + \brao*{m\omega_n}^2\).
+
+        \paragraph{Peak time}
+
+        Then the new peak time for \(s \in \setprime{\mathbf{s}}\),
+        \[
+            \setprime[2]{T}_p
+            := \frac\pi{\abs{\mathfrak{Im}\Brac{s}}}
+            = \frac\pi{-\zeta\brao{m\omega_n}}
+            = \frac1m \brao*{\frac\pi{-\zeta\omega_n}}
+            = \frac{T_p}m.
+        \].
+
+        \paragraph{Overshoot}
+        Now the new overshoot
+        \[
+                \setprime[2]{OS}
+                := \exp\brao*{\pi\brao*{\frac{\mathfrak{Re}}{\abs{\mathfrak{Im}}}}\Brac{s}}
+                = \exp\brao*{\brao*\pi\frac
+                    {-\zeta\brao*{m\omega_n}}
+                    {\brao*{m\omega_n} \sqrt{1 - z^2}}
+                }
+                = \brao*{\exp\brao*{\brao*\pi\frac
+                    {-\zeta\omega_n}
+                    {\omega_n \sqrt{1 - z^2}}
+                }}
+                = OS.
+        \]
+
+        \paragraph{Settling time}
+        Next the settling time
+        \[
+            \setprime[2]{T}_s
+            := \frac{\ln\brao*{\SI2\percent \sqrt{1 - \zeta^2}}}{\mathfrak{Re}\Brac{s}}
+            = \frac{\ln\brao*{\SI2\percent \sqrt{1 - \zeta^2}}}{-\zeta\brao{m\omega_n}}
+            = \frac1m\brao*{\frac{\ln\brao*{\SI2\percent \sqrt{1 - \zeta^2}}}{-\zeta\omega_n}}
+            = \frac{T_s}m.
+        \]
+
+        \paragraph{Rise time}
+        Finally the rise time
+        \[
+            \setprime[2]T_r
+            := \frac{\ln\brao*{\frac
+                {\SI{90}\percent}
+                {\SI{10}\percent}
+            }}{\mathfrak{Re}\Brac{s}}
+            = \frac{\ln\brao*{\frac
+                {\SI{90}\percent}
+                {\SI{10}\percent}
+            }}{-\zeta\brao{m\omega_n}}
+            = \frac1m\brao*{
+                \frac{\ln\brao*{\frac
+                    {\SI{90}\percent}
+                    {\SI{10}\percent}
+                }}{-\zeta\omega_n}
+            }
+            = \frac{T_r}m.
+        \]
+
+        \paragraph{Summary}
+        With the natural frequency, its coefficient is inversely proportional to peak time, settling time and rise time. However, it has no effect on the overshoot.
     \subsection{Part II}
     \subsection{Part III}
 \end{adjustwidth}

@@ -69,3 +69,10 @@
         }
     }%
 }%
+
+% macros for delimiters in text
+\newcommand*\DeclareTextPairedDelimiters[3]{%
+    \newcommand*#1[1]{#2##1#3}%
+}
+\DeclareTextPairedDelimiters\tbrao()%
+\DeclareTextPairedDelimiters\tangle{\(<\)}{\(>\)}%
