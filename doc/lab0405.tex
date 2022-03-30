@@ -2,9 +2,9 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/doc/lab0405.tex
 % Lab report
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-30t02:05Q
+% When      : 2022-03-30t03:10Q
 % For       : ECE 3413
-% Version   : 1.8.0
+% Version   : 1.9.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -29,10 +29,15 @@
             & Comments
     \\*
     \midrule
+        1.9.0
+            & Leomar Durán
+            & 2022-03-30t03:10Q
+            & added all models
+    \\*
         1.8.0
             & Leomar Durán
             & 2022-03-30t02:05Q
-            & finished adding scripts, related 
+            & finished adding scripts, related report
     \\*
         1.7.2
             & Leomar Durán
@@ -617,6 +622,62 @@ the impulse response, step response, ramp response, and parabola response. The M
 
     \subsection{Part III}
     Many of the parameters for the Simulink model of Part I are calculated in MATLAB. Because of this I have included the corresponding scripts in Appendix \ref{apx:top param}--\ref{apx:last param}.
+
+        \subsubsection{Added Poles}
+
+        \begin{figure}
+            \centering
+            \includegraphics[%
+                page=6,%
+                trim=1.625in 2.125in 1.75in 2.0625in,%
+                clip,%
+                width=0.75\linewidth%
+            ]{lab0405/fig/time_response_slx1.pdf}%
+            \caption{Adding poles to a system.}
+            \label{fig:adding poles}
+        \end{figure}
+
+        \subsubsection{Added Zeros}
+
+        \begin{figure}
+            \centering
+            \includegraphics[%
+                page=7,%
+                trim=1.375in 1.25in 1.4375in 1.25in,%
+                clip,%
+                width=0.85\linewidth%
+            ]{lab0405/fig/time_response_slx1.pdf}%
+            \caption{Adding zeros to a system.}
+            \label{fig:adding zeros}
+        \end{figure}
+
+        \subsubsection{Parametric Transfer Function I}
+
+        \begin{figure}
+            \centering
+            \includegraphics[%
+                page=8,%
+                trim=0.8125in 1.3125in 0.875in 1.3125in,%
+                clip,%
+                width=0.9\linewidth%
+            ]{lab0405/fig/time_response_slx1.pdf}%
+            \caption{System with parameters for zeros, poles and gain.}
+            \label{fig:parametric 1}
+        \end{figure}
+
+        \subsubsection{Parametric Transfer Function II}
+
+        \begin{figure}
+            \centering
+            \includegraphics[%
+                page=9,%
+                trim=0.125in 1.4375in 0.1875in 1.375in,%
+                clip,%
+                width=\linewidth%
+            ]{lab0405/fig/time_response_slx1.pdf}%
+            \caption{System with parameters for zeros, poles and gain.}
+            \label{fig:parametric 1}
+        \end{figure}
 
         \subsubsection{Linear analysis}
         The linear analysis is performed
