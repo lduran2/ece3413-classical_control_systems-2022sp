@@ -2,9 +2,9 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/doc/lab0405.tex
 % Lab report
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-29t15:20Q
+% When      : 2022-03-29t18:24Q
 % For       : ECE 3413
-% Version   : 1.4.0
+% Version   : 1.5.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -29,6 +29,11 @@
             & Comments
     \\*
     \midrule
+        1.5.0
+            & Leomar Durán
+            & 2022-03-29t18:24Q
+            & second-order peak time, overshoot
+    \\*
         1.4.0
             & Leomar Durán
             & 2022-03-29t15:20Q
@@ -153,7 +158,7 @@ the impulse response, step response, ramp response, and parabola response. The M
                 \brao*{
                     \mathfrak{Im}\Brac{s} \middle| A(s) = 0%
                     \,
-                } &{}= \brao*{\frac{\sqrt{4b - a^2}}{2}}\brac*{
+                } &{}= \brao*{\sqrt{b - \brao*{\frac{a}2}^2}}\brac*{
                     \begin{matrix}
                         1 \\* -1 \\*
                     \end{matrix}
@@ -190,19 +195,19 @@ the impulse response, step response, ramp response, and parabola response. The M
         \]
         These are the roots of \(
             s^2 + kas + \brao*{l^2 b + \brao*{k^2 - l^2}\brao*{\frac{a}2}^2}
-            = s^2 + 2\zeta\omega_ns + \omega_n^2
+            % = s^2 + 2\zeta\omega_ns + \omega_n^2
         \).
-        So \(2\zeta\omega_n = ka\)
-        and \(\omega_n^2 = \brao{k^2 - l^2}\frac{a^2}4 + l^2 b\).
-        Thus the natural frequency and damping ratio respectively
-        \[
-            \begin{gathered}
-                \omega_n = \sqrt{l^2 b + \brao*{k^2 - l^2}\brao*{\frac{a}2}^2},
-            \\*
-                \zeta = \frac{ka}{2\omega_n}.
-            \\*
-            \end{gathered}
-        \]
+        %So \(2\zeta\omega_n = ka\)
+        %and \(\omega_n^2 = \brao{k^2 - l^2}\frac{a^2}4 + l^2 b\).
+        % Thus the natural frequency and damping ratio respectively
+        % \[
+            % \begin{gathered}
+                % \omega_n = \sqrt{l^2 b + \brao*{k^2 - l^2}\brao*{\frac{a}2}^2},
+            % \\*
+                % \zeta = \frac{ka}{2\omega_n}.
+            % \\*
+            % \end{gathered}
+        % \]
 
         % Let's further multiply
         % \(\setprime[2]{\omega_n} = m\omega_n\).
@@ -245,7 +250,7 @@ the impulse response, step response, ramp response, and parabola response. The M
 
         We see that the coefficient of the real part \(k\) has no effect on the peak time. However, the coefficient of the imaginary part \(l\) is inversely proportional to peak time.
 
-        Now the overshoot
+        Now the new overshoot
         \[
                 \setprime{OS}
                 := \exp\brao*{\pi\brao*{\frac{\mathfrak{Re}}{\abs{\mathfrak{Im}}}}\Brac{s}}
@@ -266,10 +271,89 @@ the impulse response, step response, ramp response, and parabola response. The M
 
         Finally, the settling time
         \[
-            \setprime{T}_s
-            := \frac{\ln\brao*{\SI2\percent}}{\mathfrak{Re}\Brac{s}}
+            T_s
+            := \frac{\ln\brao*{\SI2\percent \sqrt{1 - \zeta^2}}}{\mathfrak{Re}\Brac{s}}.
         \]
 
+        Well, let's assume, \(T_s\) is a normal distribution with the approximation
+        \[
+            \widehat{T_s}
+            := \frac{\ln\brao{\SI2\percent}}{\mathfrak{Re}\Brac{s}}.
+        \]
+        For all \(\zeta \in \brac*{0,1}\), the rate of error for this approximation
+        \[
+             \frac{T_s - \widehat{T_s}}{T_s}
+             = -\brao*{\frac{2\ln\brao{\SI2\percent}}{\ln\brao*{1 - \zeta^2}} + 1}^{-1}
+             < 0.
+        \]
+        So, the error is in the right tail of the distribution. An outlier in a normal distribution is approximated as a value \(1.5\) standard deviations from the mean. We expect a proportion \(0.9332\) of data is within this range. Thus, we find a \(\max\Brac\zeta\) satisfying
+        \[
+            \frac{T_s - \widehat{T_s}}{T_s}
+            \leq \num{0.9332} - 1
+            < 0.
+        \]
+        This \(\max\Brac\zeta \approx \num{0.654847}\), which gives a settling time with an error within \(\SI{6.68}\percent\).
+
+        Now generally
+        \[
+            \begin{aligned}
+                \omega_n
+                    &{}:= \sqrt{\mathfrak{Re}^2\Brac{s} + \abs{\mathfrak{Im}}^2\Brac{s}},
+            \\*
+                \zeta
+                    &{}:= \frac{-\mathfrak{Re}\Brac{s}}{\omega_n}.
+            \\*
+            \end{aligned}
+        \]
+
+        So we have
+        \[
+            \begin{aligned}
+                \setprime{\omega}_n
+                    &{}= \sqrt{k^2 \mathfrak{Re}^2\Brac{s} + l^2 \abs{\mathfrak{Im}}^2\Brac{s}},
+            \\*
+                \setprime\zeta
+                    &{}= \frac{-k\mathfrak{Re}\Brac{s}}{\omega_n}
+                    = \frac{1}{\sqrt{1 + \brao*{
+                        \frac{l}k
+                        \brao*{\frac
+                            {\abs{\mathfrak{Im}}}
+                            {\mathfrak{Re}}
+                        }
+                        \Brac{s}
+                    }^2}}.
+            \\*
+            \end{aligned}
+        \]
+
+        Thus, we choose coefficients \(k, l\) s.t.
+        \[
+            \frac{l}k
+            \geq \frac{\sqrt{\frac1{\zeta^2} - 1}}{\brao*{\mathfrak{\abs{Im}/Re}}\Brac{s}}
+            = \frac{\sqrt{\frac1{\brao{\num{0.654847}}^2} - 1}}{\brao*{\mathfrak{\abs{Im}/Re}}\Brac{s}}
+            = \frac
+                {-1.154104}
+                {\brao*{\mathfrak{\abs{Im}/Re}}\Brac{s}}.
+        \]
+
+        Given our system \(G_2\brao{s; a, b}\), where we have
+        \(a = 4\) and \(b = 25\), then \(
+            \mathfrak{Re}\Brac{s} = -4/2 = -2
+        \) and \(
+            \abs{\mathfrak{Im}}\Brac{s} = \sqrt{25 - \brao{4/2}^2} = \sqrt{21}
+        \). Thus \(\frac{l}k \geq \num{0.503692}\).
+
+        For fixed \(l = 1\),
+        then \(k \leq {2.0}\),
+        whereas for fixed \(k = 1\),
+        then \(l \geq {0.50}\).
+
+        We will be be using fixed \(l = 1\)
+        and \(k \in \brao{1, 2, 1/2}\),
+        each of the latter of which fulfills \(k \leq 2.0\).
+        Then we will use fixed \(k = 1\)
+        and \(l \in \brao{1, 2, 4}\),
+        each of the latter of which fulfills \(l \geq 0.50\). Thus, the constraint of \(\max\Brac\zeta \approx \num{0.654847}\) is met.
     \subsection{Part II}
     \subsection{Part III}
 \end{adjustwidth}
