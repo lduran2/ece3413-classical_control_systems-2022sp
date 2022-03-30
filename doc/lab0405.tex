@@ -2,9 +2,9 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/doc/lab0405.tex
 % Lab report
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-29t18:24Q
+% When      : 2022-03-29t20:56Q
 % For       : ECE 3413
-% Version   : 1.5.0
+% Version   : 1.6.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -29,10 +29,15 @@
             & Comments
     \\*
     \midrule
+        1.6.0
+            & Leomar Durán
+            & 2022-03-29t20:56Q
+            & summary for real, imaginary
+    \\*
         1.5.0
             & Leomar Durán
             & 2022-03-29t18:24Q
-            & second-order peak time, overshoot
+            & solved for real, imaginary parts
     \\*
         1.4.0
             & Leomar Durán
@@ -239,6 +244,7 @@ the impulse response, step response, ramp response, and parabola response. The M
                 % it must be that \(b > \brao{l^{-2} - 1}\hfrac{a^2}4\). So the imaginary part through \(l\) is proportional to the natural frequency \(w_n\) and inversely proportional to the  the damping ratio \(\zeta\).
         % \end{enumerate}
 
+        \paragraph{Peak time}
         Then the new peak time for \(s \in \setprime{\mathbf{s}}\),
         \[
             \setprime{T}_p
@@ -250,6 +256,7 @@ the impulse response, step response, ramp response, and parabola response. The M
 
         We see that the coefficient of the real part \(k\) has no effect on the peak time. However, the coefficient of the imaginary part \(l\) is inversely proportional to peak time.
 
+        \paragraph{Overshoot}
         Now the new overshoot
         \[
                 \setprime{OS}
@@ -269,6 +276,7 @@ the impulse response, step response, ramp response, and parabola response. The M
         \]
         Thus we see that \(\hfrac{k}l\) is proportional to the logarithm of the overshoot.
 
+        \paragraph{Constraint for settling time}
         Finally, the settling time
         \[
             T_s
@@ -354,6 +362,44 @@ the impulse response, step response, ramp response, and parabola response. The M
         Then we will use fixed \(k = 1\)
         and \(l \in \brao{1, 2, 4}\),
         each of the latter of which fulfills \(l \geq 0.50\). Thus, the constraint of \(\max\Brac\zeta \approx \num{0.654847}\) is met.
+
+        \paragraph{Settling time}
+        Thus, we can use the approximation \(\widehat{T_s}\) as a stand-in for \(T_s\). Therefore
+        \[
+            \widehat{\setprime{T}_s}
+            := \frac{\ln\brao{\SI2\percent}}{k\mathfrak{Re}\Brac{s}}
+            = \frac1k \brao*{\frac{\ln\brao{\SI2\percent}}{\mathfrak{Re}\Brac{s}}}
+            = \frac{\widehat{T_s}}k.
+        \]
+
+        Thus the coefficient of the imaginary part of the poles \(l\) has no effect on settling time.
+        However, the coefficient of the real part \(k\) is inversely proportional to settling time.
+
+        \paragraph{Summary}
+        We have the following equations
+        \begin{eqnarray}
+            \llap{\(
+                \setprime{T}_p
+            \)} = \rlap{\(
+                \frac{T_p}l,
+            \)}
+        \\*
+            \llap{\(
+                \ln\brao{\setprime{OS}}
+            \)} = \rlap{\(
+                \frac{k}l\ln\brao*{OS},
+            \)}
+        \\*
+            \llap{\(
+                \widehat{\setprime{T}_s}
+            \)} = \rlap{\(
+                \frac{\widehat{T_s}}k.
+            \)}
+        \end{eqnarray}
+
+        Therefore, the coefficient of the imaginary part \(l\) is inversely proportional to the peak time \(\setprime{T}_p\),
+        the ratio \(\frac{k}l\) is proportional to overshoot \(\setprime{OS}\),
+        and the real part \(k\) is inversely proportional to the settling time \(\setprime{T}_s\).
     \subsection{Part II}
     \subsection{Part III}
 \end{adjustwidth}
