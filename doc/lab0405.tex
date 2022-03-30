@@ -2,9 +2,9 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/doc/lab0405.tex
 % Lab report
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-29t20:56Q
+% When      : 2022-03-29t21:02Q
 % For       : ECE 3413
-% Version   : 1.6.0
+% Version   : 1.6.1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -29,6 +29,11 @@
             & Comments
     \\*
     \midrule
+        1.6.1
+            & Leomar Durán
+            & 2022-03-29t21:02Q
+            & clean up after real, imaginary
+    \\*
         1.6.0
             & Leomar Durán
             & 2022-03-29t20:56Q
@@ -200,51 +205,22 @@ the impulse response, step response, ramp response, and parabola response. The M
         \]
         These are the roots of \(
             s^2 + kas + \brao*{l^2 b + \brao*{k^2 - l^2}\brao*{\frac{a}2}^2}
-            % = s^2 + 2\zeta\omega_ns + \omega_n^2
         \).
-        %So \(2\zeta\omega_n = ka\)
-        %and \(\omega_n^2 = \brao{k^2 - l^2}\frac{a^2}4 + l^2 b\).
-        % Thus the natural frequency and damping ratio respectively
-        % \[
-            % \begin{gathered}
-                % \omega_n = \sqrt{l^2 b + \brao*{k^2 - l^2}\brao*{\frac{a}2}^2},
-            % \\*
-                % \zeta = \frac{ka}{2\omega_n}.
-            % \\*
-            % \end{gathered}
-        % \]
-
-        % Let's further multiply
-        % \(\setprime[2]{\omega_n} = m\omega_n\).
-
-        % In which case, these are the roots of \(
-            % s^2 + kas + m\brao*{\brao*{k^2 - l^2}\frac{a^2}4 + l^2 b}
-            % = 2\zeta\omega_ns + \setprime[2]{\omega_n^2}
-        % \).
-        % \[
-            % \begin{gathered}
-                % \setprime[2]{\omega_n} = m\sqrt{\brao{k^2 - l^2}\frac{a^2}4 + l^2 b},
-            % \\*
-                % \zeta = \frac{ka}{2\setprime[2]{\omega_n^2}}.
-            % \\*
-            % \end{gathered}
-        % \]
-
-        % From this, we can see that
-        % \begin{enumerate}
-            % \item
-                % real part through \(k\) is proportional to the natural frequency \(w_n\), but changing it maintains the damping ratio \(\zeta\) at a similar value. Thus
-                % \begin{enumerate}
-                    % \item
-                        % peak time \(T_p\) and settling time \(T_s\) decrease as the real part increases.
-                    % \item
-                        % there is very little effect on overshoot \(\si\percent OS\) as the real part changes.
-                % \end{enumerate}
-            % \item
-                % it must be that \(b > \brao{l^{-2} - 1}\hfrac{a^2}4\). So the imaginary part through \(l\) is proportional to the natural frequency \(w_n\) and inversely proportional to the  the damping ratio \(\zeta\).
-        % \end{enumerate}
 
         \paragraph{Peak time}
+
+        % Note that:
+        %
+        % The roots of s^2 + (2zw)s + w^2 are
+        %   s1, s2
+        % = (-2zw +/- sqrt(4w^2 - (2zw)^2))/2
+        % = -zw +/- sqrt(4w^2 - 4z^2 w^2)/2
+        % = -zw +/- 2w sqrt(1 - z^2)/2
+        % = -zw +/- w sqrt(1 - z^2)
+        %
+        % So   Re{s}  = -zw
+        % and |Im{s}| = w sqrt(1 - z^2)
+
         Then the new peak time for \(s \in \setprime{\mathbf{s}}\),
         \[
             \setprime{T}_p
@@ -277,6 +253,18 @@ the impulse response, step response, ramp response, and parabola response. The M
         Thus we see that \(\hfrac{k}l\) is proportional to the logarithm of the overshoot.
 
         \paragraph{Constraint for settling time}
+
+        % The polynomial with roots s = x +/- yj, where x = Re{s} and y = |Im{s}|
+        %
+        %   (s - x - yj)(s - x + yj)
+        % = (s - x)^2 - (yj)^2
+        % = (s - x)^2 + y^2
+        % = s^2 - 2xs + (x^2 + y^2)
+        % = s^2 + (2zw)s + w^2
+        % 
+        % So  w = sqrt(x^2 + y^2) = sqrt(Re^2{s} + Im^2{s})
+        % and z = -x/w = -Re{s}/w
+
         Finally, the settling time
         \[
             T_s
