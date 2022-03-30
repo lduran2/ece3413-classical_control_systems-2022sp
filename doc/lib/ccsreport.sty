@@ -12,7 +12,7 @@
 \usepackage{tabularx}
 \usepackage{booktabs}
 \newcommand*\ra[1]{\renewcommand*\arraystretch{#1}}%
-\ra{1.27273}
+\ra{1.3182}
 
 \usepackage{xcolor}
 \definecolor{hrefBlue}{RGB}{5,99,193}
@@ -29,7 +29,9 @@
 % underline section titles
 \titleformat{\section}{\normalfont\Large\bfseries}{\titlelabelformat}{0pt}{\ul}
 
+% remove level 1 margin on any list
 \usepackage[inline]{enumitem}
+\setlist[1]{leftmargin=0in}
 
 \usepackage{changepage}
 
@@ -76,3 +78,15 @@
 }
 \DeclareTextPairedDelimiters\tbrao()%
 \DeclareTextPairedDelimiters\tangle{\(<\)}{\(>\)}%
+
+%% \mintintabx allows mintinline in tabularx environments
+% !use XeLaTeX compiler
+% from https://github.com/gpoore/minted/issues/162#issuecomment-299842714
+\makeatletter
+\def\mintintabx#1#2{%
+\ifx\@footnotetext\TX@trial@ftn
+\detokenize{#2}%
+\else
+\mintinline{#1}{#2}%
+\fi}
+\makeatother

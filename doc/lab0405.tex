@@ -2,9 +2,9 @@
 % Canonical : https://github.com/lduran2/ece3413_classical_control_systems/doc/lab0405.tex
 % Lab report
 % By        : Leomar Duran <https://github.com/lduran2>
-% When      : 2022-03-30t03:10Q
+% When      : 2022-03-30t11:13Q
 % For       : ECE 3413
-% Version   : 1.9.0
+% Version   : 1.10.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -29,6 +29,16 @@
             & Comments
     \\*
     \midrule
+        1.10.0
+            & Leomar Durán
+            & 2022-03-30t11:13Q
+            & finished procedure
+    \\*
+        1.9.1
+            & Leomar Durán
+            & 2022-03-30t10:26Q
+            & codes and commands
+    \\*
         1.9.0
             & Leomar Durán
             & 2022-03-30t03:10Q
@@ -529,11 +539,11 @@ the impulse response, step response, ramp response, and parabola response. The M
                 := \exp\brao*{\pi\brao*{\frac{\mathfrak{Re}}{\abs{\mathfrak{Im}}}}\Brac{s}}
                 = \exp\brao*{\brao*\pi\frac
                     {-\zeta\brao*{m\omega_n}}
-                    {\brao*{m\omega_n} \sqrt{1 - z^2}}
+                    {\brao*{m\omega_n} \sqrt{1 - \zeta^2}}
                 }
                 = \brao*{\exp\brao*{\brao*\pi\frac
                     {-\zeta\omega_n}
-                    {\omega_n \sqrt{1 - z^2}}
+                    {\omega_n \sqrt{1 - \zeta^2}}
                 }}
                 = OS.
         \]
@@ -575,7 +585,7 @@ the impulse response, step response, ramp response, and parabola response. The M
         \subsubsection{Linear analysis}
         The linear analysis is performed
         using a REPL-style program
-        available in \ref{apx:linear analysis}.
+        available in Appendix \ref{apx:linear analysis}.
         This allows the user to choose
         any of the systems modeled in this lab
         and view its linear analysis.
@@ -625,6 +635,19 @@ the impulse response, step response, ramp response, and parabola response. The M
 
         \subsubsection{Added Poles}
 
+        To add poles, we will use the system in Fig. \ref{fig:adding poles}.
+        As shown, we can add a pole by adding
+        a new system in series
+        that has the desired pole
+        after the a block representing the greatest common factor.
+        This creates a third-order pole.
+        In the case of third-order poles,
+        there does not seem to be a formula for the damping ratio as far as I was able to find.
+        However, I will use the bode plot
+        to find the frequency with the highest magnitude,
+        which should be the natural frequency.
+        As with the first-order system in Part I, we normalize to the steady state value, but not in the Simulink scope.
+
         \begin{figure}
             \centering
             \includegraphics[%
@@ -639,6 +662,16 @@ the impulse response, step response, ramp response, and parabola response. The M
 
         \subsubsection{Added Zeros}
 
+        Adding zeros,
+        as seen in Fig. \ref{fig:adding zeros},
+        is a little trickier because Simulink does not allow transfer functions of lower order than their numerator.
+        What we do here is that we multiply the GCF system by \(s\),
+        then the series blocks will have a numerator with the roots given by the desired zeroes
+        and the denominator also being \(s\).
+        These \(s\) cancel out,
+        adding the zero.
+        So for example,
+
         \begin{figure}
             \centering
             \includegraphics[%
@@ -651,10 +684,17 @@ the impulse response, step response, ramp response, and parabola response. The M
             \label{fig:adding zeros}
         \end{figure}
 
+        \[
+            \frac{25s}{s^2 + 4s + 25}\frac{\brao{s + 200}}s = \frac{25\brao{s + 200}}{s^2 + 4s + 25}.
+        \]
+
+        Again as with the first-order system in Part I, we normalize to the steady state value, but not in the Simulink scope.
+
         \subsubsection{Parametric Transfer Function I}
 
         \begin{figure}
             \centering
+            \ \\* \ \\*
             \includegraphics[%
                 page=8,%
                 trim=0.8125in 1.3125in 0.875in 1.3125in,%
@@ -665,7 +705,19 @@ the impulse response, step response, ramp response, and parabola response. The M
             \label{fig:parametric 1}
         \end{figure}
 
+        The last two sections put everything together. The gain here does the steady state value normalization for us. We will add both a pole and a zero to the GCF system as seen in Fig. \ref{fig:parametric 1}.
+
+        As with earlier, adding a pole makes this a third-order function.
+        As a consequence, we cannot find the damping function.
+        However a bode plot should provide us an approximation for the natural frequency.
+        Similarly, all other features of the system are approximated from the Linear analysis.
+        
         \subsubsection{Parametric Transfer Function II}
+
+        This analysis uses the system in Fig. \ref{fig:parametric 2}. As with the previous section, this analysis adds zeros, poles and gain. The adding of the poles makes it a third-order system.
+        In order to analyze the features of these functions,
+        \textit{i.e.}, the effects of adding each group of parameters,
+        we will look at plots of the systems.
 
         \begin{figure}
             \centering
@@ -676,13 +728,13 @@ the impulse response, step response, ramp response, and parabola response. The M
                 width=\linewidth%
             ]{lab0405/fig/time_response_slx1.pdf}%
             \caption{System with parameters for zeros, poles and gain.}
-            \label{fig:parametric 1}
+            \label{fig:parametric 2}
         \end{figure}
 
         \subsubsection{Linear analysis}
         The linear analysis is performed
         using a REPL-style program
-        available in \ref{apx:linear analysis}.
+        available in Appendix \ref{apx:linear analysis}.
         This allows the user to choose
         any of the systems modeled in this lab
         and view its linear analysis.
@@ -701,12 +753,44 @@ the impulse response, step response, ramp response, and parabola response. The M
 
 \section{Codes and Commands used in the lab}
 
-\begin{enumerate}
-    \item
-        \mintinline{matlab}{conv}
-        \tabto{1.5in}
-        \(\Rightarrow\) convolve or multiply polynomials
-\end{enumerate}
+\newcounter{row}
+\newcommand*\getrow{%
+    \stepcounter{row}%
+    \llap{\arabic{row}.\hspace{0.545em}}%
+}%
+\begin{tabularx}\linewidth{%
+    @{\getrow}%
+    >{\hsize=2.5in}X%
+    @{\(\Rightarrow\) }X%
+    @{}%
+}
+    \href{https://www.mathworks.com/help/control/ref/tf.html}{\mintintabx{matlab}{control::tf}}
+        & convert any system to standard transfer function model
+\\*
+    \href{https://www.mathworks.com/help/control/ref/zpk.html}{\mintintabx{matlab}{control::zpk}}
+        & convert any system to zero-pole-gain form
+\\*
+    \href{https://www.mathworks.com/help/control/ref/lti.tfdata.html}{\mintintabx{matlab}{control::lti.tfdata}}
+        & returns transfer function data model about a system
+\\*
+    \href{https://www.mathworks.com/help/control/ref/lti.pzmap.html}{\mintintabx{matlab}{control::lti.pzmap}}
+        & returns or plots the poles and zeros of a system
+\\*
+    \href{https://www.mathworks.com/help/matlab/ref/exist.html}{\mintintabx{matlab}{matlab::exist}}
+        & returns whether the variable named as the given string exists
+\\*
+    \href{https://www.mathworks.com/help/symbolic/limits.html}{\mintintabx{matlab}{symbolic::limmit}}
+        & calculates the mathematical limit of an expression as the symbolic variable approaches a given value
+\\*
+    \href{https://www.mathworks.com/help/control/ref/linearsystemanalyzer-app.html}{\mintintabx{matlab}{control::linearsystemanalyzer}}
+        & application function for analyzing an LTI system
+\\*
+    \href{https://www.mathworks.com/help/ident/ref/lti.impulseplot.html}{\mintintabx{matlab}{ident::lti.impulseplot}}
+        & plots the impulse response of a signal
+\\*
+    \hyperref[apx:sys2sym]{\mintintabx{matlab}{lduran2::sys2sym}}
+        & converts a system to a symbolic expression for algebra
+\end{tabularx}
 
 \section{Top-level script to calculate parameters}\label{apx:top param}
 \inputminted{matlab}{lab0405/programs/time_response_params_m1.m}
@@ -732,7 +816,7 @@ the impulse response, step response, ramp response, and parabola response. The M
 \section{Script for finding the transient responses in Part II}\label{apx:part 03 transient responses}
 \inputminted{matlab}{lab0405/programs/part02_transient_response_m1.m}
 
-\section{Function for converting systems to symbolic expressions}
+\section{Function for converting systems to symbolic expressions}\label{apx:sys2sym}
 \inputminted{matlab}{lab0405/programs/sys2sym.m}
 
 \end{document}
