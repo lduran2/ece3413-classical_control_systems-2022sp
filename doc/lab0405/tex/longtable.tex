@@ -1,0 +1,380 @@
+\begin{landscape}
+    \renewcommand*\familydefault\sfdefault%
+    \sffamily
+    \sansmath
+    \centering
+    \ra{2.3182}
+    \begin{longtblr}[%
+        caption = {The features of the variations of the systems in Parts I and III.},%
+        label={tab:varying features in parts I and II}%
+    ]{%
+        rowhead={2},%
+        colspec={%
+            @{}l%
+                Q[si={table-format=3.0},r]%
+                Q[si={table-format=2.2},r]%
+            l%
+                *4{Q[si={table-format=2.4},r]}%
+                @{ }l%
+            l@{}%
+        }%
+    }
+    \toprule
+        Independent
+        & \multicolumn2l{{{{Values}}}}
+            & Transfer
+            & \multicolumn2l{{{{Time \(t\),}}}}
+            & \multicolumn1r{{{{\(\brac{\si\second}\)}}}}
+            & \multicolumn2l{{{{Overshoot}}}}
+            & Plot
+    \\*
+    \cmidrule{2-3}
+    \cmidrule{5-7}
+        variables
+        & 1      & 2
+            & function \(G\brao{s}\)
+            & {{{Settling \(T_s\)}}}
+            & {{{Rise \(T_r\)}}}
+            & {{{Peak \(T_p\)}}}
+            & \multicolumn2l{{{{\(OS\)}}}}
+    \\*
+    \midrule
+        \(\brao*{a} : G\brao{s; a} = \hfrac{a}{\brao*{s + a}}\)
+        & 1      &
+            & \(\hfrac1{\brao*{s + 1}}\)
+            & 0.0203 % 0.0381
+            & 2.2%95 = 2.3 - 0.105
+            & 5.64
+            & 0.000 & \si\percent
+            & {\color{legend1}Fig. \ref{fig:lti part 01 first order}}
+    \\*
+        & 2      &
+            & \(\hfrac2{\brao*{s + 2}}\)
+            & 0.00642 % ~0.0104
+            & 1.09%04 = 1.15 - 0.0596
+            & 2.86
+            & 0.000 & \si\percent
+            & {\color{legend2}Fig. \ref{fig:lti part 01 first order}}
+    \\*
+        & 3      &
+            & \(\hfrac3{\brao*{s + 3}}\)
+            & 0.00642 % ~0.0104
+            & 0.73%56 = 0.77 - 0.0444
+            & 1.93
+            & 0.000 & \si\percent
+            & {\color{legend3}Fig. \ref{fig:lti part 01 first order}}
+    \\*
+        & 4      &
+            & \(\hfrac4{\brao*{s + 4}}\)
+            & 0.00566 % ~0.0104
+            & 0.553%9 = 0.577 - 0.0241
+            & 1.39
+            & 0.000 & \si\percent
+            & {\color{legend4}Fig. \ref{fig:lti part 01 first order}}
+    \\*
+    \midrule
+        \(\brao*{k,l} : \setprime{s} = k\mathfrak{Re}\Brac{s} + l\mathfrak{Im}\Brac{s}\mathcal{j}\)
+        & 1      & 1
+            & \(\hfrac{25}{\brao*{s^2 + 4 s + 25}}\)
+            & 0.0461 % ~ 0.0569 % ~0.0511
+            & 0.291 % = 0.392 - 0.101
+            & 0.685 % ~0.693
+            & 25.1%251 = (1.25 - 0.999)/0.999
+                & \si\percent
+            & {\color{legend1}Fig. \ref{fig:lti part 01 real}}
+    \\*
+        & 2      & 1
+            & \(\hfrac{37}{\brao*{s^2 + 8 s + 37}}\)
+            & 0.0352 % ~ 0.0596
+            & 0.342 % = 0.419 - 0.077
+            & 0.684
+            & 6.00 % = (1.06 - 1)/1
+                & \si\percent
+            & {\color{legend2}Fig. \ref{fig:lti part 01 real}}
+    \\*
+        & 1/2      & 1
+            & \(\hfrac{22}{\brao*{s^2 + 2 s + 22}}\)
+            & 0.0461 % 0.0682
+            & 0.268%7 = 0.365 - 0.0973
+            & 0.684
+            & 50 % = (1.5 - 1)/1
+                & \si\percent
+            & {\color{legend3}Fig. \ref{fig:lti part 01 real}}
+    \\*
+    \dashrule
+        & 1      & 1
+            & \(\hfrac{25}{\brao*{s^2 + 4 s + 25}}\)
+            & 0.0436
+            & 0.29%4 = 0.39 - 0.096
+            & 0.692 % ~0.685 % ~0.693
+            & 25.1%251 = (1.25 - 0.999)/0.999
+                & \si\percent
+            & {\color{legend1}Fig. \ref{fig:lti part 01 imaginary}}
+    \\*
+        & 1      & 2
+            & \(\hfrac{88}{\brao*{s^2 + 4 s + 88}}\)
+            & 0.0233
+            & 0.129 % = 0.181 - 0.052
+            & 0.348 % ~0.346
+            & 50 % = (1.5 - 1)/1
+                & \si\percent
+            & {\color{legend2}Fig. \ref{fig:lti part 01 imaginary}}
+    \\*
+        & 1      & 4
+            & \(\hfrac{340}{\brao*{s^2 + 4 s + 340}}\)
+            & 0.00804
+            & 0.0643 % = 0.0859 - 0.0216
+            & 0.174
+            & 70.3%41 = (1.7 - 0.998)/0.998
+                & \si\percent
+            & {\color{legend3}Fig. \ref{fig:lti part 01 imaginary}}
+    \\*
+    \midrule
+        \(\brao*{m} : \setprime\omega_n = m\omega_n\)
+        & 1      &
+            & \(\hfrac{25}{\brao*{s^2 + 4 s + 25}}\)
+            & 0.047
+            & 0.29%23 = 0.39 - 0.0977
+            & 0.685 % ~0.693
+            & 25.1%251 = (1.25 - 0.999)/0.999
+                & \si\percent
+            & {\color{legend1}Fig. \ref{fig:lti part 01 natural frequency}}
+    \\*
+        & 2      &
+            & \(\hfrac{100}{\brao*{s^2 + 8 s + 100}}\)
+            & 0.025
+            & 0.146%7 = 0.196 - 0.0503
+            & 0.341
+            & 25 % = (1.25 - 1)/1
+                & \si\percent
+            & {\color{legend2}Fig. \ref{fig:lti part 01 natural frequency}}
+    \\*
+        & 4      &
+            & \(\hfrac{400}{\brao*{s^2 + 16 s + 400}}\)
+            & 0.0114
+            & 0.073%7 = 0.0977 - 0.025
+            & 0.171
+            & 25 % = (1.25 - 1)/1
+                & \si\percent
+            & {\color{legend3}Fig. \ref{fig:lti part 01 natural frequency}}
+    \\*
+    \midrule
+        \(\brao*{p} : \setprime{G} = \brao{\frac\iota{\lim_{u\to0}\iota\brao{u}}}
+        \!\circ\!\brao*{\hfrac{G}{\brao*{\iota-\tilde{p}}}}\)
+        & -200   &
+            & \(\hfrac{5000}{\brao*{\brao*{s + 200}\brao*{s^2 + 4 s + 25}}}\)
+            & 0.047
+            & 0.291 % = 0.397 - 0.106
+            & 0.682
+            & 25.5%02 = (1.25 - 0.996)/0.996
+                & \si\percent
+            & {\color{legend2}Fig. \ref{fig:lti part 03 poles}}
+    \\*
+        & -20    &
+            & \(\hfrac{500}{\brao*{\brao*{s + 20}\brao*{s^2 + 4 s + 25}}}\)
+            & 0.069
+            & 0.306 % = 0.443 - 0.137
+            & 0.751
+            & 24.5%97 = (1.24 - 0.996)/0.996
+                & \si\percent
+            & {\color{legend3}Fig. \ref{fig:lti part 03 poles}}
+    \\*
+        & -10    &
+            & \(\hfrac{250}{\brao*{\brao*{s + 10}\brao*{s^2 + 4 s + 25}}}\)
+            & 0.0909
+            & 0.332 % = 0.497 - 0.165
+            & 0.803
+            & 22.5%90 = (1.22 - 0.996)/0.996
+                & \si\percent
+            & {\color{legend4}Fig. \ref{fig:lti part 03 poles}}
+    \\*
+        & -2    &
+            & \(\hfrac{50}{\brao*{\brao*{s + 2}\brao*{s^2 + 4 s + 25}}}\)
+            & 0.148
+            & 0.75 % = 1.02 - 0.27
+            & 2.55
+            & 0.000 %= (0.996 - 0.996)/0.996
+                & \si\percent
+            & {\color{legend5}Fig. \ref{fig:lti part 03 poles}}
+    \\*
+    \midrule
+        \(\brao*{r} : \setprime{G} = \brao{\frac\iota{\lim_{u\to0}\iota\brao{u}}}
+        \!\circ\!\brao*{{G}\times{\brao*{\iota-\tilde{r}}}}\)
+        & -200    &
+            & \(\hfrac{0.125\brao*{s + 200}}{{\brao*{s^2 + 4 s + 25}}}\)
+            & 0.0449
+            & 0.292%7 = 0.386 - 0.0943
+            & 0.679
+            & 25% = (1.25 - 1)/1
+                & \si\percent
+            & {\color{legend2}Fig. \ref{fig:lti part 03 zeros}}
+    \\*
+        & -50    &
+            & \(\hfrac{0.5\brao*{s + 50}}{{\brao*{s^2 + 4 s + 25}}}\)
+            & 0.037
+            & 0.293%6 = 0.373 - 0.0804
+            & 0.668
+            & 26% = (1.26 - 1)/1
+                & \si\percent
+            & {\color{legend3}Fig. \ref{fig:lti part 03 zeros}}
+    \\*
+        & -20    &
+            & \(\hfrac{1.25\brao*{s + 20}}{{\brao*{s^2 + 4 s + 25}}}\)
+            & 0.0212
+            & 0.272%3 = 0.335 - 0.0627
+            & 0.629
+            & 26% = (1.26 - 1)/1
+                & \si\percent
+            & {\color{legend4}Fig. \ref{fig:lti part 03 zeros}}
+    \\*
+        & -10    &
+            & \(\hfrac{2.5\brao*{s + 10}}{{\brao*{s^2 + 4 s + 25}}}\)
+            & 0.0366
+            & 0.247 % = 0.286 - 0.039
+            & 0.572
+            & 29% = (1.29 - 1)/1
+                & \si\percent
+            & {\color{legend5}Fig. \ref{fig:lti part 03 zeros}}
+    \\*
+        & -5   &
+            & \(\hfrac{5\brao*{s + 5}}{{\brao*{s^2 + 4 s + 25}}}\)
+            & 0.0074
+            & 0.168%8 = 0.191 - 0.0232
+            & 0.467
+            & 43% = (1.43 - 1)/1
+                & \si\percent
+            & {\color{legend6}Fig. \ref{fig:lti part 03 zeros}}
+    \\*
+        & -2   &
+            & \(\hfrac{12.5\brao*{s + 2}}{{\brao*{s^2 + 4 s + 25}}}\)
+            & 0.00173
+            & 0.0671% = 0.0785 - 0.0114
+            & 0.345
+            & 115% = (2.15 - 1)/1
+                & \si\percent
+            & {\color{legend7}Fig. \ref{fig:lti part 03 zeros}}
+    \\*
+    \midrule
+        \(\brao{a, b}: G\brao{s} = G\brao{s}
+        \brao*{\frac{\brao*{\hfrac{b}a}\brao*{s + a}}{s + b}}\)
+        & 3    & 3
+            & \(\frac{25\brao*{s + 3}}{{\brao*{s + 3}\brao*{s^2 + 4 s + 25}}}\)
+            & 0.0503
+            & 0.292% = 0.396 - 0.104
+            & 0.681
+            & 25%.25 = (1.25 - 0.998)/0.998
+                & \si\percent
+            & {\color{legend1}Fig. \ref{fig:lti part 03 zeros}}
+    \\*
+        & 3    & 3.01
+            & \(\frac{25.083\brao*{s + 3}}{{\brao*{s + 3.01}\brao*{s^2 + 4 s + 25}}}\)
+            & 0.0422
+            & 0.2921 % = 0.388 - 0.0959
+            & 0.681
+            & 25%.25 = (1.25 - 0.998)/0.998
+                & \si\percent
+            & {\color{legend2}Fig. \ref{fig:lti part 03 zeros}}
+    \\*
+        & 3    & 3.1
+            & \(\frac{25.833\brao*{s + 3}}{{\brao*{s + 3.1}\brao*{s^2 + 4 s + 25}}}\)
+            & 0.0384
+            & 0.287%2 = 0.381 - 0.0938
+            & 0.688
+            & 27%.25 = (1.27 - 0.998)/0.998
+                & \si\percent
+            & {\color{legend3}Fig. \ref{fig:lti part 03 zeros}}
+    \\*
+        & 3    & 3.3
+            & \(\frac{27.5\brao*{s + 3}}{{\brao*{s + 3.3}\brao*{s^2 + 4 s + 25}}}\)
+            & 0.0395
+            & 0.275%1 = 0.367 - 0.0919
+            & 0.669
+            & 29%.26 = (1.29 - 0.998)/0.998
+                & \si\percent
+            & {\color{legend4}Fig. \ref{fig:lti part 03 zeros}}
+    \\*
+        & 3    & 3.5
+            & \(\frac{29.167\brao*{s + 3}}{{\brao*{s + 3.5}\brao*{s^2 + 4 s + 25}}}\)
+            & 0.0376
+            & 0.268%5 = 0.356 - 0.0885
+            & 0.668
+            & 32%.26 = (1.32 - 0.998)/0.998
+                & \si\percent
+            & {\color{legend5}Fig. \ref{fig:lti part 03 zeros}}
+    \\*
+        & 3    & 4
+            & \(\frac{33.333\brao*{s + 3}}{{\brao*{s + 4}\brao*{s^2 + 4 s + 25}}}\)
+            & 0.0342
+            & 0.248%5 = 0.331 - 0.0825
+            & 0.632
+            & 37%.27 = (1.37 - 0.998)/0.998
+                & \si\percent
+            & {\color{legend6}Fig. \ref{fig:lti part 03 zeros}}
+    \\*
+    \dashrule
+        & 30   & 30
+            & \(\frac{2500\brao*{s + 30}}{{\brao*{s + 30}\brao*{s^2 + 40 s + 2500}}}\)
+            & 0.0047
+            & 0.292% = 0.0394 - 0.0101
+            & 0.0691
+            & 26%.50 = (1.26 - 0.996)/0.996
+                & \si\percent
+            & {\color{legend1}Fig. \ref{fig:lti part 03 zeros}}
+    \\*
+        & 30   & 30.01
+            & \(\frac{2500.8\brao*{s + 30}}{{\brao*{s + 30.01}\brao*{s^2 + 40 s + 2500}}}\)
+            & 0.0047
+            & 0.292% = 0.0394 - 0.0101
+            & 0.0691
+            & 26%.50 = (1.26 - 0.996)/0.996
+                & \si\percent
+            & {\color{legend2}Fig. \ref{fig:lti part 03 zeros}}
+    \\*
+        & 30   & 30.1
+            & \(\frac{2508.3\brao*{s + 30}}{{\brao*{s + 30.1}\brao*{s^2 + 40 s + 2500}}}\)
+            & 0.0208
+            & 0.0292%2 = 0.0388 - 0.00958
+            & 0.0688
+            & 26%.50 = (1.25 - 0.996)/0.996
+                & \si\percent
+            & {\color{legend3}Fig. \ref{fig:lti part 03 zeros}}
+    \\*
+        & 30   & 30.5
+            & \(\frac{2541.7\brao*{s + 30}}{{\brao*{s + 30.5}\brao*{s^2 + 40 s + 2500}}}\)
+            & 0.00408
+            & 0.0290%7 = 0.0385 - 0.00953
+            & 0.0685
+            & 26%.50 = (1.26 - 0.996)/0.996
+                & \si\percent
+            & {\color{legend4}Fig. \ref{fig:lti part 03 zeros}}
+    \\*
+        & 30   & 31
+            & \(\frac{2583.3\brao*{s + 30}}{{\brao*{s + 31}\brao*{s^2 + 40 s + 2500}}}\)
+            & 0.00395
+            & 0.0287%2 = 0.0381 - 0.00938
+            & 0.0675
+            & 28%.51 = (1.27 - 0.996)/0.996
+                & \si\percent
+            & {\color{legend5}Fig. \ref{fig:lti part 03 zeros}}
+    \\*
+        & 30   & 35
+            & \(\frac{2916.7\brao*{s + 30}}{{\brao*{s + 35}\brao*{s^2 + 40 s + 2500}}}\)
+            & 0.00366
+            & 0.0266%7 = 0.0355 - 0.00893
+            & 0.0655
+            & 33%.66 = (1.32 - 0.995)/0.995
+                & \si\percent
+            & {\color{legend6}Fig. \ref{fig:lti part 03 zeros}}
+    \\*
+        & 30   & 40
+            & \(\frac{3333.3\brao*{s + 30}}{{\brao*{s + 40}\brao*{s^2 + 40 s + 2500}}}\)
+            & 0.00337
+            & 0.0248%6 = 0.0331 - 0.00834
+            & 0.0626
+            & 38%.69 = (1.37 - 0.995)/0.995
+                & \si\percent
+            & {\color{legend6}Fig. \ref{fig:lti part 03 zeros}}
+    \\*
+    \bottomrule
+    \end{longtblr}
+\end{landscape}

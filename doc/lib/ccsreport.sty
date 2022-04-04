@@ -15,10 +15,13 @@
 \ra{1.3182}
 
 % long tables
-\usepackage{pdflscape}
 \usepackage{tabularray}
-\UseTblrLibrary{booktabs}
+\usepackage{pdflscape}
+\usepackage{siunitx}
+\sisetup{detect-all}
+\UseTblrLibrary{booktabs,siunitx}
 \NewTableCommand\dashrule{\hline[0.25pt,dashed]}%
+\usepackage{sansmath}
 
 \usepackage{xcolor}
 
@@ -60,14 +63,14 @@
 \usepackage{minted}
 % \usepackage{tabto}
 
-\usepackage{siunitx}
-
 % math delimiters
 \usepackage{mathtools}%
 \DeclarePairedDelimiter\brao()%
 \DeclarePairedDelimiter\brac[]%
 \DeclarePairedDelimiter\Brac\{\}%
 \DeclarePairedDelimiter\abs||%
+
+\DeclareMathOperator\norm{norm}
 
 \let\tg\textgreater
 

@@ -147,7 +147,11 @@ sysG
 %% open linear system analyzer for each part
 i_part = part_menu(N_SYS);  % initial choice
 while (i_part ~= -1)
-    linearSystemAnalyzer(sysG{i_part, 1:N_SYS(i_part)})
+    linearSystemAnalyzer(...
+        sysG{i_part, 1:N_SYS(i_part)}, ...
+        ... guidelines: y = 0.02, y = 0.9, y = 0.1
+        tf([0.02],[1]), tf([0.9],[1]), tf([0.1],[1]) ...
+    )
     i_part = part_menu(N_SYS);   % ask again
 end % while ((i_part=part_menu()) ~= -1)
 
